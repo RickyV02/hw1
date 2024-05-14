@@ -45,8 +45,8 @@ function resetoverviews(event) {
   } else {
     image.src = "public/films3.png";
   }
-  image.toggle("mouseenter", resetoverviews);
-  image.toggle("mouseleave", changeoverviews);
+  image.removeEventListener("mouseenter", resetoverviews);
+  image.addEventListener("mouseleave", changeoverviews);
 }
 
 function changeoverviews(event) {
@@ -59,8 +59,8 @@ function changeoverviews(event) {
   } else {
     image.src = "public/ov3.png";
   }
-  image.toggle("mouseenter", resetoverviews);
-  image.toggle("mouseleave", changeoverviews);
+  image.addEventListener("mouseenter", resetoverviews);
+  image.removeEventListener("mouseleave", changeoverviews);
 }
 
 function close_search(event) {
