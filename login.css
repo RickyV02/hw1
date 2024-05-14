@@ -1,0 +1,109 @@
+@import url(https://db.onlinewebfonts.com/c/f82a45d96a5a30abb6417c5b81fc416d?family=Graphik+LC+Web+Semibold+Regular);
+@font-face {
+  font-family: "Graphik LC Web Semibold Regular";
+  src: url("https://db.onlinewebfonts.com/t/f82a45d96a5a30abb6417c5b81fc416d.eot");
+  src: url("https://db.onlinewebfonts.com/t/f82a45d96a5a30abb6417c5b81fc416d.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/f82a45d96a5a30abb6417c5b81fc416d.woff2")
+      format("woff2"),
+    url("https://db.onlinewebfonts.com/t/f82a45d96a5a30abb6417c5b81fc416d.woff")
+      format("woff"),
+    url("https://db.onlinewebfonts.com/t/f82a45d96a5a30abb6417c5b81fc416d.ttf")
+      format("truetype"),
+    url("https://db.onlinewebfonts.com/t/f82a45d96a5a30abb6417c5b81fc416d.svg#Graphik LC Web Semibold Regular")
+      format("svg");
+}
+
+body {
+  margin: 0;
+  font-family: "Graphik LC Web Semibold Regular", sans-serif;
+  font-size: 14px;
+  background-color: #14181c;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: url(public/background-login.svg) no-repeat center center/cover;
+}
+
+.login-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
+  width: 90%;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: rgba(32, 118, 118, 0.95);
+  text-align: center;
+}
+
+h2,
+p {
+  margin: 0.7em 0.5em;
+  color: #171717;
+  font-weight: bold;
+}
+
+a {
+  margin-bottom: 1em;
+  color: #f2f2f2;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+input[type="text"],
+.pwd,
+input[type="email"] {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 1em 0;
+  padding: 10px;
+  color: #333;
+  width: 80%;
+  box-sizing: border-box;
+}
+
+#show-password {
+  cursor: pointer;
+  color: #171717;
+  font-size: 14px;
+  margin-bottom: 1em;
+}
+
+#show-password:hover {
+  text-decoration: underline;
+}
+
+.button {
+  width: 70%;
+  padding: 10px;
+  border: none;
+  border-radius: 25px;
+  background-color: #6a0dad;
+  color: #f2f2f2;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #0fb800;
+}
+
+.errormsg {
+  color: #ff0033;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.nascosto {
+  display: none;
+}
