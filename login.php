@@ -24,22 +24,31 @@ if(checkSession()){
 }
     if(isset($_POST["Username"]) && isset($_POST["password"]))
     {
+        
         $conn = mysqli_connect("localhost", "root", "", "hw1") or die("Errore: ". mysqli_connect_error());
-		$username = mysqli_real_escape_string($conn,$_POST['Username']);
-		$password = mysqli_real_escape_string($conn,$_POST['password']);
+        
+        $username = mysqli_real_escape_string($conn, $_POST["Username"]);
+        
+        $query = "SELECT * FROM ACCOUNTS WHERE username = '".$username."'";
+        $res = mysqli_query($conn, $query) or die(mysqli_error($conn));;
+        
+        if (mysqli_num_rows($res) > 0) {
+            $row = mysqli_fetch_assoc($res);
+            if (password_verify($_POST["password"], $row["PWD"])) {
 
-		$query = "SELECT * FROM ACCOUNTS WHERE USERNAME ='" . $username . "' AND PWD = '" .$password."'";
-        $res = mysqli_query($conn, $query)  or die("Errore: ". mysqli_connect_error());
-       if(mysqli_num_rows($res) > 0)
-        {
-            $_SESSION["username"] = $_POST["Username"];
-            header("Location: home.php");
-            exit;
+                $_SESSION["username"]=$row["USERNAME"];
+                header("Location: home.php");
+                mysqli_free_result($res);
+                mysqli_close($conn);
+                exit;
+            }
         }
-        else
-        {           
-            $error = true;
+        else {
+        $error = "Credenziali errate!";
         }
+    }
+    else if (isset($_POST["username"]) || isset($_POST["password"])) {
+        $error = "Inserisci username e password!";
     }
 ?>
 
@@ -51,12 +60,13 @@ if(checkSession()){
             if(isset($error))
             {
                 echo "<p class='errormsg'>";
-                echo "Credenziali non valide";
+                echo $error;
                 echo "</p>";
             }
         ?>
         <input type="text" placeholder="Username" name="Username" autocomplete="off" required
             <?php if(isset($_POST["Username"])){echo "value=".$_POST["Username"];} ?>>
+        <p id="nouser" class="nascosto">Inserire username!</p>
         <div class="password-container">
             <input type="password" placeholder="Password" name="password" autocomplete="off" class="pwd"
                 <?php if(isset($_POST["password"])){echo "value=".$_POST["password"];} ?>>
