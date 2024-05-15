@@ -17,12 +17,11 @@
 </head>
 
 <?php
-    session_start();
-    if(isset($_SESSION["username"]))
-    {
-        header("Location: home.php");
-        exit;
-    }
+include "checkUser.php";
+if(checkSession()){
+    header("Location: home.php");
+    exit;
+}
     if(isset($_POST["Username"]) && isset($_POST["password"]))
     {
         $conn = mysqli_connect("localhost", "root", "", "hw1") or die("Errore: ". mysqli_connect_error());
@@ -56,12 +55,14 @@
                 echo "</p>";
             }
         ?>
-        <p id="nopwd" class="nascosto">Inserire password!</p>
         <input type="text" placeholder="Username" name="Username" required>
-        <input type="password" placeholder="Password" name="password" class="pwd">
-        <span id="show-password">Mostra password</span>
+        <div class="password-container">
+            <input type="password" placeholder="Password" name="password" class="pwd">
+            <img class="show-password" src="public/eye_visible_hide_hidden_show_icon_145988.svg">
+            <p id="nopwd" class="nascosto">Inserire password!</p>
+        </div>
         <input type="submit" value="SIGN IN" class="button">
-        <p>Not Registred yet? <a href="create_account.php"> Sign up now!</a></p>
+        <p>Not Registred yet? <a href="create_account.php">Sign up now!</a></p>
         <p>Forgot Password? <a href="cambio_password.php">Change it Now!</a></p>
         <a href="index.php">Home Page</a>
     </form>

@@ -49,15 +49,23 @@ function toggleVisibility() {
   for (item of pwdInputs) {
     if (item.type === "password") {
       item.type = "text";
-      show_pwd.textContent = "Nascondi password";
+      for (item of show_pwd) {
+        item.src = hide;
+      }
     } else {
       item.type = "password";
-      show_pwd.textContent = "Mostra password";
+      for (item of show_pwd) {
+        item.src = hide;
+      }
     }
   }
 }
 
+const hide = "public/eye_slash_visible_hide_hidden_show_icon_145987.svg";
+const show = "public/eye_visible_hide_hidden_show_icon_145988.svg";
 const form = document.forms["login"];
 form.addEventListener("submit", check_credentials);
-const show_pwd = document.getElementById("show-password");
-show_pwd.addEventListener("click", toggleVisibility);
+const show_pwd = document.querySelectorAll(".show-password");
+for (item of show_pwd) {
+  item.addEventListener("click", toggleVisibility);
+}

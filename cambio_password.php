@@ -27,10 +27,10 @@
     {
         $conn = mysqli_connect("localhost", "root", "", "hw1") or die("Errore: ". mysqli_connect_error());
 		$username = mysqli_real_escape_string($conn,$_POST['Username']);
-		$Oldpassword = mysqli_real_escape_string($conn,$_POST['Oldpassword']);
+		$email = mysqli_real_escape_string($conn,$_POST['email']);
         $Newpassword = mysqli_real_escape_string($conn,$_POST['Newpassword']);
 
-		$query = "SELECT * FROM ACCOUNTS WHERE USERNAME ='" . $username . "' AND PWD = '" .$Oldpassword."'";
+		$query = "SELECT * FROM ACCOUNTS WHERE EMAIL ='" . $email . "' AND USERNAME = '" .$username."'";
         $res = mysqli_query($conn, $query)  or die("Errore: ". mysqli_connect_error());
        if(mysqli_num_rows($res) > 0)
         {
@@ -58,16 +58,22 @@
                 echo "</p>";
             }
         ?>
-        <p id="pwd" class="nascosto">La password deve contenere almeno una lettera maiuscola e un carattere speciale!
-        </p>
-        <p id="pwdmatch" class="nascosto">La password non coincidono!</p>
-        <p id="nopwd" class="nascosto">Inserire password!</p>
-        <p id="samepwd" class="nascosto">La nuova password non può essere uguale alla precedente!</p>
         <input type="text" placeholder="Username" name="Username" required>
-        <input type="password" placeholder="Old Password" name="Oldpassword" class="pwd">
-        <input type="password" placeholder="New Password" name="Newpassword" class="pwd">
-        <input type="password" placeholder="Repeat New Password" name="rpassword" class="pwd">
-        <span id="show-password">Mostra password</span>
+        <input type="email" placeholder="Email" name="email" required>
+        <div class="password-container">
+            <input type="password" placeholder="New Password" name="password" class="pwd">
+            <img class="show-password" src="public/eye_visible_hide_hidden_show_icon_145988.svg">
+            <p id="samepwd" class="nascosto">La nuova password non può essere uguale alla precedente!</p>
+            <p id="nopwd" class="nascosto">Inserire password!</p>
+            <p id="pwd" class="nascosto">La password deve contenere almeno una lettera maiuscola e un carattere
+                speciale!
+            </p>
+        </div>
+        <div class="password-container">
+            <input type="password" placeholder="Repeat Password" name="rpassword" class="pwd" autocomplete="off">
+            <img class="show-password" src="public/eye_visible_hide_hidden_show_icon_145988.svg">
+            <p id="pwdmatch" class="nascosto">La password non coincidono!</p>
+        </div>
         <input type="submit" value="SIGN IN" class="button">
         <p>Already Have an Account? <a href="login.php"> Sign in now!</a></p>
         <a href="index.php">Home Page</a>

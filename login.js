@@ -16,17 +16,19 @@ function check_credentials(event) {
 }
 
 function toggleVisibility() {
-  const item = document.querySelector(".pwd");
-  if (item.type === "password") {
-    item.type = "text";
-    show_pwd.textContent = "Nascondi password";
+  const it = document.querySelector(".pwd");
+  if (it.type === "password") {
+    it.type = "text";
+    show_pwd.src = hide;
   } else {
-    item.type = "password";
-    show_pwd.textContent = "Mostra password";
+    it.type = "password";
+    show_pwd.src = show;
   }
 }
 
+const hide = "public/eye_slash_visible_hide_hidden_show_icon_145987.svg";
+const show = "public/eye_visible_hide_hidden_show_icon_145988.svg";
 const form = document.forms["login"];
 form.addEventListener("submit", check_credentials);
-const show_pwd = document.getElementById("show-password");
+const show_pwd = document.querySelector(".show-password");
 show_pwd.addEventListener("click", toggleVisibility);

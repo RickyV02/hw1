@@ -43,19 +43,29 @@ body {
 
 h2,
 p {
-  margin: 0.7em 0.5em;
+  margin: 0.5em 0.5em;
   color: #171717;
   font-weight: bold;
 }
 
 a {
-  margin-bottom: 1em;
+  margin: auto;
   color: #f2f2f2;
   text-decoration: none;
 }
 
 a:hover {
   text-decoration: underline;
+}
+
+div {
+  margin-bottom: 20px;
+}
+
+.password-container {
+  position: relative;
+  width: 100%;
+  margin: auto 0;
 }
 
 input[type="text"],
@@ -65,21 +75,24 @@ input[type="email"] {
   border: 1px solid #ccc;
   border-radius: 5px;
   margin: 1em 0;
-  padding: 10px;
+  padding: 8px 40px 8px 8px;
   color: #333;
   width: 80%;
   box-sizing: border-box;
 }
 
-#show-password {
-  cursor: pointer;
-  color: #171717;
-  font-size: 14px;
-  margin-bottom: 1em;
+input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
 }
 
-#show-password:hover {
-  text-decoration: underline;
+.show-password {
+  position: absolute;
+  top: 25%;
+  right: 11%;
+  width: 30x;
+  height: 30px;
+  cursor: pointer;
 }
 
 .button {
