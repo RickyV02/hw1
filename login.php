@@ -61,8 +61,8 @@ if(checkSession()){
             <input type="password" placeholder="Password" name="password" autocomplete="off" class="pwd"
                 <?php if(isset($_POST["password"])){echo "value=".$_POST["password"];} ?>>
             <img class="show-password" src="public/eye_visible_hide_hidden_show_icon_145988.svg">
-            <p id="nopwd" class="nascosto">Inserire password!</p>
         </div>
+        <p id="nopwd" class="nascosto">Inserire password!</p>
         <input type="submit" value="SIGN IN" class="button">
         <p>Not Registred yet? <a href="create_account.php">Sign up now!</a></p>
         <p>Forgot Password? <a href="cambio_password.php">Change it Now!</a></p>

@@ -1,3 +1,20 @@
+function toggleVisibility() {
+  const pwdInputs = document.querySelectorAll(".pwd");
+  for (item of pwdInputs) {
+    if (item.type === "password") {
+      item.type = "text";
+      for (item of show_pwd) {
+        item.src = hide;
+      }
+    } else {
+      item.type = "password";
+      for (item of show_pwd) {
+        item.src = show;
+      }
+    }
+  }
+}
+
 function validatePassword(password) {
   const maiuscRegex = /[A-Z]/;
   if (!maiuscRegex.test(password)) {
@@ -18,70 +35,119 @@ function validateEmail(email) {
   else return false;
 }
 
-function nascondiTutti() {
-  const msgs = document.querySelectorAll(".errormsg");
-  for (item of msgs) {
-    item.classList.add("nascosto");
+function onResponse(response) {
+  if (!response.ok) return null;
+  else return response.json();
+}
+
+function onJsonEmail(json) {
+  const error_msg = document.getElementById("em2");
+  if (json.exists) {
+    error_msg.classList.remove("nascosto");
+    error_msg.classList.add("errormsg");
+    checkSubmit = false;
+  } else {
+    error_msg.classList.remove("errormsg");
+    error_msg.classList.add("nascosto");
+    checkSubmit = true;
+  }
+}
+
+function onJsonUsername(json) {
+  const error_msg = document.getElementById("user");
+  if (json.exists) {
+    error_msg.classList.remove("nascosto");
+    error_msg.classList.add("errormsg");
+    checkSubmit = false;
+  } else {
+    error_msg.classList.remove("errormsg");
+    error_msg.classList.add("nascosto");
+    checkSubmit = true;
+  }
+}
+
+function check_email() {
+  const error_msg = document.getElementById("em");
+  if (!validateEmail(form.email.value)) {
+    error_msg.classList.remove("nascosto");
+    error_msg.classList.add("errormsg");
+    checkSubmit = false;
+  } else {
+    error_msg.classList.remove("errormsg");
+    error_msg.classList.add("nascosto");
+    fetch("checkEmail.php?email=" + encodeURIComponent(form.email.value))
+      .then(onResponse)
+      .then(onJsonEmail);
+  }
+}
+
+function check_username() {
+  fetch("checkUsername.php?Username=" + encodeURIComponent(form.Username.value))
+    .then(onResponse)
+    .then(onJsonUsername);
+}
+
+function check_password() {
+  const error_msg = document.getElementById("pwd");
+  if (!validatePassword(form.password.value)) {
+    error_msg.classList.remove("nascosto");
+    error_msg.classList.add("errormsg");
+    checkSubmit = false;
+  } else {
+    error_msg.classList.remove("errormsg");
+    error_msg.classList.add("nascosto");
+    checkSubmit = true;
+  }
+}
+
+function check_minlength() {
+  const error_msg = document.getElementById("minlength");
+  if (form.password.value.length < 8) {
+    error_msg.classList.remove("nascosto");
+    error_msg.classList.add("errormsg");
+    checkSubmit = false;
+  } else {
+    error_msg.classList.remove("errormsg");
+    error_msg.classList.add("nascosto");
+    checkSubmit = true;
+  }
+}
+
+function check_match() {
+  const error_msg = document.getElementById("pwdmatch");
+  if (form.password.value !== form.rpassword.value) {
+    error_msg.classList.remove("nascosto");
+    error_msg.classList.add("errormsg");
+    checkSubmit = false;
+  } else {
+    error_msg.classList.remove("errormsg");
+    error_msg.classList.add("nascosto");
+    checkSubmit = true;
   }
 }
 
 function check_credentials(event) {
-  nascondiTutti();
-  if (form.password.value.length == 0 || form.rpassword.value.length == 0) {
-    const error_msg = document.getElementById("nopwd");
-    error_msg.classList.remove("nascosto");
-    error_msg.classList.add("errormsg");
-    event.preventDefault();
-  } else if (!validateEmail(form.email.value)) {
-    const error_msg = document.getElementById("em");
-    error_msg.classList.remove("nascosto");
-    error_msg.classList.add("errormsg");
-    event.preventDefault();
-  } else if (!validatePassword(form.password.value)) {
-    const error_msg = document.getElementById("pwd");
-    error_msg.classList.remove("nascosto");
-    error_msg.classList.add("errormsg");
-    event.preventDefault();
-  } else if (form.password.value !== form.rpassword.value) {
-    const error_msg = document.getElementById("pwdmatch");
-    error_msg.classList.remove("nascosto");
-    error_msg.classList.add("errormsg");
-    event.preventDefault();
-  } else if (!form.terms.checked) {
+  if (!form.terms.checked) {
     const error_msg = document.getElementById("noterms");
     error_msg.classList.remove("nascosto");
     error_msg.classList.add("errormsg");
     event.preventDefault();
-  } else if (form.password.value.length < 8) {
-    const error_msg = document.getElementById("minlength");
-    error_msg.classList.remove("nascosto");
-    error_msg.classList.add("errormsg");
+  } else if (!checkSubmit) {
     event.preventDefault();
   }
 }
 
-function toggleVisibility() {
-  const pwdInputs = document.querySelectorAll(".pwd");
-  for (item of pwdInputs) {
-    if (item.type === "password") {
-      item.type = "text";
-      for (item of show_pwd) {
-        item.src = hide;
-      }
-    } else {
-      item.type = "password";
-      for (item of show_pwd) {
-        item.src = show;
-      }
-    }
-  }
-}
-
+let checkSubmit = false;
 const hide = "public/eye_slash_visible_hide_hidden_show_icon_145987.svg";
 const show = "public/eye_visible_hide_hidden_show_icon_145988.svg";
-const form = document.forms["login"];
-form.addEventListener("submit", check_credentials);
 const show_pwd = document.querySelectorAll(".show-password");
 for (item of show_pwd) {
   item.addEventListener("click", toggleVisibility);
 }
+const form = document.forms["login"];
+form.Username.addEventListener("blur", check_username);
+form.password.addEventListener("blur", check_password);
+form.password.addEventListener("blur", check_minlength);
+form.email.addEventListener("blur", check_email);
+form.rpassword.addEventListener("blur", check_match);
+form.addEventListener("submit", check_credentials);

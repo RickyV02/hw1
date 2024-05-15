@@ -63,7 +63,7 @@ if(isset($_POST['email'])&&isset($_POST['Username']) && isset($_POST['password']
     if (count($errors) == 0) {
         $password = password_hash($password, PASSWORD_BCRYPT);
 
-        $query = "INSERT INTO ACCOUNTS(EMAIL,USERNAME,PWD) VALUES('$email',$username,'$password')";
+        $query = "INSERT INTO ACCOUNTS(EMAIL,USERNAME,PWD) VALUES('$email','$username','$password')";
         
         if (mysqli_query($conn, $query)) {
             $_SESSION["username"] = $username;
@@ -76,6 +76,7 @@ if(isset($_POST['email'])&&isset($_POST['Username']) && isset($_POST['password']
     }
 
     mysqli_close($conn);
+    
 }else if (isset($_POST["Username"])){
     $errors[] = "Riempire tutti i campi!";
 }
@@ -100,30 +101,31 @@ if(isset($_POST['email'])&&isset($_POST['Username']) && isset($_POST['password']
         <input type="email" placeholder="Email" name="email" autocomplete="off" required
             <?php if(isset($_POST["email"])){echo "value=".$_POST["email"];} ?>>
         <p id="em" class="nascosto">Email non valida!</p>
+        <p id="em2" class="nascosto">Email già utilizzata!</p>
         <input type="text" placeholder="Username" name="Username" autocomplete="off" required
             <?php if(isset($_POST["Username"])){echo "value=".$_POST["Username"];} ?>>
+        <p id="user" class="nascosto">Username non disponibile!</p>
         <div class="password-container">
             <input type="password" placeholder="Password" name="password" class="pwd" autocomplete="off"
                 <?php if(isset($_POST["password"])){echo "value=".$_POST["password"];} ?>>
             <img class="show-password" src="public/eye_visible_hide_hidden_show_icon_145988.svg">
-            <p id="nopwd" class="nascosto">Inserire password!</p>
-            <p id="minlength" class="nascosto">Inserire una password di almeno 6 caratteri!</p>
-            <p id="pwd" class="nascosto">La passsword deve contenere almeno una lettera maiuscola e un carattere
-                speciale!
-            </p>
         </div>
+        <p id="minlength" class="nascosto">Inserire una password di almeno 6 caratteri!</p>
+        <p id="pwd" class="nascosto">La passsword deve contenere almeno una lettera maiuscola e un carattere
+            speciale!
+        </p>
         <div class="password-container">
             <input type="password" placeholder="Repeat Password" name="rpassword" class="pwd" autocomplete="off"
                 <?php if(isset($_POST["rpassword"])){echo "value=".$_POST["rpassword"];} ?>>
             <img class="show-password" src="public/eye_visible_hide_hidden_show_icon_145988.svg">
-            <p id="pwdmatch" class="nascosto">La password non coincidono!</p>
         </div>
+        <p id="pwdmatch" class="nascosto">La password non coincidono!</p>
         <div>
             <input type="checkbox" name="terms" id="terms"
                 <?php if(isset($_POST["terms"])){echo $_POST["terms"] ? "checked" : "";} ?>>
             <label for="terms">I agree to the terms and conditions of Letterboxd</label>
-            <p id="noterms" class="nascosto">Accettare i termini e condizioni d'uso!</p>
         </div>
+        <p id="noterms" class="nascosto">Accettare i termini e condizioni d'uso!</p>
         <input type="submit" value="SIGN UP" class="button">
         <p>Already Have an Account? <a href="login.php">Sign in now!</a></p>
         <a href="index.php">Home Page</a>

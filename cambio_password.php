@@ -66,18 +66,18 @@
             <input type="password" placeholder="New Password" name="password" class="pwd" autocomplete="off"
                 <?php if(isset($_POST["password"])){echo "value=".$_POST["password"];} ?>>
             <img class="show-password" src="public/eye_visible_hide_hidden_show_icon_145988.svg">
-            <p id="samepwd" class="nascosto">La nuova password non può essere uguale alla precedente!</p>
-            <p id="nopwd" class="nascosto">Inserire password!</p>
-            <p id="pwd" class="nascosto">La password deve contenere almeno una lettera maiuscola e un carattere
-                speciale!
-            </p>
         </div>
+        <p id="samepwd" class="nascosto">La nuova password non può essere uguale alla precedente!</p>
+        <p id="nopwd" class="nascosto">Inserire password!</p>
+        <p id="pwd" class="nascosto">La password deve contenere almeno una lettera maiuscola e un carattere
+            speciale!
+        </p>
         <div class="password-container">
             <input type="password" placeholder="Repeat Password" name="rpassword" class="pwd" autocomplete="off"
                 <?php if(isset($_POST["rpassword"])){echo "value=".$_POST["rpassword"];} ?>>
             <img class="show-password" src="public/eye_visible_hide_hidden_show_icon_145988.svg">
-            <p id="pwdmatch" class="nascosto">La password non coincidono!</p>
         </div>
+        <p id="pwdmatch" class="nascosto">La password non coincidono!</p>
         <input type="submit" value="SIGN IN" class="button">
         <p>Already Have an Account? <a href="login.php"> Sign in now!</a></p>
         <a href="index.php">Home Page</a>
