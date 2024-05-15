@@ -16,7 +16,7 @@
 
 body {
   margin: 0;
-  font-family: "Graphik LC Web Semibold Regular";
+  font-family: "Graphik LC Web Semibold Regular", sans-serif;
   font-size: 13px;
   color: #9ab;
   background-color: #14181c;
