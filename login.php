@@ -17,7 +17,7 @@
 </head>
 
 <?php
-include "checkUser.php";
+include "checkSession.php";
 if(checkSession()){
     header("Location: home.php");
     exit;
