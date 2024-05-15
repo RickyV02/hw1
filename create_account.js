@@ -52,7 +52,7 @@ function check_credentials(event) {
     error_msg.classList.remove("nascosto");
     error_msg.classList.add("errormsg");
     event.preventDefault();
-  } else if (form.password.value.length < 6) {
+  } else if (form.password.value.length < 8) {
     const error_msg = document.getElementById("minlength");
     error_msg.classList.remove("nascosto");
     error_msg.classList.add("errormsg");

@@ -24,31 +24,60 @@ if(checkSession()){
     exit;
 }
 
-if(isset($_POST['email'])&&isset($_POST['Username']) && isset($_POST['password'])&& isset($_POST['terms']))
+if(isset($_POST['email'])&&isset($_POST['Username']) && isset($_POST['password']) && isset($_POST['rpassword']) && isset($_POST['terms']))
 {
+    $errors=array();
     $conn = mysqli_connect("localhost", "root", "", "HW1") or die("Errore: ". mysqli_connect_error());
     $email = mysqli_real_escape_string($conn,$_POST['email']);
-    $username = mysqli_real_escape_string($conn,$_POST['Username']);
     $password = mysqli_real_escape_string($conn,$_POST['password']);
 
-    $query = "SELECT * FROM ACCOUNTS WHERE USERNAME = '$username' OR EMAIL = '$email'";
-    $res = mysqli_query($conn, $query)  or die("Errore: ". mysqli_connect_error());
-   if(mysqli_num_rows($res) > 0)
-    {
-        $error = true;
-    }
-    else
-    {           
-        $query="INSERT INTO ACCOUNTS(EMAIL,USERNAME,PWD) VALUES('$email','$username','$password')";
-        $res = mysqli_query($conn, $query)  or die("Errore: ". mysqli_connect_error());
-        if($res){
-            $_SESSION["username"]=$username;
-            header("Location: home.php");
-            exit;
-        }else{
-            $error = true;
+    if(!preg_match('/^[a-zA-Z0-9_]{1,15}$/', $_POST['username'])) {
+        $errors[] = "Formato username non valido!";
+    } else {
+        $username = mysqli_real_escape_string($conn, $_POST['Username']);
+        $query = "SELECT USERNAME FROM ACCOUNTS WHERE username = '$username'";
+        $res = mysqli_query($conn, $query);
+        if (mysqli_num_rows($res) > 0) {
+            $errors[] = "Username già utilizzato!";
         }
     }
+
+    if (strlen($password) < 8) {
+        $errors[] = "Inserire una password di almeno 8 caratteri!";
+    } 
+
+    if (strcmp($password, $_POST["rpassword"]) != 0) {
+        $errors[] = "Le password non coincidono!";
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Email non valida!";
+    } else {
+        $email = mysqli_real_escape_string($conn, strtolower($email));
+        $res = mysqli_query($conn, "SELECT EMAIL FROM ACCOUNTS WHERE EMAIL = '$email'");
+        if (mysqli_num_rows($res) > 0) {
+            $errors[] = "Email già utilizzata!";
+        }
+    }
+
+    if (count($errors) == 0) {
+        $password = password_hash($password, PASSWORD_BCRYPT);
+
+        $query = "INSERT INTO ACCOUNTS(EMAIL,USERNAME,PWD) VALUES('$email',$username,'$password')";
+        
+        if (mysqli_query($conn, $query)) {
+            $_SESSION["username"] = $username;
+            mysqli_close($conn);
+            header("Location: home.php");
+            exit;
+        } else {
+            $errors[] = "Errore di connessione al Database";
+        }
+    }
+
+    mysqli_close($conn);
+}else{
+    $errors[] = "Riempire tutti i campi!";
 }
 ?>
 
@@ -64,11 +93,14 @@ if(isset($_POST['email'])&&isset($_POST['Username']) && isset($_POST['password']
                 echo "</p>";
             }
         ?>
-        <input type="email" placeholder="Email" name="email" autocomplete="off" required>
+        <input type="email" placeholder="Email" name="email" autocomplete="off" required
+            <?php if(isset($_POST["confirm_password"])){echo "value=".$_POST["email"];} ?>>
         <p id="em" class="nascosto">Email non valida!</p>
-        <input type="text" placeholder="Username" name="Username" autocomplete="off" required>
+        <input type="text" placeholder="Username" name="Username" autocomplete="off" required
+            <?php if(isset($_POST["confirm_password"])){echo "value=".$_POST["Username"];} ?>>
         <div class="password-container">
-            <input type="password" placeholder="Password" name="password" class="pwd" autocomplete="off">
+            <input type="password" placeholder="Password" name="password" class="pwd" autocomplete="off"
+                <?php if(isset($_POST["confirm_password"])){echo "value=".$_POST["passowrd"];} ?>>
             <img class="show-password" src="public/eye_visible_hide_hidden_show_icon_145988.svg">
             <p id="nopwd" class="nascosto">Inserire password!</p>
             <p id="minlength" class="nascosto">Inserire una password di almeno 6 caratteri!</p>
@@ -77,12 +109,14 @@ if(isset($_POST['email'])&&isset($_POST['Username']) && isset($_POST['password']
             </p>
         </div>
         <div class="password-container">
-            <input type="password" placeholder="Repeat Password" name="rpassword" class="pwd" autocomplete="off">
+            <input type="password" placeholder="Repeat Password" name="rpassword" class="pwd" autocomplete="off"
+                <?php if(isset($_POST["confirm_password"])){echo "value=".$_POST["rpassowrd"];} ?>>
             <img class="show-password" src="public/eye_visible_hide_hidden_show_icon_145988.svg">
             <p id="pwdmatch" class="nascosto">La password non coincidono!</p>
         </div>
         <div>
-            <input type="checkbox" name="terms" id="terms" required>
+            <input type="checkbox" name="terms" id="terms"
+                <?php if(isset($_POST["allow"])){echo $_POST["allow"] ? "checked" : "";} ?>>
             <label for="terms">I agree to the terms and conditions of Letterboxd</label>
             <p id="noterms" class="nascosto">Accettare i termini e condizioni d'uso!</p>
         </div>
