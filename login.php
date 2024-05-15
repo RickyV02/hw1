@@ -43,11 +43,9 @@ if(checkSession()){
                 exit;
             }
         }
-        else {
         $error = "Credenziali errate!";
-        }
     }
-    else if (isset($_POST["username"]) || isset($_POST["password"])) {
+    else if (isset($_POST["Username"]) || isset($_POST["password"])) {
         $error = "Inserisci username e password!";
     }
 ?>
