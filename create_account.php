@@ -64,14 +64,15 @@ if(isset($_POST['email'])&&isset($_POST['Username']) && isset($_POST['password']
                 echo "</p>";
             }
         ?>
-        <input type="email" placeholder="Email" name="email" required>
+        <input type="email" placeholder="Email" name="email" autocomplete="off" required>
         <p id="em" class="nascosto">Email non valida!</p>
-        <input type="text" placeholder="Username" name="Username" required>
+        <input type="text" placeholder="Username" name="Username" autocomplete="off" required>
         <div class="password-container">
-            <input type="password" placeholder="Password" name="password" class="pwd">
+            <input type="password" placeholder="Password" name="password" class="pwd" autocomplete="off">
             <img class="show-password" src="public/eye_visible_hide_hidden_show_icon_145988.svg">
             <p id="nopwd" class="nascosto">Inserire password!</p>
-            <p id="pwd" class="nascosto">La password deve contenere almeno una lettera maiuscola e un carattere
+            <p id="minlength" class="nascosto">Inserire una password di almeno 6 caratteri!</p>
+            <p id="pwd" class="nascosto">La passsword deve contenere almeno una lettera maiuscola e un carattere
                 speciale!
             </p>
         </div>
@@ -81,8 +82,8 @@ if(isset($_POST['email'])&&isset($_POST['Username']) && isset($_POST['password']
             <p id="pwdmatch" class="nascosto">La password non coincidono!</p>
         </div>
         <div>
-            <input type="checkbox" name="terms" required>
-            <label for="terms">I agree to the terms and conditions of Letterboxd</a></label>
+            <input type="checkbox" name="terms" id="terms" required>
+            <label for="terms">I agree to the terms and conditions of Letterboxd</label>
             <p id="noterms" class="nascosto">Accettare i termini e condizioni d'uso!</p>
         </div>
         <input type="submit" value="SIGN UP" class="button">

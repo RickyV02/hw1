@@ -58,10 +58,10 @@
                 echo "</p>";
             }
         ?>
-        <input type="text" placeholder="Username" name="Username" required>
-        <input type="email" placeholder="Email" name="email" required>
+        <input type="text" placeholder="Username" name="Username" autocomplete="off" required>
+        <input type="email" placeholder="Email" name="email" autocomplete="off" required>
         <div class="password-container">
-            <input type="password" placeholder="New Password" name="password" class="pwd">
+            <input type="password" placeholder="New Password" name="password" class="pwd" autocomplete="off">
             <img class="show-password" src="public/eye_visible_hide_hidden_show_icon_145988.svg">
             <p id="samepwd" class="nascosto">La nuova password non può essere uguale alla precedente!</p>
             <p id="nopwd" class="nascosto">Inserire password!</p>

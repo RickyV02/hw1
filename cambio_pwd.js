@@ -55,7 +55,7 @@ function toggleVisibility() {
     } else {
       item.type = "password";
       for (item of show_pwd) {
-        item.src = hide;
+        item.src = show;
       }
     }
   }

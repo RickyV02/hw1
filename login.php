@@ -55,9 +55,9 @@ if(checkSession()){
                 echo "</p>";
             }
         ?>
-        <input type="text" placeholder="Username" name="Username" required>
+        <input type="text" placeholder="Username" name="Username" autocomplete="off" required>
         <div class="password-container">
-            <input type="password" placeholder="Password" name="password" class="pwd">
+            <input type="password" placeholder="Password" name="password" autocomplete="off" class="pwd">
             <img class="show-password" src="public/eye_visible_hide_hidden_show_icon_145988.svg">
             <p id="nopwd" class="nascosto">Inserire password!</p>
         </div>
