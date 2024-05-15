@@ -31,11 +31,11 @@ if(isset($_POST['email'])&&isset($_POST['Username']) && isset($_POST['password']
     $email = mysqli_real_escape_string($conn,$_POST['email']);
     $password = mysqli_real_escape_string($conn,$_POST['password']);
 
-    if(!preg_match('/^[a-zA-Z0-9_]{1,15}$/', $_POST['username'])) {
+    if(!preg_match('/^[a-zA-Z0-9_]{1,15}$/', $_POST['Username'])) {
         $errors[] = "Formato username non valido!";
     } else {
         $username = mysqli_real_escape_string($conn, $_POST['Username']);
-        $query = "SELECT USERNAME FROM ACCOUNTS WHERE username = '$username'";
+        $query = "SELECT USERNAME FROM ACCOUNTS WHERE USERNAME = '$username'";
         $res = mysqli_query($conn, $query);
         if (mysqli_num_rows($res) > 0) {
             $errors[] = "Username già utilizzato!";
@@ -76,7 +76,7 @@ if(isset($_POST['email'])&&isset($_POST['Username']) && isset($_POST['password']
     }
 
     mysqli_close($conn);
-}else{
+}else if (isset($_POST["Username"])){
     $errors[] = "Riempire tutti i campi!";
 }
 ?>
@@ -85,22 +85,26 @@ if(isset($_POST['email'])&&isset($_POST['Username']) && isset($_POST['password']
     <form name="login" method="post" class="login-box">
         <h2>Sign Up</h2>
         <p>Keep in touch with your friends</p>
-        <?php
-            if(isset($error))
-            {
-                echo "<p class='errormsg'>";
-                echo "Credenziali non valide (prova a cambiare email e/o username)";
-                echo "</p>";
+        <?php 
+        if(isset($errors)) 
+        {
+            foreach($errors as $err) {
+                {
+                    echo "<p class='errormsg'>";
+                    echo $err;
+                    echo "</p>";
+                }
             }
+        } 
         ?>
         <input type="email" placeholder="Email" name="email" autocomplete="off" required
-            <?php if(isset($_POST["confirm_password"])){echo "value=".$_POST["email"];} ?>>
+            <?php if(isset($_POST["email"])){echo "value=".$_POST["email"];} ?>>
         <p id="em" class="nascosto">Email non valida!</p>
         <input type="text" placeholder="Username" name="Username" autocomplete="off" required
-            <?php if(isset($_POST["confirm_password"])){echo "value=".$_POST["Username"];} ?>>
+            <?php if(isset($_POST["Username"])){echo "value=".$_POST["Username"];} ?>>
         <div class="password-container">
             <input type="password" placeholder="Password" name="password" class="pwd" autocomplete="off"
-                <?php if(isset($_POST["confirm_password"])){echo "value=".$_POST["passowrd"];} ?>>
+                <?php if(isset($_POST["password"])){echo "value=".$_POST["password"];} ?>>
             <img class="show-password" src="public/eye_visible_hide_hidden_show_icon_145988.svg">
             <p id="nopwd" class="nascosto">Inserire password!</p>
             <p id="minlength" class="nascosto">Inserire una password di almeno 6 caratteri!</p>
@@ -110,13 +114,13 @@ if(isset($_POST['email'])&&isset($_POST['Username']) && isset($_POST['password']
         </div>
         <div class="password-container">
             <input type="password" placeholder="Repeat Password" name="rpassword" class="pwd" autocomplete="off"
-                <?php if(isset($_POST["confirm_password"])){echo "value=".$_POST["rpassowrd"];} ?>>
+                <?php if(isset($_POST["rpassword"])){echo "value=".$_POST["rpassword"];} ?>>
             <img class="show-password" src="public/eye_visible_hide_hidden_show_icon_145988.svg">
             <p id="pwdmatch" class="nascosto">La password non coincidono!</p>
         </div>
         <div>
             <input type="checkbox" name="terms" id="terms"
-                <?php if(isset($_POST["allow"])){echo $_POST["allow"] ? "checked" : "";} ?>>
+                <?php if(isset($_POST["terms"])){echo $_POST["terms"] ? "checked" : "";} ?>>
             <label for="terms">I agree to the terms and conditions of Letterboxd</label>
             <p id="noterms" class="nascosto">Accettare i termini e condizioni d'uso!</p>
         </div>
