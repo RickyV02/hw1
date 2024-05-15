@@ -73,7 +73,6 @@ if(checkSession()){
         <p id="nopwd" class="nascosto">Inserire password!</p>
         <input type="submit" value="SIGN IN" class="button">
         <p>Not Registred yet? <a href="create_account.php">Sign up now!</a></p>
-        <p>Forgot Password? <a href="cambio_password.php">Change it Now!</a></p>
         <a href="index.php">Home Page</a>
     </form>
 
