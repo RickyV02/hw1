@@ -17,13 +17,11 @@
 </head>
 
 <?php
-    session_start();
-    if(!isset($_SESSION['username']))
-    {
-        header("Location: index.php");
+    include "checkSession.php";
+    if(checkSession()){
+        header("Location: home.php");
         exit;
-    }
-
+    }   
 ?>
 
 <body>
