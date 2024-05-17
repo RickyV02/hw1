@@ -12,14 +12,14 @@
         rel="stylesheet" />
     <link href="https://db.onlinewebfonts.com/c/f82a45d96a5a30abb6417c5b81fc416d?family=Graphik+LC+Web+Semibold+Regular"
         rel="stylesheet">
-    <script src="hw1.js" defer></script>
+    <script src="index.js" defer></script>
     <title>Letterboxd•Social Film Discovery</title>
 </head>
 
 <?php
     include "checkSession.php";
-    if(checkSession()){
-        header("Location: home.php");
+    if(!checkSession()){
+        header("Location: index.php");
         exit;
     }   
 ?>
@@ -46,6 +46,7 @@
             </h1>
             <nav>
                 <a href="logout.php"><span>LOGOUT</span></a>
+                <a href="profile.php"><span>PROFILE</span></a>
                 <a href=""><span>FILMS</span></a>
                 <a href=""><span>LISTS</span></a>
                 <a href=""><span>MEMBERS</span></a>
@@ -133,16 +134,8 @@
                 <a href=""><img src="public/spam12.jpg" /></a>
             </div>
         </section>
-        <h1>
-            Write and share reviews. Compile your own lists. Share your life in
-            film.
-        </h1>
-        <p class="word">
-            Below are some popular reviews and lists from this week.
-            <a href="" class="crea-account">Sign up</a> to create your own.
-        </p>
         <div class="reviews">
-            <div class="colonna1">
+            <div class="colonna">
                 <div class="reviews__top">
                     <h2 class="news">
                         <a href="">POPULAR REVIEWS THIS WEEK</a>
