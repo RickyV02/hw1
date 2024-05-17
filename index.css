@@ -294,22 +294,6 @@ nav span {
   padding: 0 0 1.5%;
 }
 
-@media screen and (max-width: 1455px) {
-  .moviebox {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  }
-}
-
-@media screen and (max-width: 720px) {
-  .moviebox {
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  }
-  .moviebox img {
-    height: 150px;
-    width: 100px;
-  }
-}
-
 .moviebox div {
   display: flex;
   align-items: center;
@@ -326,6 +310,22 @@ nav span {
 
 .moviebox img:hover {
   border-color: green;
+}
+
+@media screen and (max-width: 1455px) {
+  .moviebox {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
+
+@media screen and (max-width: 855px) {
+  .moviebox {
+    grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+  }
+  .moviebox img {
+    height: 150px;
+    width: 100px;
+  }
 }
 
 #feature {
