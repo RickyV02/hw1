@@ -136,28 +136,6 @@ a {
   height: 100%;
 }
 
-@media screen and (max-width: 855px) {
-  .logo {
-    display: none;
-  }
-  .container {
-    width: 100%;
-  }
-  .overlay {
-    width: 100%;
-  }
-  .sfondo {
-    width: 100%;
-  }
-  .navsection {
-    justify-content: center;
-    width: 100%;
-  }
-  .slogan {
-    margin-top: 0;
-  }
-}
-
 .logo p {
   color: #fff;
   font-size: 24px;
@@ -245,6 +223,32 @@ nav span {
 
 .navsection nav a span {
   color: #d8e0d8;
+}
+
+@media screen and (max-width: 855px) {
+  .logo {
+    display: none;
+  }
+  .container {
+    width: 100%;
+  }
+  .overlay {
+    width: 100%;
+  }
+  .sfondo {
+    width: 100%;
+  }
+  .navsection {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .navsection nav {
+    justify-content: center;
+  }
+  .slogan {
+    margin-top: 0;
+  }
 }
 
 .wrapper {
@@ -523,11 +527,11 @@ nav span {
   margin-top: -1em;
 }
 
-@media screen and (max-width: 855px){
-  .utente{
+@media screen and (max-width: 855px) {
+  .utente {
     flex-wrap: wrap;
   }
-  .nickname{
+  .nickname {
     margin-top: 0.1em;
   }
 }
@@ -614,10 +618,9 @@ nav span {
   flex-grow: 1;
   display: flex;
   height: fit-content;
-  width: fit-content;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
   border-radius: 5px;
   background-color: #202830;
   box-shadow: 5px 5px 5px black;
@@ -699,6 +702,10 @@ footer {
 }
 
 .footer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin-right: 20px;
 }
 
