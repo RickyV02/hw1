@@ -35,10 +35,6 @@
             <nav>
                 <a href="login.php"><span>LOGIN</span></a>
                 <a href="create_account.php"><span>SIGN UP</span></a>
-                <form>
-                    <input type="text" autocomplete="off" id="movie_name">
-                    <input type="submit" class="submit" value="">
-                </form>
             </nav>
         </section>
     </header>
