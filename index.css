@@ -373,7 +373,7 @@ nav span {
 
 @media screen and (max-width: 1090px) {
   .livefeed div {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 }
 
@@ -395,6 +395,14 @@ nav span {
   text-align: center;
   font-size: 1.1rem;
   line-height: 1;
+}
+
+.word a {
+  text-decoration: underline;
+}
+
+.word a:hover {
+  color: green;
 }
 
 .reviews {

@@ -113,7 +113,7 @@
         </h1>
         <p class="word">
             Below are some popular reviews and games from this week.
-            <a href="create_account.php" class="crea-account">Sign up</a> to create your own.
+            <a href="create_account.php">Sign up</a> to create your own.
         </p>
         <div class="reviews">
             <div class="colonna">

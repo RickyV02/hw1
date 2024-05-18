@@ -20,7 +20,14 @@ function onJsonWeekly(json) {
 function onJsonRandomMovies(json) {
   const livefeed = document.querySelector("#randommovies div");
   for (let i = 0; i < 10; i++) {
-    const index = RandomNumber();
+    let index = RandomNumber();
+    if (i >= 1) {
+      const ids = document.querySelectorAll("#randommovies div a img")[i - 1]
+        .dataset.id;
+      while (ids.includes(json[index].imdbid)) {
+        index = RandomNumber();
+      }
+    }
     const item = json[index];
     const movielink = document.createElement("a");
     movielink.href = "login.php";
@@ -43,7 +50,14 @@ function onJsonRandomMovies(json) {
 function onJsonRandomSeries(json) {
   const livefeed = document.querySelector("#randomseries div");
   for (let i = 0; i < 10; i++) {
-    const index = RandomNumber();
+    let index = RandomNumber();
+    if (i >= 1) {
+      const ids = document.querySelectorAll("#randomseries div a img")[i - 1]
+        .dataset.id;
+      while (ids.includes(json[index].imdbid)) {
+        index = RandomNumber();
+      }
+    }
     const item = json[index];
     const movielink = document.createElement("a");
     movielink.href = "login.php";
