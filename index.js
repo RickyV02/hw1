@@ -77,6 +77,10 @@ function onJsonRandomSeries(json) {
   }
 }
 
+function onJsonRandomGames(json) {
+  console.log(json);
+}
+
 function onResponse(response) {
   if (!response.ok) {
     console.log("Error: " + response);
@@ -88,6 +92,7 @@ function getContent() {
   fetch("FetchWeekly.php").then(onResponse).then(onJsonWeekly);
   fetch("FetchRandomMovies.php").then(onResponse).then(onJsonRandomMovies);
   fetch("FetchRandomSeries.php").then(onResponse).then(onJsonRandomSeries);
+  fetch("FetchRandomGames.php").then(onResponse).then(onJsonRandomGames);
 }
 
 getContent();
