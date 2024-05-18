@@ -1,7 +1,10 @@
+@import url(https://db.onlinewebfonts.com/c/f82a45d96a5a30abb6417c5b81fc416d?family=Graphik+LC+Web+Semibold+Regular);
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Graphik LC Web Semibold Regular", sans-serif;
+  font-size: 14px;
+  background-color: #14181c;
   margin: 0;
-  padding: 0;
 }
 
 .profile-container {

@@ -1,18 +1,4 @@
 @import url(https://db.onlinewebfonts.com/c/f82a45d96a5a30abb6417c5b81fc416d?family=Graphik+LC+Web+Semibold+Regular);
-@font-face {
-  font-family: "Graphik LC Web Semibold Regular";
-  src: url("https://db.onlinewebfonts.com/t/f82a45d96a5a30abb6417c5b81fc416d.eot");
-  src: url("https://db.onlinewebfonts.com/t/f82a45d96a5a30abb6417c5b81fc416d.eot?#iefix")
-      format("embedded-opentype"),
-    url("https://db.onlinewebfonts.com/t/f82a45d96a5a30abb6417c5b81fc416d.woff2")
-      format("woff2"),
-    url("https://db.onlinewebfonts.com/t/f82a45d96a5a30abb6417c5b81fc416d.woff")
-      format("woff"),
-    url("https://db.onlinewebfonts.com/t/f82a45d96a5a30abb6417c5b81fc416d.ttf")
-      format("truetype"),
-    url("https://db.onlinewebfonts.com/t/f82a45d96a5a30abb6417c5b81fc416d.svg#Graphik LC Web Semibold Regular")
-      format("svg");
-}
 
 body {
   margin: 0;

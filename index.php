@@ -101,7 +101,7 @@
             </div>
         </section>
         <section class="livefeed">
-            <h1>JUST REVIEWED...</h1>
+            <h1>WEEKLY RECOMMENDATION</h1>
             <div>
                 <a href=""><img src="public/spam1.jpg" /></a>
                 <a href=""><img src="public/spam2.jpg" /></a>
