@@ -1,12 +1,14 @@
 <?php
 
-function getMovies() {
+include("credentials.php");
 
-    $apikey = "83d90273b9msh182624ed0f75e4ap148f8ejsn46464751b036";
+function getWeeklyTop10() {
+    
+    global $apikey;
 
     $url = 'https://imdb188.p.rapidapi.com/api/v1/getWeekTop10';
     $headers = array(
-        'x-rapidapi-key: %',
+        'x-rapidapi-key: ' . $apikey,
         'x-rapidapi-host: imdb188.p.rapidapi.com',
         'Content-Type: application/json'
     );
@@ -21,5 +23,5 @@ function getMovies() {
     echo $response;
 }
 
-getMovies();
+getWeeklyTop10();
 ?>

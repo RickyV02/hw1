@@ -45,14 +45,6 @@
             Share them with your friends.
         </h1>
         <a class="crea-account" id="spam" href="create_account.php">GET STARTED — IT‘S FREE!</a>
-        <div class="moviebox">
-            <div><a href=""><img src="public/foto1.jpg" /></a></div>
-            <div><a href=""><img src="public/foto2.jpg" /></a></div>
-            <div><a href=""><img src="public/foto3.jpg" /></a></div>
-            <div><a href=""><img src="public/foto4.jpg" /></a></div>
-            <div><a href=""><img src="public/foto5.jpg" /></a></div>
-            <div><a href=""><img src="public/foto6.jpg" /></a></div>
-        </div>
         <section id="feature">
             <h1>LETTERBOXD LETS YOU...</h1>
             <div class="feature__box">
@@ -100,21 +92,19 @@
                 </div>
             </div>
         </section>
-        <section class="livefeed">
-            <h1>WEEKLY RECOMMENDATION</h1>
+        <section class="livefeed" id="livefeed">
+            <h1>10 WEEKLY RECOMMENDATION</h1>
             <div>
-                <a href=""><img src="public/spam1.jpg" /></a>
-                <a href=""><img src="public/spam2.jpg" /></a>
-                <a href=""><img src="public/spam3.jpg" /></a>
-                <a href=""><img src="public/spam4.jpg" /></a>
-                <a href=""><img src="public/spam5.jpg" /></a>
-                <a href=""><img src="public/spam6.jpg" /></a>
-                <a href=""><img src="public/spam7.jpg" /></a>
-                <a href=""><img src="public/spam8.jpg" /></a>
-                <a href=""><img src="public/spam9.jpg" /></a>
-                <a href=""><img src="public/spam10.jpg" /></a>
-                <a href=""><img src="public/spam11.jpg" /></a>
-                <a href=""><img src="public/spam12.jpg" /></a>
+            </div>
+        </section>
+        <section class="livefeed" id="randommovies">
+            <h1>10 RANDOM MOVIES TO WATCH</h1>
+            <div>
+            </div>
+        </section>
+        <section class="livefeed" id="randomseries">
+            <h1>10 RANDOM SERIES TO WATCH</h1>
+            <div>
             </div>
         </section>
         <h1>

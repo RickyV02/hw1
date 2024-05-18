@@ -272,49 +272,6 @@ nav span {
   background-color: green;
 }
 
-.moviebox {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 15px;
-  margin-top: 1.5em;
-  width: 65%;
-  padding: 0 0 1.5%;
-}
-
-.moviebox div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.moviebox img {
-  cursor: pointer;
-  border-radius: 5px;
-  height: 230px;
-  width: 145px;
-  border: 2px solid white;
-}
-
-.moviebox img:hover {
-  border-color: green;
-}
-
-@media screen and (max-width: 1455px) {
-  .moviebox {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  }
-}
-
-@media screen and (max-width: 855px) {
-  .moviebox {
-    grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
-  }
-  .moviebox img {
-    height: 150px;
-    width: 100px;
-  }
-}
-
 #feature {
   display: flex;
   flex-direction: column;
@@ -329,8 +286,8 @@ nav span {
 .livefeed h1,
 .colonna h1,
 .recentarticles h1 {
-  font-size: 14px;
-  color: #678;
+  font-size: 16px;
+  color: whitesmoke;
   font-weight: 400;
 }
 
@@ -398,12 +355,12 @@ nav span {
 
 .livefeed div {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   width: 100%;
   gap: 1em;
   padding-top: 0.5%;
   border-top: 1px solid #456;
-  margin-top: 0.1em;
+  margin-top: 0.2em;
 }
 
 .livefeed a {
@@ -411,19 +368,21 @@ nav span {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1090px) {
   .livefeed div {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   }
 }
 
 .livefeed img {
   height: 100%;
-  width: 100px;
-  border: 2px solid white;
-  border-radius: 3px;
+  width: 150px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px black;
+  border: 2px solid #202830;
 }
 
 .livefeed img:hover {
