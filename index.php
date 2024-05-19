@@ -51,36 +51,34 @@
                 <div class="verde">
                     <img src="public/icona1.png" />
                     <p class="panel">
-                        Keep track of every film you've ever watched (or just start from
-                        the day you join)
+                        Keep track of every film you've ever watched and games you've played
                     </p>
                 </div>
                 <div class="arancione">
                     <img src="public/icona2.png" />
                     <p class="panel">
-                        Show some love for yout favorite films, lists and reviews with a
+                        Show some love for your favorite films and games with a
                         "like"
                     </p>
                 </div>
                 <div class="azzurro">
                     <img src="public/icona6.png" />
                     <p class="panel">
-                        Write and share reviews, and follow friends and other members to
+                        Write and share comments, and follow friends and other members to
                         read theirs
                     </p>
                 </div>
                 <div class="verde">
                     <img src="public/icona3.png" />
                     <p class="panel">
-                        Rate each film on a five-star scale (with halves) to record and
+                        Rate each film to record and
                         share your reaction
                     </p>
                 </div>
                 <div class="arancione">
                     <img src="public/icona5.png" />
                     <p class="panel">
-                        Keep a diary of your film watching (and upgrade to
-                        <span>Pro</span> for comprehensive stats)
+                        Keep a diary of your film watching and game status
                     </p>
                 </div>
                 <div class="azzurro">
@@ -275,7 +273,7 @@
             <div class="footer-section">
                 <h3>Contact Us</h3>
                 <p>Email: FlixNexus@gmail.com</p>
-                <p>Phone: 342-0710390</p>
+                <p>Phone: 3420710390</p>
             </div>
         </div>
     </footer>
