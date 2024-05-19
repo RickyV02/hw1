@@ -364,8 +364,7 @@ nav span {
   margin-top: 0.2em;
 }
 
-.livefeed a,
-.games a {
+.livefeed a {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -379,18 +378,17 @@ nav span {
   }
 }
 
-.livefeed img,
-.games img {
+.livefeed img {
   height: 100%;
   width: 150px;
   border-radius: 5px;
   box-shadow: 5px 5px 5px black;
-  border: 2px solid #202830;
+  border: 3px solid #202830;
+  transition: border-color 0.8s ease;
 }
 
-.livefeed img:hover,
-.games img:hover {
-  border-color: green;
+.livefeed img:hover {
+  border-color: rgb(2, 186, 2);
 }
 
 .word {
@@ -551,15 +549,6 @@ nav span {
   gap: 5px;
   font-weight: 400;
   color: #678;
-}
-
-.games {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  width: 65%;
-  margin-bottom: 1em;
 }
 
 footer {

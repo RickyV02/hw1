@@ -59,7 +59,7 @@ function onJsonRandomSeries(json) {
   for (let i = 0; i < 10; i++) {
     let index = RandomNumber();
     if (i >= 1) {
-      const images = document.querySelectorAll("#randommovies div a img");
+      const images = document.querySelectorAll("#randomseries div a img");
       const ids = [];
       for (let j = 0; j < images.length; j++) {
         ids.push(images[j].dataset.id);
@@ -89,7 +89,7 @@ function onJsonRandomSeries(json) {
 
 function onJsonRandomGames(json) {
   const gamefeed = document.querySelector("#randomgames div");
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 20; i++) {
     let index = RandomBigNumber();
     if (i >= 1) {
       const images = document.querySelectorAll("randomgames div a img");
