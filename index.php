@@ -40,9 +40,13 @@
     </header>
     <div class="wrapper">
         <h1 class="slogan">
-            Track films you’ve watched. <br />
-            Search games you recently played. <br />
-            Share them with your friends.
+            Search films you’ve watched.
+        </h1>
+        <h1 class="slogan">
+            Track games you recently played.
+        </h1>
+        <h1 class="slogan">
+            Get infos about them.
         </h1>
         <a class="crea-account" id="spam" href="create_account.php">GET STARTED — IT‘S FREE!</a>
         <section id="feature">

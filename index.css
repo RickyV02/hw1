@@ -229,9 +229,6 @@ nav span {
   .navsection nav {
     justify-content: center;
   }
-  .slogan {
-    margin-top: 0;
-  }
 }
 
 .wrapper {
@@ -263,6 +260,8 @@ nav span {
 
 .slogan {
   color: white;
+  line-height: 1.5;
+  margin: 0.1em auto;
 }
 
 #spam:hover {
