@@ -29,7 +29,7 @@ function getGames() {
     curl_close($curl);
     
     $url = "https://api.igdb.com/v4/games";
-    $data = "fields *;limit 500;";
+    $data = "fields cover.*;limit 500;where (cover != null) & (release_dates.platform = (1,6));";
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);

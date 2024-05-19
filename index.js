@@ -2,6 +2,10 @@ function RandomNumber() {
   return Math.floor(Math.random() * 100);
 }
 
+function RandomBigNumber() {
+  return Math.floor(Math.random() * 500);
+}
+
 function onJsonWeekly(json) {
   const topMovies = json.data;
   const livefeed = document.querySelector("#livefeed div");
@@ -22,8 +26,11 @@ function onJsonRandomMovies(json) {
   for (let i = 0; i < 10; i++) {
     let index = RandomNumber();
     if (i >= 1) {
-      const ids = document.querySelectorAll("#randommovies div a img")[i - 1]
-        .dataset.id;
+      const images = document.querySelectorAll("#randommovies div a img");
+      const ids = [];
+      for (let j = 0; j < images.length; j++) {
+        ids.push(images[j].dataset.id);
+      }
       while (ids.includes(json[index].imdbid)) {
         index = RandomNumber();
       }
@@ -52,8 +59,11 @@ function onJsonRandomSeries(json) {
   for (let i = 0; i < 10; i++) {
     let index = RandomNumber();
     if (i >= 1) {
-      const ids = document.querySelectorAll("#randomseries div a img")[i - 1]
-        .dataset.id;
+      const images = document.querySelectorAll("#randommovies div a img");
+      const ids = [];
+      for (let j = 0; j < images.length; j++) {
+        ids.push(images[j].dataset.id);
+      }
       while (ids.includes(json[index].imdbid)) {
         index = RandomNumber();
       }
@@ -78,7 +88,33 @@ function onJsonRandomSeries(json) {
 }
 
 function onJsonRandomGames(json) {
-  console.log(json);
+  const gamefeed = document.querySelector("#randomgames div");
+  for (let i = 0; i < 50; i++) {
+    let index = RandomBigNumber();
+    if (i >= 1) {
+      const images = document.querySelectorAll("randomgames div a img");
+      const ids = [];
+      for (let j = 0; j < images.length; j++) {
+        ids.push(images[j].dataset.id);
+      }
+      while (ids.includes(json[index].id)) {
+        index = RandomBigNumber();
+      }
+    }
+    const item = json[index];
+    const gamelink = document.createElement("a");
+    gamelink.href = "login.php";
+    const img_id = item.cover.image_id;
+    const cover_url =
+      "https://images.igdb.com/igdb/image/upload/t_cover_big/" +
+      img_id +
+      ".jpg";
+    const thumbImg = document.createElement("img");
+    thumbImg.src = cover_url;
+    thumbImg.dataset.id = item.id;
+    gamelink.appendChild(thumbImg);
+    gamefeed.appendChild(gamelink);
+  }
 }
 
 function onResponse(response) {

@@ -110,8 +110,8 @@
             </div>
         </section>
         <h1>
-            Write and share reviews. Search the games you like. Share your life in
-            film.
+            Search the games you like. Share your life in
+            film. Put like and comments.
         </h1>
         <p class="word">
             Below are some popular reviews and games from this week.
@@ -254,7 +254,7 @@
                 </section>
             </div>
         </div>
-        <section class="games">
+        <section class="livefeed" id="randomgames">
             <h1>DONT KNOW WHAT TO PLAY? TRY THESE!</h1>
             <div>
             </div>
