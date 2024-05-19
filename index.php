@@ -8,7 +8,7 @@
     <link href="https://db.onlinewebfonts.com/c/f82a45d96a5a30abb6417c5b81fc416d?family=Graphik+LC+Web+Semibold+Regular"
         rel="stylesheet">
     <script src="index.js" defer></script>
-    <title>FlixNexus • Social Index</title>
+    <title>FlixNexus • Index</title>
 </head>
 
 <?php
@@ -48,7 +48,7 @@
         <h1 class="slogan">
             Get infos about them.
         </h1>
-        <a class="crea-account" id="spam" href="create_account.php">GET STARTED — IT‘S FREE!</a>
+        <a id="spam" href="create_account.php">GET STARTED — IT‘S FREE!</a>
         <section id="feature">
             <h1>LETTERBOXD LETS YOU...</h1>
             <div class="feature__box">

@@ -102,9 +102,7 @@ a {
 }
 
 .sfondo {
-  background-image: url(public/sfondo.png);
-  background-position: center center;
-  background-size: cover;
+  background: url(public/sfondo.jpg) no-repeat center center/cover;
   position: absolute;
   height: 100%;
   width: 100%;
@@ -122,7 +120,7 @@ a {
 
 .logo p {
   color: #fff;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
   font-style: italic;
   cursor: default;
@@ -130,7 +128,7 @@ a {
 }
 
 .logo img {
-  height: 100px;
+  height: 80px;
 }
 
 header {
@@ -218,6 +216,9 @@ nav span {
 }
 
 @media screen and (max-width: 855px) {
+  .sfondo {
+    background: url(public/sfondomobile.jpg) no-repeat center center/cover;
+  }
   .container {
     width: 100%;
   }
