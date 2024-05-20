@@ -13,15 +13,11 @@
 
 <?php
     include "checkSession.php";
-    if(!checkSession()){
+    if(!checkSession() || !isset($_POST["search"]) ){
         header("Location: index.php");
         exit;
-    }
-    if(isset($_POST["search"])){
-        $searchname = $_POST["search"];
     }else{
-        header("Location: index.php");
-        exit;
+        $searchname = $_POST["search"];
     }
 ?>
 
@@ -31,18 +27,14 @@ const searchname = "<?php echo $searchname; ?>";
 
 <body>
     <header>
-        <h1>You searched for "<?php echo $_POST["search"];?>"</h1>
+        <h1>You searched for "<?php echo $searchname;?>"</h1>
         <form>
             <input type="text" autocomplete="off">
             <input type="submit" class="submit" value="">
         </form>
     </header>
-    <main>
-        <div class="movie-card">
-            <h2>Movie 1 Title</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-    </main>
+    <section id="modal_search">
+    </section>
 </body>
 
 </html>
