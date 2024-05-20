@@ -6,11 +6,10 @@ function onResponse(response) {
 }
 
 function onJson(json) {
-  console.log(json);
 }
 
 function checkSearch() {
-  fetch("checkSearch.php").then(onResponse).then(onJson);
+  console.log(searchname);
 }
 
 checkSearch();

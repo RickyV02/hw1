@@ -17,11 +17,6 @@
         header("Location: index.php");
         exit;
     } 
-    if(isset($_POST["search"])){
-        $_SESSION["search"] = $_POST["search"];
-        header("Location: search.php");
-        exit;
-    }
 ?>
 
 <body>
@@ -40,7 +35,7 @@
             <nav>
                 <a href="logout.php"><span>LOGOUT</span></a>
                 <a href="profile.php"><span>PROFILE</span></a>
-                <form method="post">
+                <form method="post" action="search.php">
                     <input type="text" autocomplete="off" id="movie_name" name="search">
                     <input type="submit" class="submit" value="">
                 </form>
@@ -91,9 +86,9 @@
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="terms.html">Terms of Use</a></li>
                 </ul>
             </div>
             <div class="footer-section">

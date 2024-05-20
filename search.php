@@ -8,7 +8,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="search.css">
     <script src="search.js" defer></script>
-    <title>FlixNexus•Search&Results</title>
+    <title>FlixNexus • Search&Results</title>
 </head>
 
 <?php
@@ -17,11 +17,21 @@
         header("Location: index.php");
         exit;
     }
+    if(isset($_POST["search"])){
+        $searchname = $_POST["search"];
+    }else{
+        header("Location: index.php");
+        exit;
+    }
 ?>
+
+<script>
+const searchname = "<?php echo $searchname; ?>";
+</script>
 
 <body>
     <header>
-        <h1>You searched for "<?php echo $_SESSION["search"]; ?>"</h1>
+        <h1>You searched for "<?php echo $_POST["search"];?>"</h1>
         <form>
             <input type="text" autocomplete="off">
             <input type="submit" class="submit" value="">
