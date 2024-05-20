@@ -28,8 +28,8 @@ const searchname = "<?php echo $searchname; ?>";
 <body>
     <header>
         <h1>You searched for "<?php echo $searchname;?>"</h1>
-        <form>
-            <input type="text" autocomplete="off">
+        <form method="post">
+            <input type="text" autocomplete="off" name="search">
             <input type="submit" class="submit" value="">
         </form>
     </header>
