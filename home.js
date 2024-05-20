@@ -37,7 +37,11 @@ function onJsonRandomMovies(json) {
     }
     const item = json[index];
     const movielink = document.createElement("a");
-    movielink.href = "result.php?q=" + encodeURIComponent(item.id);
+    movielink.href =
+      "result.php?id=" +
+      encodeURIComponent(item.id) +
+      "&qid=" +
+      encodeURIComponent(item.qid);
     let movieThumb;
     if (item.hasOwnProperty("image")) {
       movieThumb = item.image;
@@ -70,7 +74,11 @@ function onJsonRandomSeries(json) {
     }
     const item = json[index];
     const movielink = document.createElement("a");
-    movielink.href = "result.php?q=" + encodeURIComponent(item.id);
+    movielink.href =
+      "result.php?id=" +
+      encodeURIComponent(item.id) +
+      "&qid=" +
+      encodeURIComponent(item.qid);
     let movieThumb;
     if (item.hasOwnProperty("image")) {
       movieThumb = item.image;
@@ -103,7 +111,11 @@ function onJsonRandomGames(json) {
     }
     const item = json[index];
     const gamelink = document.createElement("a");
-    gamelink.href = "result.php?q=" + encodeURIComponent(item.id);
+    gamelink.href =
+      "result.php?id=" +
+      encodeURIComponent(item.id) +
+      "&qid=" +
+      encodeURIComponent("videoGame");
     const img_id = item.cover.image_id;
     const cover_url =
       "https://images.igdb.com/igdb/image/upload/t_cover_big/" +

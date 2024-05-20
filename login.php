@@ -8,7 +8,7 @@
     <link href="https://db.onlinewebfonts.com/c/f82a45d96a5a30abb6417c5b81fc416d?family=Graphik+LC+Web+Semibold+Regular"
         rel="stylesheet">
     <script src="login.js" defer></script>
-    <title>FlixNexus•Login</title>
+    <title>FlixNexus • Login</title>
 </head>
 
 <?php
