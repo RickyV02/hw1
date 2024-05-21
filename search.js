@@ -27,7 +27,11 @@ function onJson(json) {
     const title = document.createElement("h2");
     title.textContent = nome;
     movie_list.dataset.id = item.id;
-    movie_list.href = "result.php?q=" + encodeURIComponent(item.id);
+    movie_list.href =
+      "result.php?id=" +
+      encodeURIComponent(item.id) +
+      "&qid=" +
+      encodeURIComponent(item.qid);
     movie_list.appendChild(title);
     movie_list.appendChild(poster_url);
     modal_search.appendChild(movie_list);

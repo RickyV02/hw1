@@ -11,7 +11,7 @@ function onJson(json) {
 
 function showResults() {
   if (search_id.includes("tt")) {
-    if (search_qid == "videoGame") {
+    if (search_qid === "videoGame") {
       fetch("FetchGame.php?q=" + encodeURIComponent(search_id))
         .then(onResponse)
         .then(onJson);
