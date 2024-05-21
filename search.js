@@ -33,7 +33,7 @@ function onJson(json) {
     movie_list.dataset.id = item.id;
     if (item.qid === "videoGame") {
       movie_list.href =
-        "result.php?id=" +
+        "result.php?name=" +
         encodeURIComponent(nome) +
         "&qid=" +
         encodeURIComponent("videoGame");

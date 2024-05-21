@@ -13,17 +13,21 @@
 
 <?php
     include "checkSession.php";
-    if(!checkSession() || !isset($_GET["id"]) || !isset($_GET["qid"]) ){
+    if(!checkSession() || (!isset($_GET["id"]) && !isset($_GET["qid"])) || (!isset($_GET["name"]) && !isset($_GET["qid"])) ){
         header("Location: index.php");
         exit;
+    }
+    if(isset($_GET["name"])){
+        $search = $_GET["name"];
+        $searchqid = $_GET["qid"];
     }else{
-        $searchid = $_GET["id"];
+        $search = $_GET["id"];
         $searchqid = $_GET["qid"];
     }
 ?>
 
 <script>
-const search_id = "<?php echo $searchid; ?>";
+const search = "<?php echo $search; ?>";
 const search_qid = "<?php echo $searchqid; ?>";
 </script>
 

@@ -11,15 +11,15 @@ function onJson(json) {
 
 function showResults() {
   if (search_qid === "videoGame") {
-    fetch("FetchGame.php?q=" + encodeURIComponent(search_id))
+    fetch("FetchGame.php?q=" + encodeURIComponent(search))
       .then(onResponse)
       .then(onJson);
-  } else if (search_id.includes("tt")) {
-    fetch("FetchMovie.php?q=" + encodeURIComponent(search_id))
+  } else if (search.includes("tt")) {
+    fetch("FetchMovie.php?q=" + encodeURIComponent(search))
       .then(onResponse)
       .then(onJson);
-  } else if (search_id.includes("nm")) {
-    fetch("FetchOthers.php?q=" + encodeURIComponent(search_id))
+  } else if (search.includes("nm")) {
+    fetch("FetchOthers.php?q=" + encodeURIComponent(search))
       .then(onResponse)
       .then(onJson);
   }
