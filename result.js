@@ -10,16 +10,14 @@ function onJson(json) {
 }
 
 function showResults() {
-  if (search_id.includes("tt")) {
-    if (search_qid === "videoGame") {
-      fetch("FetchGame.php?q=" + encodeURIComponent(search_id))
-        .then(onResponse)
-        .then(onJson);
-    } else {
-      fetch("FetchMovie.php?q=" + encodeURIComponent(search_id))
-        .then(onResponse)
-        .then(onJsonMovie);
-    }
+  if (search_qid === "videoGame") {
+    fetch("FetchGame.php?q=" + encodeURIComponent(search_id))
+      .then(onResponse)
+      .then(onJson);
+  } else if (search_id.includes("tt")) {
+    fetch("FetchMovie.php?q=" + encodeURIComponent(search_id))
+      .then(onResponse)
+      .then(onJsonMovie);
   } else if (search_id.includes("nm")) {
     fetch("FetchOthers.php?q=" + encodeURIComponent(search_id))
       .then(onResponse)

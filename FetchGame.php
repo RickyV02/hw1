@@ -8,7 +8,8 @@ function searchGame() {
     $token= getToken();
     
     $url = "https://api.igdb.com/v4/games";
-    $data = "fields *.*;where id = '" . $_GET['q'] . "';";
+    $id=$_GET["q"];
+    $data = "fields *;where id = '$id';";
     
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
