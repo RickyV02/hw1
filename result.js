@@ -17,11 +17,11 @@ function showResults() {
   } else if (search_id.includes("tt")) {
     fetch("FetchMovie.php?q=" + encodeURIComponent(search_id))
       .then(onResponse)
-      .then(onJsonMovie);
+      .then(onJson);
   } else if (search_id.includes("nm")) {
     fetch("FetchOthers.php?q=" + encodeURIComponent(search_id))
       .then(onResponse)
-      .then(onJsonOthers);
+      .then(onJson);
   }
 }
 

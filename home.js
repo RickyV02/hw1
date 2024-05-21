@@ -11,11 +11,15 @@ function onJsonWeekly(json) {
   const livefeed = document.querySelector("#livefeed div");
   for (item of topMovies) {
     const movielink = document.createElement("a");
-    movielink.href = "result.php?q=" + encodeURIComponent(item.id);
+    movielink.href =
+      "result.php?id=" +
+      encodeURIComponent(item.imdbid) +
+      "&qid=" +
+      encodeURIComponent(item.qid);
     const movieThumb = item.primaryImage.imageUrl;
     const thumbImg = document.createElement("img");
     thumbImg.src = movieThumb;
-    thumbImg.dataset.id = item.id;
+    thumbImg.dataset.id = item.imdbid;
     movielink.appendChild(thumbImg);
     livefeed.appendChild(movielink);
   }
@@ -39,7 +43,7 @@ function onJsonRandomMovies(json) {
     const movielink = document.createElement("a");
     movielink.href =
       "result.php?id=" +
-      encodeURIComponent(item.id) +
+      encodeURIComponent(item.imdbid) +
       "&qid=" +
       encodeURIComponent(item.qid);
     let movieThumb;
@@ -76,7 +80,7 @@ function onJsonRandomSeries(json) {
     const movielink = document.createElement("a");
     movielink.href =
       "result.php?id=" +
-      encodeURIComponent(item.id) +
+      encodeURIComponent(item.imdbid) +
       "&qid=" +
       encodeURIComponent(item.qid);
     let movieThumb;
@@ -113,7 +117,7 @@ function onJsonRandomGames(json) {
     const gamelink = document.createElement("a");
     gamelink.href =
       "result.php?id=" +
-      encodeURIComponent(item.id) +
+      encodeURIComponent(item.imdbid) +
       "&qid=" +
       encodeURIComponent("videoGame");
     const img_id = item.cover.image_id;
@@ -123,7 +127,7 @@ function onJsonRandomGames(json) {
       ".jpg";
     const thumbImg = document.createElement("img");
     thumbImg.src = cover_url;
-    thumbImg.dataset.id = item.id;
+    thumbImg.dataset.id = item.imdbid;
     gamelink.appendChild(thumbImg);
     gamefeed.appendChild(gamelink);
   }

@@ -6,6 +6,7 @@ function onResponse(response) {
 }
 
 function onJson(json) {
+  console.log(json);
   const results = json.d;
   modal_search.innerHTML = "";
   if (results.length === 0) {
