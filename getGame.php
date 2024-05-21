@@ -2,15 +2,16 @@
 
 include("credentials.php");
 include("getToken.php");
+function searchGame() {
 
-function getGames() {
-    
     global $client_id_twitch;
     $token= getToken();
     
     $url = "https://api.igdb.com/v4/games";
-    $data = "fields cover.game,cover.image_id;limit 500;where (cover != null) & (release_dates.platform = (1,6));";
-
+    $name=$_GET["name"];
+    $data = 'fields id,name,alternative_names.name,genres.name,release_dates.*,cover.image_id,genres.*,summary,storyline,rating,platforms.name,themes.name; ' .
+        'where name = "' . $name . '" | alternative_names.name = "' . $name . '";';
+    
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_POST, true);
@@ -28,5 +29,5 @@ function getGames() {
     
 }
 
-getGames();
+searchGame();
 ?>

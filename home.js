@@ -109,7 +109,7 @@ function onJsonRandomGames(json) {
       for (let j = 0; j < images.length; j++) {
         ids.push(images[j].dataset.id);
       }
-      while (ids.includes(json[index].id)) {
+      while (ids.includes(json[index].cover.image_id)) {
         index = RandomBigNumber();
       }
     }
@@ -127,7 +127,7 @@ function onJsonRandomGames(json) {
       ".jpg";
     const thumbImg = document.createElement("img");
     thumbImg.src = cover_url;
-    thumbImg.dataset.id = item.imdbid;
+    thumbImg.dataset.id = img_id;
     gamelink.appendChild(thumbImg);
     gamefeed.appendChild(gamelink);
   }

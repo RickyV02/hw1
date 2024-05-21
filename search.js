@@ -5,9 +5,12 @@ function onResponse(response) {
   } else return response.json();
 }
 
+function onJsonGameId(json) {
+  console.log(json);
+}
+
 function onJson(json) {
   const results = json.d;
-  console.log(results);
   modal_search.innerHTML = "";
   if (results.length === 0) {
     const msg = document.createElement("h2");
@@ -28,11 +31,19 @@ function onJson(json) {
     const title = document.createElement("h2");
     title.textContent = nome;
     movie_list.dataset.id = item.id;
-    movie_list.href =
-      "result.php?id=" +
-      encodeURIComponent(item.id) +
-      "&qid=" +
-      encodeURIComponent(item.qid);
+    if (item.qid === "videoGame") {
+      movie_list.href =
+        "result.php?id=" +
+        encodeURIComponent(nome) +
+        "&qid=" +
+        encodeURIComponent("videoGame");
+    } else {
+      movie_list.href =
+        "result.php?id=" +
+        encodeURIComponent(item.id) +
+        "&qid=" +
+        encodeURIComponent(item.qid);
+    }
     movie_list.appendChild(title);
     movie_list.appendChild(poster_url);
     modal_search.appendChild(movie_list);
