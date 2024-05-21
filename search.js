@@ -6,8 +6,8 @@ function onResponse(response) {
 }
 
 function onJson(json) {
-  console.log(json);
   const results = json.d;
+  console.log(results);
   modal_search.innerHTML = "";
   if (results.length === 0) {
     const msg = document.createElement("h2");

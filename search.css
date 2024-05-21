@@ -60,31 +60,30 @@ form {
 }
 
 #modal_search a {
-  cursor: pointer;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  list-style: none;
+  cursor: pointer;
   min-height: 20%;
   margin: 10px;
   padding: 15px;
   border-radius: 12px;
-  text-align: center;
-  background: #272727;
-  border: solid 3px black;
-  transition: border-color 0.8s ease;
   text-decoration: none;
-}
-
-#modal_search a:hover {
-  border-color: rgb(2, 186, 2);
+  background: #202830;
+  border: 3px solid #202830;
+  transition: border-color 0.8s ease;
+  box-shadow: 5px 5px 5px black;
 }
 
 #modal_search a img {
   max-height: 200px;
   max-width: 250px;
   border-radius: 5px;
-  border: solid 2px black;
+}
+
+#modal_search a:hover {
+  border-color: rgb(2, 186, 2);
 }
 
 #modal_search h2 {

@@ -117,7 +117,7 @@ function onJsonRandomGames(json) {
     const gamelink = document.createElement("a");
     gamelink.href =
       "result.php?id=" +
-      encodeURIComponent(item.imdbid) +
+      encodeURIComponent(item.cover.game) +
       "&qid=" +
       encodeURIComponent("videoGame");
     const img_id = item.cover.image_id;
