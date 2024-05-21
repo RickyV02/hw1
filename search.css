@@ -15,6 +15,7 @@ header {
 }
 
 header h1 {
+  font-size: 2em;
   margin: 0.5em 0;
 }
 
@@ -71,7 +72,7 @@ form {
   border-radius: 12px;
   text-decoration: none;
   background: #202830;
-  border: 3px solid #202830;
+  border: 3px solid #1c1c1c;
   transition: border-color 0.8s ease;
   box-shadow: 5px 5px 5px black;
 }
@@ -80,6 +81,7 @@ form {
   max-height: 200px;
   max-width: 250px;
   border-radius: 5px;
+  border: 1px solid black;
 }
 
 #modal_search a:hover {
