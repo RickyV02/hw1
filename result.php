@@ -13,16 +13,17 @@
 
 <?php
     include "checkSession.php";
-    if(!checkSession() || (!isset($_GET["id"]) && !isset($_GET["qid"])) || (!isset($_GET["name"]) && !isset($_GET["qid"])) ){
+    if(!checkSession()){
         header("Location: index.php");
         exit;
     }
-    if(isset($_GET["name"])){
+    if(isset($_GET["name"]) && isset($_GET["qid"])){
         $search = $_GET["name"];
         $searchqid = $_GET["qid"];
-    }else{
+        
+    }else if(isset($_GET["id"])){
         $search = $_GET["id"];
-        $searchqid = $_GET["qid"];
+        $searchqid = null;
     }
 ?>
 

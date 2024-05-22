@@ -63,6 +63,7 @@ form {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  min-height: 100vh;
 }
 
 #modal_search a {
@@ -71,9 +72,8 @@ form {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  min-height: 20%;
-  margin: 10px;
-  padding: 15px;
+  margin: 0.5em;
+  padding: 1em;
   border-radius: 12px;
   text-decoration: none;
   background: #202830;
@@ -82,25 +82,74 @@ form {
   box-shadow: 5px 5px 5px black;
 }
 
-#modal_search a img {
-  max-height: 200px;
-  max-width: 250px;
-  border-radius: 5px;
-  border: 1px solid black;
-}
-
-#modal_search a:hover {
-  border-color: rgb(2, 186, 2);
-}
-
 #modal_search h2 {
   color: antiquewhite;
   font-size: 1.3em;
   box-shadow: 2px 2px 2px 2px black;
   border: solid 2px black;
   font-style: italic;
-  margin-top: 0;
+  margin: 0.5em;
   padding: 5px;
+}
+
+.modal_game {
+  background-color: #272727;
+  display: flex;
+  width: auto;
+  height: auto;
+  justify-content: space-between;
+  gap: 1em;
+  padding: 1% 1%;
+  border-radius: 10px;
+  margin: 1.5em 2em;
+  border: solid 2px #14181c;
+  box-shadow: 5px 5px 5px 5px black;
+}
+
+.modal_game div {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal_game div p {
+  font-size: 1.2em;
+  line-height: 1.1em;
+  color: antiquewhite;
+  font-style: italic;
+  margin: 0.5em;
+  box-shadow: 2px 2px 2px 2px black;
+  border: solid 2px black;
+  padding: 5px 5px;
+}
+
+.credits img {
+  max-height: 150px;
+  max-width: 200px;
+  border-radius: 5px;
+  border: 2px solid black;
+  transition: border-color 0.8s ease;
+}
+
+.cover {
+  border-radius: 5px;
+  border: solid 2px black;
+  max-height: 200px;
+  max-width: 250px;
+}
+
+#modal_search a:hover {
+  border-color: rgb(2, 186, 2);
+}
+
+.credits {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 1000px;
+  flex-wrap: wrap;
+  overflow: hidden;
+  padding: auto;
+  margin: auto;
 }
 
 footer {

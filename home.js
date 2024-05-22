@@ -11,11 +11,7 @@ function onJsonWeekly(json) {
   const livefeed = document.querySelector("#livefeed div");
   for (item of topMovies) {
     const movielink = document.createElement("a");
-    movielink.href =
-      "result.php?id=" +
-      encodeURIComponent(item.imdbid) +
-      "&qid=" +
-      encodeURIComponent(item.qid);
+    movielink.href = "result.php?id=" + encodeURIComponent(item.id);
     const movieThumb = item.primaryImage.imageUrl;
     const thumbImg = document.createElement("img");
     thumbImg.src = movieThumb;
@@ -41,11 +37,7 @@ function onJsonRandomMovies(json) {
     }
     const item = json[index];
     const movielink = document.createElement("a");
-    movielink.href =
-      "result.php?id=" +
-      encodeURIComponent(item.imdbid) +
-      "&qid=" +
-      encodeURIComponent(item.qid);
+    movielink.href = "result.php?id=" + encodeURIComponent(item.imdbid);
     let movieThumb;
     if (item.hasOwnProperty("image")) {
       movieThumb = item.image;
@@ -78,11 +70,7 @@ function onJsonRandomSeries(json) {
     }
     const item = json[index];
     const movielink = document.createElement("a");
-    movielink.href =
-      "result.php?id=" +
-      encodeURIComponent(item.imdbid) +
-      "&qid=" +
-      encodeURIComponent(item.qid);
+    movielink.href = "result.php?id=" + encodeURIComponent(item.imdbid);
     let movieThumb;
     if (item.hasOwnProperty("image")) {
       movieThumb = item.image;
@@ -116,8 +104,8 @@ function onJsonRandomGames(json) {
     const item = json[index];
     const gamelink = document.createElement("a");
     gamelink.href =
-      "result.php?id=" +
-      encodeURIComponent(item.cover.game) +
+      "result.php?name=" +
+      encodeURIComponent(item.name) +
       "&qid=" +
       encodeURIComponent("videoGame");
     const img_id = item.cover.image_id;

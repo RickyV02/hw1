@@ -28,6 +28,7 @@ function onJson(json) {
     const movie_list = document.createElement("a");
     const poster_url = document.createElement("img");
     poster_url.src = poster;
+    poster_url.classList.add("cover");
     const title = document.createElement("h2");
     title.textContent = nome;
     movie_list.dataset.id = item.id;
