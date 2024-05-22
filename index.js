@@ -131,12 +131,6 @@ function getContent() {
   fetch("FetchRandomGames.php").then(onResponse).then(onJsonRandomGames);
 }
 
-function checkInput(event) {
-  if (form.search.value === "") event.preventDefault();
-}
-
 getContent();
 const placeholder_img =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png";
-const form = document.querySelector("form");
-form.addEventListener("submit", checkInput);
