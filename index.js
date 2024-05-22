@@ -15,7 +15,7 @@ function onJsonWeekly(json) {
     const movieThumb = item.primaryImage.imageUrl;
     const thumbImg = document.createElement("img");
     thumbImg.src = movieThumb;
-    thumbImg.dataset.id = item.id;
+    thumbImg.dataset.id = item.imdbid;
     movielink.appendChild(thumbImg);
     livefeed.appendChild(movielink);
   }
@@ -97,7 +97,7 @@ function onJsonRandomGames(json) {
       for (let j = 0; j < images.length; j++) {
         ids.push(images[j].dataset.id);
       }
-      while (ids.includes(json[index].id)) {
+      while (ids.includes(json[index].cover.image_id)) {
         index = RandomBigNumber();
       }
     }
@@ -111,7 +111,7 @@ function onJsonRandomGames(json) {
       ".jpg";
     const thumbImg = document.createElement("img");
     thumbImg.src = cover_url;
-    thumbImg.dataset.id = item.id;
+    thumbImg.dataset.id = img_id;
     gamelink.appendChild(thumbImg);
     gamefeed.appendChild(gamelink);
   }
@@ -131,6 +131,12 @@ function getContent() {
   fetch("FetchRandomGames.php").then(onResponse).then(onJsonRandomGames);
 }
 
+function checkInput(event) {
+  if (form.search.value === "") event.preventDefault();
+}
+
 getContent();
 const placeholder_img =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png";
+const form = document.querySelector("form");
+form.addEventListener("submit", checkInput);

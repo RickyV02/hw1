@@ -169,7 +169,6 @@ function onJsonMovie(json) {
 }
 
 function onJsonOthers(json) {
-  console.log(json);
   modal_search.innerHTML = "";
   const movie_div = document.createElement("div");
   movie_div.classList.add("modal_game");

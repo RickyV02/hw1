@@ -31,7 +31,6 @@ function onJson(json) {
     poster_url.classList.add("cover");
     const title = document.createElement("h2");
     title.textContent = nome;
-    movie_list.dataset.id = item.id;
     if (item.qid === "videoGame") {
       movie_list.href =
         "result.php?name=" +
