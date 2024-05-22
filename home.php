@@ -47,7 +47,6 @@
         <div class="sfondo">
         </div>
     </div>
-    <?php echo $_SESSION[("username")];?>
     <header>
         <section class="navsection">
             <h1 class="logo">
