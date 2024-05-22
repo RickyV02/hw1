@@ -5,10 +5,6 @@ function onResponse(response) {
   } else return response.json();
 }
 
-function onJsonGameId(json) {
-  console.log(json);
-}
-
 function onJson(json) {
   const results = json.d;
   modal_search.innerHTML = "";

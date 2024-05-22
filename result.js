@@ -6,6 +6,7 @@ function onResponse(response) {
 }
 
 function onJsonGame(json) {
+  console.log(json);
   modal_search.innerHTML = "";
   for (item of json) {
     const game = item;
@@ -82,10 +83,10 @@ function onJsonMovie(json) {
     const releaseDate = document.createElement("p");
     releaseDate.textContent = "Release Date: ";
     if (film.releaseDate.day !== null) {
-      releaseDate.textContent += film.releaseDate.day;
+      releaseDate.textContent += film.releaseDate.day + "/";
     }
     if (film.releaseDate.month !== null) {
-      releaseDate.textContent += film.releaseDate.month;
+      releaseDate.textContent += film.releaseDate.month + "/";
     }
     if (film.releaseDate.year !== null) {
       releaseDate.textContent += film.releaseDate.year;
@@ -97,6 +98,12 @@ function onJsonMovie(json) {
     rating.textContent =
       "Rating Summary: " + film.ratingsSummary.aggregateRating;
     movie_info.appendChild(rating);
+  }
+  if (film.metacritic !== null) {
+    const metascore = document.createElement("p");
+    metascore.textContent =
+      "Metacritic Score: " + film.metacritic.metascore.score;
+    movie_info.appendChild(metascore);
   }
   if (film.canHaveEpisodes) {
     const ep = document.createElement("p");
@@ -111,6 +118,14 @@ function onJsonMovie(json) {
     }
     movie_info.appendChild(genres);
   }
+  if (film.directors.length !== 0) {
+    const director = document.createElement("p");
+    director.textContent = "Director: ";
+    for (item of film.directors[0].credits) {
+      director.textContent += item.name.nameText.text;
+    }
+    movie_info.appendChild(director);
+  }
   if (film.countriesOfOrigin !== null) {
     const country = document.createElement("p");
     country.textContent = "Countries of Origin: ";
@@ -124,10 +139,29 @@ function onJsonMovie(json) {
     director.textContent = "Director: ";
     for (item of film.directors) {
       if (item.credits.length !== 0) {
-        director.textContent += item.credits[0].name.nameText.text;
+        director.textContent += item.credits[0].name.nameText.text + " ";
       }
     }
     movie_info.appendChild(director);
+  }
+  if (json.nominations.total !== 0) {
+    const info = document.createElement("p");
+    info.textContent = "Nominations: " + json.nominations.total;
+    movie_info.appendChild(info);
+  }
+  if (film.production.edges.length !== 0) {
+    const info = document.createElement("p");
+    info.textContent = "Production Company: "+film.production.edges[0].node.company.companyText.text;
+    movie_info.appendChild(info);
+  }
+  if (film.productionBudget !== null) {
+    const info = document.createElement("p");
+    info.textContent =
+      "Production Budget: " +
+      film.productionBudget.budget.amount +
+      " " +
+      film.productionBudget.budget.currency;
+    movie_info.appendChild(info);
   }
   if (film.plot !== null) {
     const mainplot = document.createElement("p");
@@ -224,6 +258,19 @@ function onJsonOthers(json) {
     death_Cause.textContent =
       "Death Cause: " + json.deathCause.displayableProperty.value.plainText;
     movie_info.appendChild(death_Cause);
+  }
+  if (json.children) {
+    const children = document.createElement("p");
+    children.textContent = "Children: " + json.children.total;
+    movie_info.appendChild(children);
+  }
+  if (json.jobs.length !== 0) {
+    const jobs = document.createElement("p");
+    jobs.textContent = "Jobs: ";
+    for (item of json.jobs) {
+      jobs.textContent += item.category.text + " ";
+    }
+    movie_info.appendChild(jobs);
   }
   if (json.wins.total !== 0) {
     const info = document.createElement("p");

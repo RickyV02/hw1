@@ -28,7 +28,7 @@ input[type="text"] {
   border-radius: 20px;
   border: none;
   padding: 5px 35px 5px 5px;
-  width: 10%;
+  width: 15%;
   height: 20px;
   color: rgb(28, 27, 27);
   font-size: 14px;
@@ -52,7 +52,7 @@ form {
   cursor: pointer;
   position: absolute;
   top: 25%;
-  right: 44%;
+  right: 41.5%;
 }
 
 #modal_search {
@@ -72,10 +72,11 @@ form {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  width: fit-content  ;
+  height: fit-content;
   margin: 0.5em;
   padding: 1em;
   border-radius: 12px;
-  text-decoration: none;
   background: #202830;
   border: 3px solid #1c1c1c;
   transition: border-color 0.8s ease;
@@ -112,7 +113,7 @@ form {
 }
 
 .modal_game div p {
-  font-size: 1.2em;
+  font-size: 16px;
   line-height: 1.1em;
   color: antiquewhite;
   font-style: italic;
@@ -122,14 +123,6 @@ form {
   padding: 5px 5px;
 }
 
-.credits img {
-  max-height: 150px;
-  max-width: 200px;
-  border-radius: 5px;
-  border: 2px solid black;
-  transition: border-color 0.8s ease;
-}
-
 .cover {
   border-radius: 5px;
   border: solid 2px black;
@@ -137,19 +130,23 @@ form {
   max-width: 250px;
 }
 
-#modal_search a:hover{
+#modal_search a:hover {
   border-color: rgb(2, 186, 2);
 }
 
 .credits {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  max-width: 1000px;
-  flex-wrap: wrap;
-  overflow: hidden;
-  padding: auto;
-  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 20px;
+  padding: 0.1em;
+}
+
+.credits img {
+  max-height: 150px;
+  max-width: 200px;
+  border-radius: 5px;
+  border: 2px solid black;
+  transition: border-color 0.8s ease;
 }
 
 footer {
