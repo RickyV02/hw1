@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="index.css" />
     <link href="https://db.onlinewebfonts.com/c/f82a45d96a5a30abb6417c5b81fc416d?family=Graphik+LC+Web+Semibold+Regular"
         rel="stylesheet">
+    <link rel="icon" href="public/logo.png" />
     <script src="home.js" defer></script>
     <title>FlixNexus • Home</title>
 </head>

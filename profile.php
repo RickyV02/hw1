@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://db.onlinewebfonts.com/c/f82a45d96a5a30abb6417c5b81fc416d?family=Graphik+LC+Web+Semibold+Regular"
         rel="stylesheet">
+    <link rel="icon" href="public/logo.png" />
     <title>FlixNexus•User Profile</title>
     <link rel="stylesheet" href="profile.css">
 </head>
