@@ -14,37 +14,55 @@
 
 <?php
 include "checkSession.php";
-if(checkSession()){
+
+if (checkSession() || isset($_COOKIE["remember_me"])) {
     header("Location: home.php");
     exit;
 }
-    if(isset($_POST["Username"]) && isset($_POST["password"]))
-    {
-        
-        $conn = mysqli_connect("localhost", "root", "", "hw1") or die("Errore: ". mysqli_connect_error());
-        
-        $username = mysqli_real_escape_string($conn, $_POST["Username"]);
-        
-        $query = "SELECT * FROM ACCOUNTS WHERE username = '".$username."'";
-        $res = mysqli_query($conn, $query) or die(mysqli_error($conn));;
-        
+
+if (isset($_POST["Username"], $_POST["password"])) {
+    $conn = mysqli_connect("localhost", "root", "", "hw1") or die("Errore: " . mysqli_connect_error());
+
+    $username = mysqli_real_escape_string($conn, $_POST["Username"]);
+    $query = "SELECT * FROM ACCOUNTS WHERE USERNAME = '$username'";
+    $res = mysqli_query($conn, $query);
+
+    if ($res) {
         if (mysqli_num_rows($res) > 0) {
             $row = mysqli_fetch_assoc($res);
             if (password_verify($_POST["password"], $row["PWD"])) {
-
-                $_SESSION["username"]=$row["USERNAME"];
+                $_SESSION["username"] = $row["USERNAME"];
+                if (isset($_POST["rememberme"])) {
+                    $token = bin2hex(random_bytes(32));
+                    $expires_at = time() + (86400 * 30);
+                    $expires_at_datetime = date('Y-m-d H:i:s', $expires_at);
+                    $id = $row["ID"];
+                    $query = "INSERT INTO USER_TOKENS (USERID, TOKEN, EXPIRES_AT) VALUES ('$id', '$token', '$expires_at_datetime')";
+                    $res = mysqli_query($conn, $query);
+                    if ($res) {
+                        setcookie("remember_me", $token, $expires_at);
+                    } else {
+                        $error = "Errore durante la creazione del token di ricordo!";
+                    }
+                }
                 header("Location: home.php");
-                mysqli_free_result($res);
-                mysqli_close($conn);
                 exit;
+            } else {
+                $error = "Password errata!";
             }
+        } else {
+            $error = "Credenziali errate!";
         }
-        $error = "Credenziali errate!";
+        mysqli_free_result($res);
+    } else {
+        $error = "Errore durante l'esecuzione della query!";
     }
-    else if (isset($_POST["Username"]) || isset($_POST["password"])) {
-        $error = "Inserisci username e password!";
-    }
+    mysqli_close($conn);
+} elseif (isset($_POST["Username"]) || isset($_POST["password"])) {
+    $error = "Inserisci username e password!";
+}
 ?>
+
 
 <body>
     <form name="login" method="post" class="login-box">
@@ -67,6 +85,11 @@ if(checkSession()){
             <img class="show-password" src="public/eye_visible_hide_hidden_show_icon_145988.svg">
         </div>
         <p id="nopwd" class="nascosto">Inserire password!</p>
+        <div class="check">
+            <input type="checkbox" name="rememberme" id="rememberme"
+                <?php if(isset($_POST["rememberme"])){echo $_POST["rememberme"] ? "checked" : "";} ?>>
+            <label for="rememberme">Remember me</label>
+        </div>
         <input type="submit" value="SIGN IN" class="button">
         <p>Not Registred yet? <a href="create_account.php">Sign up now!</a></p>
         <a href="index.php">Home Page</a>

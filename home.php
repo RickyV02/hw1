@@ -14,10 +14,30 @@
 
 <?php
     include "checkSession.php";
-    if(!checkSession()){
+    
+    if (!checkSession() && isset($_COOKIE["remember_me"])) {
+        $conn = mysqli_connect("localhost", "root", "", "hw1") or die("Errore: ". mysqli_connect_error());
+        $token = mysqli_real_escape_string($conn, $_COOKIE['remember_me']);
+    
+        $query = "SELECT * FROM USER_TOKENS JOIN ACCOUNTS ON USER_TOKENS.USERID=ACCOUNTS.ID WHERE TOKEN = '$token' AND EXPIRES_AT > NOW()";
+        $res = mysqli_query($conn, $query);
+    
+        if (mysqli_num_rows($res) > 0) {
+            $row = mysqli_fetch_assoc($res);
+            $_SESSION["username"] = $row['USERNAME'];
+        } else {
+            setcookie("remember_me", "");
+            header("Location: index.php");
+            exit;
+        }
+    }  
+    
+    if (!checkSession()) {
         header("Location: index.php");
         exit;
-    } 
+    }
+    
+    
 ?>
 
 <body>
@@ -27,6 +47,7 @@
         <div class="sfondo">
         </div>
     </div>
+    <?php echo $_SESSION[("username")];?>
     <header>
         <section class="navsection">
             <h1 class="logo">

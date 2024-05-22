@@ -13,6 +13,10 @@ body {
   background: url(public/background-login.svg) no-repeat center center/cover;
 }
 
+label {
+  color: white;
+}
+
 .login-box {
   display: flex;
   flex-direction: column;
@@ -21,22 +25,23 @@ body {
   max-width: 400px;
   width: 90%;
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 5px 5px 5px black;
   border-radius: 10px;
-  background-color: rgba(32, 118, 118, 0.95);
+  background-color: #14181c;
   text-align: center;
 }
 
 h2,
-p {
+p,
+a {
   margin: 0.5em 0.5em;
-  color: #171717;
+  color: white;
   font-weight: bold;
 }
 
 a {
   margin: auto;
-  color: #f2f2f2;
+  color: green;
   text-decoration: none;
 }
 
@@ -44,8 +49,10 @@ a:hover {
   text-decoration: underline;
 }
 
-div {
-  margin-bottom: 20px;
+.check {
+  display: flex;
+  align-items: center;
+  margin: 15px;
 }
 
 .password-container {

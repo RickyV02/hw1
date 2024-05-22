@@ -82,9 +82,21 @@ function check_email() {
 }
 
 function check_username() {
-  fetch("checkUsername.php?Username=" + encodeURIComponent(form.Username.value))
-    .then(onResponse)
-    .then(onJsonUsername);
+  const error_msg = document.getElementById("nouser");
+  if (form.Username.value.length < 4 || form.Username.value.length > 16) {
+    error_msg.classList.remove("nascosto");
+    error_msg.classList.add("errormsg");
+    checkSubmit = false;
+  } else {
+    error_msg.classList.remove("errormsg");
+    error_msg.classList.add("nascosto");
+    checkSubmit = true;
+    fetch(
+      "checkUsername.php?Username=" + encodeURIComponent(form.Username.value)
+    )
+      .then(onResponse)
+      .then(onJsonUsername);
+  }
 }
 
 function check_password() {

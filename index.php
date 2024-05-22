@@ -14,7 +14,7 @@
 
 <?php
     include "checkSession.php";
-    if(checkSession()){
+    if(checkSession() || isset($_COOKIE["remember_me"])){
         header("Location: home.php");
         exit;
     }   
