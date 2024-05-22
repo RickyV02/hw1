@@ -6,7 +6,6 @@ function onResponse(response) {
 }
 
 function onJsonGame(json) {
-  console.log(json);
   modal_search.innerHTML = "";
   for (item of json) {
     const game = item;
@@ -23,11 +22,6 @@ function onJsonGame(json) {
     const game_info = document.createElement("div");
     const game_title = document.createElement("p");
     game_title.textContent = game.name;
-    const game_genre = document.createElement("p");
-    game_genre.textContent = "Genres: ";
-    for (item of game.genres) {
-      game_genre.textContent += item.name + " ";
-    }
     const game_platform = document.createElement("p");
     game_platform.textContent = "Platforms: ";
     for (item of game.platforms) {
@@ -36,19 +30,28 @@ function onJsonGame(json) {
     const first_release = document.createElement("p");
     first_release.textContent =
       "First Release Date: " + game.release_dates[0].human;
-    const themes = document.createElement("p");
-    themes.textContent = "Themes: ";
-    for (item of game.themes) {
-      themes.textContent += item.name + " ";
-    }
     const summary = document.createElement("p");
     summary.textContent = "Summary: " + game.summary;
     const storyline = document.createElement("p");
     storyline.textContent = "Storyline: " + game.storyline;
     game_info.appendChild(game_title);
-    game_info.appendChild(game_genre);
+    const game_genre = document.createElement("p");
+    game_genre.textContent = "Genres: ";
+    if (game.genres) {
+      for (item of game.genres) {
+        game_genre.textContent += item.name + " ";
+      }
+      game_info.appendChild(game_genre);
+    }
     game_info.appendChild(game_platform);
-    game_info.appendChild(themes);
+    const themes = document.createElement("p");
+    themes.textContent = "Themes: ";
+    if (game.themes) {
+      for (item of game.themes) {
+        themes.textContent += item.name + " ";
+      }
+      game_info.appendChild(themes);
+    }
     game_info.appendChild(first_release);
     if (summary.textContent !== "Summary: undefined") {
       game_info.appendChild(summary);
@@ -151,7 +154,9 @@ function onJsonMovie(json) {
   }
   if (film.production.edges.length !== 0) {
     const info = document.createElement("p");
-    info.textContent = "Production Company: "+film.production.edges[0].node.company.companyText.text;
+    info.textContent =
+      "Production Company: " +
+      film.production.edges[0].node.company.companyText.text;
     movie_info.appendChild(info);
   }
   if (film.productionBudget !== null) {
