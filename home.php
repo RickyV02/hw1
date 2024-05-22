@@ -94,7 +94,7 @@
             <div class="footer-section">
                 <h3>Contact Us</h3>
                 <p>Email: FlixNexus@gmail.com</p>
-                <p>Phone: 3420710390</p>
+                <p>Phone: (555) 123-4567</p>
             </div>
         </div>
     </footer>
