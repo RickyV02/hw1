@@ -80,13 +80,16 @@ function onJsonMovie(json) {
   movie_info.appendChild(movie_title);
   if (film.releaseDate !== null) {
     const releaseDate = document.createElement("p");
-    releaseDate.textContent =
-      "Release Date: " +
-      film.releaseDate.day +
-      "/" +
-      film.releaseDate.month +
-      "/" +
-      film.releaseDate.year;
+    releaseDate.textContent = "Release Date: ";
+    if (film.releaseDate.day !== null) {
+      releaseDate.textContent += film.releaseDate.day;
+    }
+    if (film.releaseDate.month !== null) {
+      releaseDate.textContent += film.releaseDate.month;
+    }
+    if (film.releaseDate.year !== null) {
+      releaseDate.textContent += film.releaseDate.year;
+    }
     movie_info.appendChild(releaseDate);
   }
   if (film.ratingsSummary.aggregateRating !== null) {
