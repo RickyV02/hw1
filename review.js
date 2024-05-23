@@ -81,6 +81,11 @@ function onResponseLike(response) {
 
 function onJsonLike(json) {
   console.log(json);
+  if (json.ok) {
+    checkLike = true;
+  } else {
+    checkLike = false;
+  }
 }
 
 function getLike() {
