@@ -95,7 +95,7 @@ form {
 
 form h2 {
   cursor: pointer;
-  width: 95%;
+  width: max-content;
 }
 
 .heart {

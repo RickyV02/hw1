@@ -4,9 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://db.onlinewebfonts.com/c/f82a45d96a5a30abb6417c5b81fc416d?family=Graphik+LC+Web+Semibold+Regular"
+        rel="stylesheet">
     <link rel="icon" href="public/logo.png" />
-    <title>FlixNexus • Review</title>
     <link rel="stylesheet" href="review.css">
+    <script src="review.js" defer></script>
+    <title>FlixNexus • Review</title>
 </head>
 
 <?php
@@ -16,7 +19,11 @@
         exit;
     }
     if(isset($_POST["id"]) && isset($_POST["name"]) && isset($_POST["image"])){
-        $id = $_POST["id"];
+        if(is_numeric($_POST["id"])){
+            $id = $_POST["id"];
+        }else{
+            $id = "'" . $_POST["id"] . "'";
+        }
         $name = $_POST["name"];
         $image = $_POST["image"];
     }else{
@@ -27,8 +34,8 @@
 
 <script>
 const id = <?php echo $id; ?>;
-const namer = <?php echo $name; ?>;
-const img = <?php echo $image; ?>
+const namer = "<?php echo $name; ?>";
+const img = "<?php echo $image; ?>";
 </script>
 
 <body>
@@ -48,14 +55,14 @@ const img = <?php echo $image; ?>
 
                 <label for="review">Your Review:</label>
                 <textarea id="review" name="review" rows="4" cols="50" required></textarea>
-                <p id="norev" class="nascosto">Insert a rating between 1 and 10 !</p>
+                <p id="norev" class="nascosto">Insert a review with maximum 255 chars!</p>
 
 
                 <label for="rating">Rating:</label>
-                <input type="number" id="rating" name="rating" required>
+                <input type="number" id="rating" name="rating" step="0.1" required>
                 <p id="maxrat" class="nascosto">Insert a rating between 1 and 10 !</p>
 
-                <input type=" submit" value="SUBMIT">
+                <input type="submit" value="SUBMIT">
             </form>
         </div>
     </div>

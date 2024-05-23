@@ -1,3 +1,18 @@
+function dispatchError(error) {
+  console.log("Errore: " + error);
+}
+
+function databaseResponse(json) {
+  if (!json.ok) {
+    dispatchError();
+    return null;
+  }
+}
+
+function checkResponse(response) {
+  return response.json().then(databaseResponse);
+}
+
 function checkRating() {
   const error_msg = document.getElementById("maxrat");
   if (
@@ -18,8 +33,7 @@ function checkRating() {
 
 function checkReview() {
   const error_msg = document.getElementById("norev");
-  const reviewTextarea = document.getElementById("review");
-  if (reviewContent.length < 1 || reviewContent.length > 255) {
+  if (reviewContent.value.length < 1 || reviewContent.value.length > 255) {
     error_msg.classList.remove("nascosto");
     error_msg.classList.add("errormsg");
     checkSubmit = false;
@@ -28,21 +42,6 @@ function checkReview() {
     error_msg.classList.add("nascosto");
     checkSubmit = true;
   }
-}
-
-function dispatchError(error) {
-  console.log("Errore: " + error);
-}
-
-function databaseResponse(json) {
-  if (!json.ok) {
-    dispatchError();
-    return null;
-  }
-}
-
-function checkResponse(response) {
-  return response.json().then(databaseResponse);
 }
 
 function saveReview() {
@@ -66,17 +65,17 @@ function saveReview() {
 }
 
 function check_credentials(event) {
-  if (!checkSubmit) {
-    event.preventDefault();
-  } else {
+  if (checkSubmit) {
     saveReview();
+  } else {
+    event.preventDefault();
   }
 }
-
 let checkSubmit = false;
-const form = document.forms["login"];
+const form = document.querySelector("form");
 form.rating.addEventListener("blur", checkRating);
-form.review("blur", checkReview);
+const reviewContent = document.getElementById("review");
+reviewContent.addEventListener("blur", checkReview);
 form.addEventListener("submit", check_credentials);
 const emptyheart = "public/favourite-heart-svgrepo-com.svg";
 const fullheart = "public/favorite-svgrepo-com.svg";
