@@ -1,5 +1,7 @@
 <?php
     session_start();
+    session_unset();
+    session_destroy();
         if (isset($_COOKIE["remember_me"])) {
             $conn = mysqli_connect("localhost", "root", "", "hw1") or die("Errore: ". mysqli_connect_error());
             $tokenData=$_COOKIE["remember_me"];
@@ -10,7 +12,6 @@
             }
             mysqli_close($conn);
         }
-    session_destroy();
     header("Location: index.php");
     exit;
 ?>
