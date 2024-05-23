@@ -13,7 +13,7 @@ body {
   margin-top: 5px;
 }
 
-.nascosto{
+.nascosto {
   display: none;
 }
 
@@ -50,12 +50,20 @@ header h1 {
 }
 
 .film-info img {
+  position: relative;
   cursor: pointer;
   max-height: 450px;
   max-width: 500px;
   border-radius: 5px;
   border: 2px solid black;
   transition: border-color 0.8s ease;
+}
+
+.heart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }
 
 .review-form {
@@ -69,9 +77,6 @@ header h1 {
 form {
   display: flex;
   flex-direction: column;
-}
-
-.review-form form {
   text-align: left;
 }
 
@@ -149,7 +154,7 @@ footer {
   font-size: 14px;
 }
 
-footer a{
+footer a {
   color: white;
   text-decoration: none;
 }

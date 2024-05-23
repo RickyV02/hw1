@@ -71,7 +71,29 @@ function check_credentials(event) {
     event.preventDefault();
   }
 }
+
+function onResponseLike(response) {
+  if (!response.ok) {
+    return null;
+  }
+  return response.json();
+}
+
+function onJsonLike(json) {
+  console.log(json);
+}
+
+function getLikes() {
+  const formData = new FormData();
+  formData.append("id", id);
+  fetch("getLikes.php", { method: "post", body: formData })
+    .then(onResponseLike)
+    .then(onJsonLike);
+}
+
+getLikes();
 let checkSubmit = false;
+let checkLike = false;
 const form = document.querySelector("form");
 form.rating.addEventListener("blur", checkRating);
 const reviewContent = document.getElementById("review");
