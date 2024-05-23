@@ -22,6 +22,7 @@ function onJson(json) {
       poster = item.i.imageUrl;
     }
     const movie_list = document.createElement("a");
+    movie_list.classList.add("search");
     const poster_url = document.createElement("img");
     poster_url.src = poster;
     poster_url.classList.add("cover");

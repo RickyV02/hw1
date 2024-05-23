@@ -5,6 +5,10 @@ function onResponse(response) {
   } else return response.json();
 }
 
+function submitform(event) {
+  event.currentTarget.parentNode.submit();
+}
+
 function onJsonGame(json) {
   modal_search.innerHTML = "";
   for (item of json) {
@@ -19,22 +23,50 @@ function onJsonGame(json) {
       ".jpg";
     game_cover.src = cover_url;
     game_cover.classList.add("cover");
+    const review_form = document.createElement("form");
+    review_form.setAttribute("action", "review.php");
+    review_form.setAttribute("method", "post");
+    const data = {
+      id: game.id,
+      name: game.name,
+      image: cover_url,
+    };
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        const input = document.createElement("input");
+        input.setAttribute("type", "hidden");
+        input.setAttribute("name", key);
+        input.value = data[key];
+        review_form.appendChild(input);
+      }
+    }
+    const reviewh2 = document.createElement("h2");
+    reviewh2.textContent = "Leave a Review!";
+    review_form.appendChild(game_cover);
+    review_form.appendChild(reviewh2);
+    reviewh2.addEventListener("click", submitform);
     const game_info = document.createElement("div");
     const game_title = document.createElement("p");
     game_title.textContent = game.name;
-    const game_platform = document.createElement("p");
-    game_platform.textContent = "Platforms: ";
-    for (item of game.platforms) {
-      game_platform.textContent += item.name + " ";
+    game_info.appendChild(game_title);
+    if (game.platforms) {
+      const game_platform = document.createElement("p");
+      game_platform.textContent = "Platforms: ";
+      for (item of game.platforms) {
+        game_platform.textContent += item.name + " ";
+      }
+      game_info.appendChild(game_platform);
     }
-    const first_release = document.createElement("p");
-    first_release.textContent =
-      "First Release Date: " + game.release_dates[0].human;
+    if (game.release_dates) {
+      const first_release = document.createElement("p");
+      first_release.textContent =
+        "First Release Date: " + game.release_dates[0].human;
+      game_info.appendChild(first_release);
+    }
     const summary = document.createElement("p");
     summary.textContent = "Summary: " + game.summary;
     const storyline = document.createElement("p");
     storyline.textContent = "Storyline: " + game.storyline;
-    game_info.appendChild(game_title);
     const game_genre = document.createElement("p");
     game_genre.textContent = "Genres: ";
     if (game.genres) {
@@ -43,7 +75,6 @@ function onJsonGame(json) {
       }
       game_info.appendChild(game_genre);
     }
-    game_info.appendChild(game_platform);
     if (game.franchise) {
       const franchise = document.createElement("p");
       franchise.textContent = "Franchise: " + game.franchise.name;
@@ -57,7 +88,6 @@ function onJsonGame(json) {
       }
       game_info.appendChild(themes);
     }
-    game_info.appendChild(first_release);
     if (game.expansions) {
       const dlc = document.createElement("p");
       dlc.textContent = "Expansions: ";
@@ -88,7 +118,7 @@ function onJsonGame(json) {
     if (storyline.textContent !== "Storyline: undefined") {
       game_info.appendChild(storyline);
     }
-    game_div.appendChild(game_cover);
+    game_div.appendChild(review_form);
     game_div.appendChild(game_info);
     modal_search.appendChild(game_div);
   }
@@ -106,7 +136,29 @@ function onJsonMovie(json) {
   } else {
     poster.src = placeholder_img;
   }
-  movie_div.appendChild(poster);
+  const review_form = document.createElement("form");
+  review_form.setAttribute("action", "review.php");
+  review_form.setAttribute("method", "post");
+  const data = {
+    id: film.id,
+    name: film.titleText.text,
+    image: poster.src,
+  };
+  for (const key in data) {
+    if (data.hasOwnProperty(key)) {
+      const input = document.createElement("input");
+      input.setAttribute("type", "hidden");
+      input.setAttribute("name", key);
+      input.value = data[key];
+      review_form.appendChild(input);
+    }
+  }
+  const reviewh2 = document.createElement("h2");
+  reviewh2.textContent = "Leave a Review!";
+  review_form.appendChild(poster);
+  review_form.appendChild(reviewh2);
+  reviewh2.addEventListener("click", submitform);
+  movie_div.appendChild(review_form);
   const movie_info = document.createElement("div");
   const movie_title = document.createElement("p");
   movie_title.textContent = film.titleText.text;
