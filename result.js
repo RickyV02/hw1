@@ -260,6 +260,7 @@ function onJsonMovie(json) {
     const cast = film.cast.edges;
     for (item of cast) {
       const movie_li = document.createElement("a");
+      movie_li.classList.add("search");
       const obj = item.node;
       const actor_name = document.createElement("p");
       actor_name.textContent = obj.name.nameText.text;
@@ -374,6 +375,7 @@ function onJsonOthers(json) {
     const cast = json.knownForFeature.edges;
     for (item of cast) {
       const movie_li = document.createElement("a");
+      movie_li.classList.add("search");
       const obj = item.node.title;
       const actor_name = document.createElement("p");
       actor_name.textContent = obj.titleText.text;
