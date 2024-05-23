@@ -83,7 +83,7 @@ function onJsonLike(json) {
   console.log(json);
 }
 
-function getLikes() {
+function getLike() {
   const formData = new FormData();
   formData.append("id", id);
   fetch("getLikes.php", { method: "post", body: formData })
@@ -91,7 +91,7 @@ function getLikes() {
     .then(onJsonLike);
 }
 
-getLikes();
+getLike();
 let checkSubmit = false;
 let checkLike = false;
 const form = document.querySelector("form");
