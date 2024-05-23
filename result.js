@@ -44,6 +44,11 @@ function onJsonGame(json) {
       game_info.appendChild(game_genre);
     }
     game_info.appendChild(game_platform);
+    if (game.franchise) {
+      const franchise = document.createElement("p");
+      franchise.textContent = "Franchise: " + game.franchise.name;
+      game_info.appendChild(franchise);
+    }
     const themes = document.createElement("p");
     themes.textContent = "Themes: ";
     if (game.themes) {
@@ -53,6 +58,30 @@ function onJsonGame(json) {
       game_info.appendChild(themes);
     }
     game_info.appendChild(first_release);
+    if (game.expansions) {
+      const dlc = document.createElement("p");
+      dlc.textContent = "Expansions: ";
+      for (item of game.expansions) {
+        dlc.textContent += item.name + " ";
+      }
+      game_info.appendChild(dlc);
+    }
+    if (game.dlcs) {
+      const dlc = document.createElement("p");
+      dlc.textContent = "Dlcs: ";
+      for (item of game.dlcs) {
+        dlc.textContent += item.name + " ";
+      }
+      game_info.appendChild(dlc);
+    }
+    if (game.involved_companies) {
+      const dlc = document.createElement("p");
+      dlc.textContent = "Involved Companies: ";
+      for (item of game.involved_companies) {
+        dlc.textContent += item.company.name + " ";
+      }
+      game_info.appendChild(dlc);
+    }
     if (summary.textContent !== "Summary: undefined") {
       game_info.appendChild(summary);
     }
