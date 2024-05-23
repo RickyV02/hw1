@@ -1,7 +1,9 @@
 <?php
     include "checkSession.php";
-    if (!$userid = checkSession()) exit;
-
+    if (!$userid = checkSession()){
+        header("Location: index.php");
+        exit;
+    }
     function getLike() {
         
         global $userid;
