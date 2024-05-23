@@ -23,7 +23,6 @@
         }else{
             echo json_encode(array('ok' => false));
         }
-
         mysqli_close($conn);
         exit;
     }
