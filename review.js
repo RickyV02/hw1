@@ -118,14 +118,13 @@ function ToggleHeart() {
 
 function onJsonRandomReviews(json) {
   console.log(json);
-  const ReviewSection = document.getElementById("other-reviews");
-  const sectionTitle = document.querySelector("#other-reviews h1");
+  const ReviewSection = document.getElementById("other_reviews");
+  const sectionTitle = document.querySelector("#other_reviews h1");
   if (json.norev) {
-    sectionTitle.textContent = "Our Users Reviews";
+    sectionTitle.textContent = "Some of Our Users Reviews";
     for (let i = 0; i < 5; i++) {
       const index = Rng();
       const item = json[index];
-      //da finire
     }
   } else {
     sectionTitle.textContent = "This title has not been reviewed yet!";
