@@ -113,3 +113,19 @@ input[type="checkbox"] {
 .nascosto {
   display: none;
 }
+
+input[type="file"] {
+  display: none;
+}
+
+label[for="avatar"] {
+  background-color: #2b2b2b;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+label[for="avatar"]:hover {
+  background-color: green;
+}

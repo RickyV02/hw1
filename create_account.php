@@ -56,10 +56,35 @@ if(isset($_POST['email'])&&isset($_POST['Username']) && isset($_POST['password']
         }
     }
 
+    if (count($errors) == 0) { 
+        if (isset($_FILES['avatar'])) {
+            $file = $_FILES['avatar'];
+            $filetype = exif_imagetype($file['tmp_name']);
+            $ext = array(IMAGETYPE_PNG => 'png', IMAGETYPE_JPEG => 'jpg', IMAGETYPE_GIF => 'gif');
+            if (isset($ext[$filetype])) {
+                if ($file['error'] === 0) {
+                    if ($file['size'] <= 5*1024*1024) {
+                        $newname = uniqid('', true).".".$ext[$filetype];
+                        $avatar = 'public/'.$newname;
+                        move_uploaded_file($file['tmp_name'], $avatar);
+                    } else {
+                        $errors[] = "L'immagine non deve superare i 5MB !";
+                    }
+                } else {
+                    $errors[] = "Errore nel carimento del file !";
+                }
+            } else {
+                $errors[] = "Formati consentiti sono .png, .jpeg, .jpg e .gif !";
+            }
+        }else{
+            $errors[]= "Non hai caricato nessuna immagine !";
+        }
+    }
+
     if (count($errors) == 0) {
         $password = password_hash($password, PASSWORD_BCRYPT);
 
-        $query = "INSERT INTO ACCOUNTS(EMAIL,USERNAME,PWD) VALUES('$email','$username','$password')";
+        $query = "INSERT INTO ACCOUNTS(EMAIL,USERNAME,PWD,AVATAR) VALUES('$email','$username','$password','$avatar')";
         
         if (mysqli_query($conn, $query)) {
             $_SESSION["username"] = $username;
@@ -79,7 +104,7 @@ if(isset($_POST['email'])&&isset($_POST['Username']) && isset($_POST['password']
 ?>
 
 <body>
-    <form name="login" method="post" class="login-box">
+    <form name="login" method="post" class="login-box" enctype="multipart/form-data">
         <h2>Sign Up</h2>
         <p>Keep in touch with your friends</p>
         <?php 
@@ -117,7 +142,11 @@ if(isset($_POST['email'])&&isset($_POST['Username']) && isset($_POST['password']
             <img class="show-password" src="public/eye_visible_hide_hidden_show_icon_145988.svg">
         </div>
         <p id="pwdmatch" class="nascosto">La password non coincidono!</p>
-        <div class="check">
+        <label id="avatar" for="avatar">Upload a Profile Picture</label>
+        <input type="file" id="file" name="avatar" accept=' .jpg, .jpeg, image/gif, image/png'>
+        <p id="nosize" class="nascosto">Caricare un file con dimesione non superiore a 5MB !</p>
+        <p id="noext" class="nascosto">Estensini consentite: .jpeg, .jpg, .png e .gif !</p>
+        <div class=" check">
             <input type="checkbox" name="terms" id="terms"
                 <?php if(isset($_POST["terms"])){echo $_POST["terms"] ? "checked" : "";} ?>>
             <label for="terms">I agree to the terms and conditions of Letterboxd</label>

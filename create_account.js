@@ -149,6 +149,51 @@ function check_credentials(event) {
   }
 }
 
+function activateClick() {
+  fileInput.click();
+}
+
+function hideFileErrors() {
+  const error_msg1 = document.getElementById("nosize");
+  error_msg1.classList.remove("errormsg");
+  error_msg1.classList.add("nascosto");
+  const error_msg2 = document.getElementById("noext");
+  error_msg2.classList.remove("errormsg");
+  error_msg2.classList.add("nascosto");
+}
+
+function checkFile() {
+  const fileUpload = fileInput.files[0];
+  if (fileUpload) {
+    const maxSize = 5 * 1024 * 1024;
+    if (fileUpload.size >= maxSize) {
+      const error_msg = document.getElementById("nosize");
+      error_msg.classList.remove("nascosto");
+      error_msg.classList.add("errormsg");
+      checkSubmit = false;
+      return;
+    }
+    const allowedExtensions = [".jpg", ".jpeg", ".png", ".gif"];
+    const fileName = fileUpload.name.toLowerCase();
+    let validExtension = false;
+    for (item of allowedExtensions) {
+      if (fileName.endsWith(item)) {
+        validExtension = true;
+        break;
+      }
+    }
+    if (!validExtension) {
+      const error_msg = document.getElementById("noext");
+      error_msg.classList.remove("nascosto");
+      error_msg.classList.add("errormsg");
+      checkSubmit = false;
+      return;
+    }
+    hideFileErrors();
+    checkSubmit = true;
+  }
+}
+
 let checkSubmit = false;
 const hide = "public/eye_slash_visible_hide_hidden_show_icon_145987.svg";
 const show = "public/eye_visible_hide_hidden_show_icon_145988.svg";
@@ -163,3 +208,7 @@ form.password.addEventListener("blur", check_minlength);
 form.email.addEventListener("blur", check_email);
 form.rpassword.addEventListener("blur", check_match);
 form.addEventListener("submit", check_credentials);
+const fileLabel = document.getElementById("avatar");
+fileLabel.addEventListener("click", activateClick);
+const fileInput = document.getElementById("file");
+fileInput.addEventListener("change", checkFile);
