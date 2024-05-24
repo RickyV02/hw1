@@ -51,7 +51,7 @@ const img = "<?php echo $image; ?>";
         </div>
 
         <div class="review-form">
-            <h1>Write Your Review</h1>
+            <h1></h1>
             <form method="post">
 
                 <label for="review">Your Review:</label>
@@ -69,7 +69,8 @@ const img = "<?php echo $image; ?>";
     </div>
 
     <section id="other_reviews">
-
+        <h1></h1>
+        <div class="reviews-box"></div>
     </section>
 
     <footer>
