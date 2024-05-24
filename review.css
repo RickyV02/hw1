@@ -49,21 +49,28 @@ header h1 {
   cursor: default;
 }
 
-.film-info img {
+.film-info {
   position: relative;
-  cursor: pointer;
+}
+
+.film-info img {
   max-height: 450px;
   max-width: 500px;
   border-radius: 5px;
   border: 2px solid black;
   transition: border-color 0.8s ease;
+  z-index: 0;
 }
 
-.heart {
+#heart {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  border: none;
+  left: 5px;
+  top: auto;
+  width: 50px;
+  height: auto;
   cursor: pointer;
+  z-index: 2;
 }
 
 .review-form {

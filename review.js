@@ -1,18 +1,3 @@
-function dispatchError(error) {
-  console.log("Errore: " + error);
-}
-
-function databaseResponse(json) {
-  if (!json.ok) {
-    dispatchError();
-    return null;
-  }
-}
-
-function checkResponse(response) {
-  return response.json().then(databaseResponse);
-}
-
 function checkRating() {
   const error_msg = document.getElementById("maxrat");
   if (
@@ -45,23 +30,11 @@ function checkReview() {
 }
 
 function saveReview() {
-  if (isNaN(id)) {
-    const formData = new FormData();
-    formData.append("id", id);
-    formData.append("name", namer);
-    formData.append("image", img);
-    fetch("saveMovieReview.php", { method: "post", body: formData }).then(
-      checkResponse
-    );
-  } else {
-    const formData = new FormData();
-    formData.append("id", id);
-    formData.append("name", namer);
-    formData.append("image", img);
-    fetch("saveGameReview.php", { method: "post", body: formData }).then(
-      checkResponse
-    );
-  }
+  const formData = new FormData();
+  formData.append("id", id);
+  formData.append("name", namer);
+  formData.append("image", img);
+  fetch("saveReview.php", { method: "post", body: formData }).then(onResponse);
 }
 
 function check_credentials(event) {
@@ -72,7 +45,7 @@ function check_credentials(event) {
   }
 }
 
-function onResponseLike(response) {
+function onResponse(response) {
   if (!response.ok) {
     return null;
   }
@@ -80,10 +53,11 @@ function onResponseLike(response) {
 }
 
 function onJsonLike(json) {
-  console.log(json);
   if (json.ok) {
+    heart.src = fullheart;
     checkLike = true;
   } else {
+    heart.src = emptyheart;
     checkLike = false;
   }
 }
@@ -91,18 +65,37 @@ function onJsonLike(json) {
 function getLike() {
   const formData = new FormData();
   formData.append("id", id);
-  fetch("getLikes.php", { method: "post", body: formData })
-    .then(onResponseLike)
+  fetch("getLike.php", { method: "post", body: formData })
+    .then(onResponse)
     .then(onJsonLike);
 }
 
-getLike();
+function ToggleHeart() {
+  const formData = new FormData();
+  formData.append("id", id);
+  if (!checkLike) {
+    formData.append("name", namer);
+    formData.append("cover", img);
+    fetch("saveLikes.php", { method: "post", body: formData })
+      .then(onResponse)
+      .then(onJsonLike);
+  } else {
+    fetch("deleteLikes.php", { method: "post", body: formData })
+      .then(onResponse)
+      .then(onJsonLike);
+  }
+}
+
 let checkSubmit = false;
 let checkLike = false;
+const emptyheart = "public/empty.svg";
+const fullheart = "public/full.svg";
 const form = document.querySelector("form");
 form.rating.addEventListener("blur", checkRating);
 const reviewContent = document.getElementById("review");
 reviewContent.addEventListener("blur", checkReview);
 form.addEventListener("submit", check_credentials);
-const emptyheart = "public/favourite-heart-svgrepo-com.svg";
-const fullheart = "public/favorite-svgrepo-com.svg";
+const heart = document.getElementById("heart");
+heart.addEventListener("click", ToggleHeart);
+
+getLike();

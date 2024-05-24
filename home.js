@@ -16,6 +16,9 @@ function onJsonWeekly(json) {
     const thumbImg = document.createElement("img");
     thumbImg.src = movieThumb;
     thumbImg.dataset.id = item.imdbid;
+    thumbImg.onerror = function () {
+      thumbImg.src = placeholder_img;
+    };
     movielink.appendChild(thumbImg);
     livefeed.appendChild(movielink);
   }
@@ -49,6 +52,9 @@ function onJsonRandomMovies(json) {
     const thumbImg = document.createElement("img");
     thumbImg.src = movieThumb;
     thumbImg.dataset.id = item.imdbid;
+    thumbImg.onerror = function () {
+      thumbImg.src = placeholder_img;
+    };
     movielink.appendChild(thumbImg);
     livefeed.appendChild(movielink);
   }
@@ -82,6 +88,9 @@ function onJsonRandomSeries(json) {
     const thumbImg = document.createElement("img");
     thumbImg.src = movieThumb;
     thumbImg.dataset.id = item.imdbid;
+    thumbImg.onerror = function () {
+      thumbImg.src = placeholder_img;
+    };
     movielink.appendChild(thumbImg);
     livefeed.appendChild(movielink);
   }
@@ -116,6 +125,9 @@ function onJsonRandomGames(json) {
     const thumbImg = document.createElement("img");
     thumbImg.src = cover_url;
     thumbImg.dataset.id = img_id;
+    thumbImg.onerror = function () {
+      thumbImg.src = placeholder_img;
+    };
     gamelink.appendChild(thumbImg);
     gamefeed.appendChild(gamelink);
   }

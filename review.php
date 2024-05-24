@@ -47,6 +47,7 @@ const img = "<?php echo $image; ?>";
         <div class="film-info">
             <h1><?php echo $name?></h1>
             <img src="<?php echo $image?>">
+            <img id="heart" src="public/empty.svg">
         </div>
 
         <div class="review-form">
@@ -54,13 +55,13 @@ const img = "<?php echo $image; ?>";
             <form method="post">
 
                 <label for="review">Your Review:</label>
-                <textarea id="review" name="review" rows="4" cols="50" required></textarea>
+                <textarea id="review" name="review" rows="4" cols="50"></textarea>
                 <p id="norev" class="nascosto">Insert a review with maximum 255 chars!</p>
 
 
                 <label for="rating">Rating:</label>
-                <input type="number" id="rating" name="rating" step="0.1" required>
-                <p id="maxrat" class="nascosto">Insert a rating between 1 and 10 !</p>
+                <input type="number" id="rating" name="rating" step="0.1">
+                <p id="maxrat" class="nascosto">Insert a rating between 0 and 10 !</p>
 
                 <input type="submit" value="SUBMIT">
             </form>
