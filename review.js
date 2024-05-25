@@ -117,14 +117,38 @@ function ToggleHeart() {
 }
 
 function onJsonRandomReviews(json) {
-  console.log(json);
-  const ReviewSection = document.getElementById("other_reviews");
   const sectionTitle = document.querySelector("#other_reviews h1");
-  if (json.norev) {
+  if (!json.norev) {
     sectionTitle.textContent = "Some of Our Users Reviews";
+    const revDiv = document.getElementById("reviews-box");
+    const displayedReviews = [];
     for (let i = 0; i < 5; i++) {
-      const index = Rng();
+      let index;
+      do {
+        index = Rng();
+      } while (displayedReviews.includes(index));
+      displayedReviews.push(index);
       const item = json[index];
+      const moviediv = document.createElement("div");
+      moviediv.classList.add("review");
+      const review = document.createElement("div");
+      const profileLink = document.createElement("a");
+      profileLink.href = "profile.php?q=" + encodeURIComponent(item.USERNAME);
+      const avatar = document.createElement("img");
+      avatar.src = item.AVATAR;
+      profileLink.appendChild(avatar);
+      review.appendChild(profileLink);
+      const user = document.createElement("h2");
+      user.textContent = item.USERNAME;
+      review.appendChild(user);
+      const revrat = document.createElement("p");
+      revrat.textContent = "Rating: " + item.VOTO;
+      review.appendChild(revrat);
+      moviediv.appendChild(review);
+      const revtxt = document.createElement("p");
+      revtxt.textContent = item.RECENSIONE;
+      moviediv.appendChild(revtxt);
+      revDiv.appendChild(moviediv);
     }
   } else {
     sectionTitle.textContent = "This title has not been reviewed yet!";

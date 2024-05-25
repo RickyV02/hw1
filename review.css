@@ -84,11 +84,75 @@ header h1 {
   }
 }
 
-@media screen and (max-width: 420px){
+@media screen and (max-width: 420px) {
   #heart {
     top: 4.5rem;
   }
+}
 
+#other_reviews {
+  padding: 20px;
+}
+
+#other_reviews h1 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  color: burlywood;
+  border-bottom: 2px solid #2c3440;
+}
+
+#reviews-box {
+  display: grid;
+  grid-gap: 30px;
+}
+
+.review {
+  display: flex;
+  flex-direction: column;
+  border: 3px solid #1c1c1c;
+  box-shadow: 5px 5px 5px 5px black;
+  transition: border-color 1s ease;
+  background-color: #2c3440;
+  height: fit-content;
+}
+
+.review:hover {
+  border-color: green;
+}
+
+.review div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+  width: fit-content;
+  margin: 0.3em;
+}
+
+.review div h2 {
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+}
+
+.review p,
+.review div p {
+  color: antiquewhite;
+  font-size: 16px;
+  margin: 0.3em;
+}
+
+.review img {
+  border: 2px solid black;
+  border-radius: 50%;
+  max-width: 50px;
+  height: auto;
+  transition: border-color 1s ease;
+}
+
+.review img:hover {
+  border-color: rgb(122, 55, 122);
 }
 
 .review-form {

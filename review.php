@@ -70,7 +70,8 @@ const img = "<?php echo $image; ?>";
 
     <section id="other_reviews">
         <h1></h1>
-        <div class="reviews-box"></div>
+        <div id="reviews-box">
+        </div>
     </section>
 
     <footer>

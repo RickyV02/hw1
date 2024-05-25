@@ -55,7 +55,7 @@
             </h1>
             <nav>
                 <a href="logout.php"><span>LOGOUT</span></a>
-                <a href="profile.php"><span>PROFILE</span></a>
+                <a href="profile.php?q=<?php echo urlencode($_SESSION["username"]) ?>"><span>PROFILE</span></a>
                 <form method="post" action="search.php">
                     <input type="text" autocomplete="off" id="movie_name" name="search">
                     <input type="submit" class="submit" value="">

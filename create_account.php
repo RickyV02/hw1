@@ -57,7 +57,7 @@ if(isset($_POST['email'])&&isset($_POST['Username']) && isset($_POST['password']
     }
 
     if (count($errors) == 0) { 
-        if (isset($_FILES['avatar'])) {
+        if ($_FILES['avatar']['size'] != 0) {
             $file = $_FILES['avatar'];
             $filetype = exif_imagetype($file['tmp_name']);
             $ext = array(IMAGETYPE_PNG => 'png', IMAGETYPE_JPEG => 'jpg', IMAGETYPE_GIF => 'gif');
@@ -77,7 +77,7 @@ if(isset($_POST['email'])&&isset($_POST['Username']) && isset($_POST['password']
                 $errors[] = "Formati consentiti sono .png, .jpeg, .jpg e .gif !";
             }
         }else{
-            $errors[]= "Non hai caricato nessuna immagine !";
+            $errors[]= "Nessuna immagina caricata !";
         }
     }
 
