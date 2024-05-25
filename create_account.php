@@ -145,7 +145,7 @@ if(isset($_POST['email'])&&isset($_POST['Username']) && isset($_POST['password']
         <label id="avatar" for="avatar">Upload a Profile Picture</label>
         <input type="file" id="file" name="avatar" accept=' .jpg, .jpeg, image/gif, image/png'>
         <p id="nosize" class="nascosto">Caricare un file con dimesione non superiore a 5MB !</p>
-        <p id="noext" class="nascosto">Estensini consentite: .jpeg, .jpg, .png e .gif !</p>
+        <p id="noext" class="nascosto">Estensioni consentite: .jpeg, .jpg, .png e .gif !</p>
         <div class=" check">
             <input type="checkbox" name="terms" id="terms"
                 <?php if(isset($_POST["terms"])){echo $_POST["terms"] ? "checked" : "";} ?>>
