@@ -102,7 +102,6 @@ function getReview() {
 }
 
 function onJsonRandomReviews(json) {
-  console.log(json);
   const sectionTitle = document.querySelector("#other_reviews h1");
   if (!json.norev) {
     sectionTitle.textContent = "Some of Our Users Reviews";
