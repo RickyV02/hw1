@@ -159,7 +159,7 @@ header h1 {
   font-size: 16px;
 }
 
-.review img {
+.avatar {
   border: 2px solid black;
   border-radius: 50%;
   max-width: 50px;
@@ -167,7 +167,7 @@ header h1 {
   transition: border-color 1s ease;
 }
 
-.review img:hover {
+.avatar:hover {
   border-color: rgb(122, 55, 122);
 }
 

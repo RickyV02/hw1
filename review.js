@@ -1,5 +1,5 @@
 function Rng() {
-  return Math.floor(Math.random() * 5);
+  return Math.floor(Math.random() * 10);
 }
 
 function checkRating() {
@@ -123,6 +123,7 @@ function onJsonRandomReviews(json) {
       profileLink.href = "profile.php?q=" + encodeURIComponent(item.USERNAME);
       const avatar = document.createElement("img");
       avatar.src = item.AVATAR;
+      avatar.classList.add("avatar");
       profileLink.appendChild(avatar);
       review.appendChild(profileLink);
       const user = document.createElement("h2");
@@ -178,7 +179,7 @@ function getRandomReviews() {
   fetch("getRandomReviews.php?q=" + encodeURIComponent(id))
     .then(onResponse)
     .then(onJsonRandomReviews)
-    .then(getReviewLike);
+    .then(getReviewLike).then(getMyReviewLikes);
 }
 
 function onJsonShowLike(json) {
@@ -221,7 +222,7 @@ function ToggleHeart() {
 }
 
 function onJsonMyReviewLikes(json) {
-  if (!json.ok) {
+  if (!json.nolike) {
     const indexs = [];
     for (item of json) {
       indexs.push(item.REVIEW_ID);
@@ -247,7 +248,7 @@ function getMyReviewLikes() {
 function onJsonRHeart(json) {
   const allHearts = document.querySelectorAll(".review-heart");
   for (item of allHearts) {
-    if (json.id == item.dataset.reviewid) {
+    if (json.id == item.parentNode.dataset.reviewid) {
       if (json.ok === "insert") {
         item.src = fullheart;
       } else {
@@ -259,17 +260,16 @@ function onJsonRHeart(json) {
 
 function toggleReviewHeart(event) {
   const formData = new FormData();
-  formData.append("id", event.parentNode.dataset.reviewid);
-  if (event.src === emptyheart) {
+  const div = event.currentTarget.parentNode;
+  formData.append("id", div.dataset.reviewid);
+  if (event.currentTarget.src === "http://localhost/hw1/" + emptyheart) {
     fetch("addReviewLike.php", { method: "post", body: formData })
       .then(onResponse)
-      .then(onJsonRHeart)
-      .then(getInfo);
+      .then(onJsonRHeart);
   } else {
     fetch("deleteReviewLike.php", { method: "post", body: formData })
       .then(onResponse)
-      .then(onJsonRHeart)
-      .then(getInfo);
+      .then(onJsonRHeart);
   }
 }
 
@@ -290,4 +290,3 @@ getLike();
 getReview();
 getRandomReviews();
 getInfo();
-getMyReviewLikes();
