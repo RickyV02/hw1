@@ -175,13 +175,14 @@ function ToggleHeart() {
     formData.append("cover", img);
     fetch("saveLikes.php", { method: "post", body: formData })
       .then(onResponse)
-      .then(onJsonLike);
+      .then(onJsonLike)
+      .then(getInfo);
   } else {
     fetch("deleteLikes.php", { method: "post", body: formData })
       .then(onResponse)
-      .then(onJsonLike);
+      .then(onJsonLike)
+      .then(getInfo);
   }
-  getInfo();
 }
 
 let checkSubmit = false;
