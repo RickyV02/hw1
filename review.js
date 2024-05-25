@@ -102,6 +102,7 @@ function getReview() {
 }
 
 function onJsonRandomReviews(json) {
+  console.log(json);
   const sectionTitle = document.querySelector("#other_reviews h1");
   if (!json.norev) {
     sectionTitle.textContent = "Some of Our Users Reviews";
@@ -116,6 +117,7 @@ function onJsonRandomReviews(json) {
       const item = json[index];
       const moviediv = document.createElement("div");
       moviediv.classList.add("review");
+      moviediv.dataset.reviewid = item.ID;
       const review = document.createElement("div");
       const profileLink = document.createElement("a");
       profileLink.href = "profile.php?q=" + encodeURIComponent(item.USERNAME);
@@ -130,14 +132,14 @@ function onJsonRandomReviews(json) {
       revrat.textContent = "Rating: " + item.VOTO;
       revrat.classList.add("rating");
       review.appendChild(revrat);
-      const likeHeart=document.createElement("img");
-      likeHeart.classList.add("review-heart");
-      //DA FINIRE
       moviediv.appendChild(review);
       const revtxt = document.createElement("p");
       revtxt.textContent = item.RECENSIONE;
       revtxt.classList.add("text");
       moviediv.appendChild(revtxt);
+      const likeHeart = document.createElement("img");
+      likeHeart.src = emptyheart;
+      likeHeart.addEventListener("click", toggleReviewHeart);
       revDiv.appendChild(moviediv);
     }
   } else {
@@ -216,6 +218,13 @@ function ToggleHeart() {
   }
 }
 
+function toggleReviewHeart(){
+}
+
+function getMyReviewLikes() {
+
+}
+
 let checkSubmit = false;
 let checkLike = false;
 const emptyheart = "public/empty.svg";
@@ -233,3 +242,4 @@ getLike();
 getReview();
 getRandomReviews();
 getInfo();
+getMyReviewLikes();
