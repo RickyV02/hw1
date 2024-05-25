@@ -64,6 +64,7 @@ function check_credentials(event) {
   event.preventDefault();
   if (checkSubmit) {
     saveReview();
+    getInfo();
   }
 }
 
@@ -98,22 +99,6 @@ function getReview() {
   fetch("getReview.php", { method: "post", body: formData })
     .then(onResponse)
     .then(onJsonReview);
-}
-
-function ToggleHeart() {
-  const formData = new FormData();
-  formData.append("id", id);
-  if (!checkLike) {
-    formData.append("name", namer);
-    formData.append("cover", img);
-    fetch("saveLikes.php", { method: "post", body: formData })
-      .then(onResponse)
-      .then(onJsonLike);
-  } else {
-    fetch("deleteLikes.php", { method: "post", body: formData })
-      .then(onResponse)
-      .then(onJsonLike);
-  }
 }
 
 function onJsonRandomReviews(json) {
@@ -161,6 +146,44 @@ function getRandomReviews() {
     .then(onJsonRandomReviews);
 }
 
+function onJsonShowLike(json) {
+  const par = document.getElementById("likes");
+  par.textContent = json.info + " likes";
+}
+
+function onJsonShowReviews(json) {
+  const par = document.getElementById("reviews");
+  par.textContent = json.info + " reviews";
+}
+
+function getInfo() {
+  const formData = new FormData();
+  formData.append("id", id);
+  fetch("getNumLikes.php", { method: "post", body: formData })
+    .then(onResponse)
+    .then(onJsonShowLike);
+  fetch("getNumReviews.php", { method: "post", body: formData })
+    .then(onResponse)
+    .then(onJsonShowReviews);
+}
+
+function ToggleHeart() {
+  const formData = new FormData();
+  formData.append("id", id);
+  if (!checkLike) {
+    formData.append("name", namer);
+    formData.append("cover", img);
+    fetch("saveLikes.php", { method: "post", body: formData })
+      .then(onResponse)
+      .then(onJsonLike);
+  } else {
+    fetch("deleteLikes.php", { method: "post", body: formData })
+      .then(onResponse)
+      .then(onJsonLike);
+  }
+  getInfo();
+}
+
 let checkSubmit = false;
 let checkLike = false;
 const emptyheart = "public/empty.svg";
@@ -170,9 +193,11 @@ form.rating.addEventListener("blur", checkRating);
 const reviewContent = document.getElementById("review");
 reviewContent.addEventListener("blur", checkReview);
 form.addEventListener("submit", check_credentials);
+form.addEventListener("submit", getInfo);
 const heart = document.getElementById("heart");
 heart.addEventListener("click", ToggleHeart);
 
 getLike();
 getReview();
 getRandomReviews();
+getInfo();

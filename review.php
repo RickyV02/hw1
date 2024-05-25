@@ -65,6 +65,11 @@ const img = "<?php echo $image; ?>";
 
                 <input type="submit" value="SUBMIT">
             </form>
+            <div class="info">
+                <h3>Info:</h3>
+                <p id="likes"></p>
+                <p id="reviews"></p>
+            </div>
         </div>
     </div>
 
