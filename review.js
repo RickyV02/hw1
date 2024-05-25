@@ -128,10 +128,15 @@ function onJsonRandomReviews(json) {
       review.appendChild(user);
       const revrat = document.createElement("p");
       revrat.textContent = "Rating: " + item.VOTO;
+      revrat.classList.add("rating");
       review.appendChild(revrat);
+      const likeHeart=document.createElement("img");
+      likeHeart.classList.add("review-heart");
+      //DA FINIRE
       moviediv.appendChild(review);
       const revtxt = document.createElement("p");
       revtxt.textContent = item.RECENSIONE;
+      revtxt.classList.add("text");
       moviediv.appendChild(revtxt);
       revDiv.appendChild(moviediv);
     }
@@ -140,10 +145,36 @@ function onJsonRandomReviews(json) {
   }
 }
 
+function onJsonReviewLikes(json) {
+  const reviews = document.querySelectorAll(".review");
+  for (item of reviews) {
+    if (item.querySelector("div h2").textContent == json.USERNAME) {
+      const likes = document.createElement("p");
+      likes.textContent = json.NUMLIKE + " likes";
+      likes.classList.add("likes");
+      item.appendChild(likes);
+      return;
+    }
+  }
+}
+
+function getReviewLike() {
+  const reviews = document.querySelectorAll(".review");
+  const formData = new FormData();
+  formData.append("id", id);
+  for (item of reviews) {
+    formData.append("username", item.querySelector("div h2").textContent);
+    fetch("getReviewLikes.php", { method: "post", body: formData })
+      .then(onResponse)
+      .then(onJsonReviewLikes);
+  }
+}
+
 function getRandomReviews() {
   fetch("getRandomReviews.php?q=" + encodeURIComponent(id))
     .then(onResponse)
-    .then(onJsonRandomReviews);
+    .then(onJsonRandomReviews)
+    .then(getReviewLike);
 }
 
 function onJsonShowLike(json) {
