@@ -120,6 +120,12 @@ header h1 {
 
 .review-heart {
   position: absolute;
+  right: 5px;
+  top: 10px;
+  width: 30px;
+  height: auto;
+  cursor: pointer;
+  border: none;
 }
 
 .review:hover {

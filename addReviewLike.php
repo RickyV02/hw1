@@ -17,7 +17,7 @@
             if(mysqli_query($conn, $query) or die(mysqli_error($conn))){
                 $query = "UPDATE GAME_REVIEWS SET NUMLIKE = NUMLIKE + 1 WHERE USERNAME = '$userid' AND GAME_ID = '$id'";
                 if(mysqli_query($conn, $query) or die(mysqli_error($conn))){
-                    echo json_encode(array('ok' => true));
+                    echo json_encode(array('ok' => "insert","id"=> $id));
                     exit;
                 }
             }
@@ -26,7 +26,7 @@
             if(mysqli_query($conn, $query) or die(mysqli_error($conn))){
                 $query = "UPDATE MOVIE_REVIEWS SET NUMLIKE = NUMLIKE + 1 WHERE USERNAME = '$userid' AND FILM_ID = '$id'";
                 if(mysqli_query($conn, $query) or die(mysqli_error($conn))){
-                    echo json_encode(array('ok' => true));
+                    echo json_encode(array('ok' => "insert","id"=> $id));
                     exit;
                 }
             }

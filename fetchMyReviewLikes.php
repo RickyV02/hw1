@@ -4,7 +4,7 @@
         header("Location: index.php");
         exit;
     }
-    function getLike() {
+    function getReviewLikes() {
         
         global $userid;
 
@@ -13,13 +13,14 @@
         $userid = mysqli_real_escape_string($conn, $userid);
         $id = mysqli_real_escape_string($conn, $_POST["id"]);
         if(is_numeric($id)){
-            $query = "SELECT * FROM GAMEREVIEW_LIKES WHERE USERNAME = '$userid' AND REVIEW_ID = '$id'";
+            $query = "SELECT REVIEW_ID FROM GAMEREVIEW_LIKES WHERE USERNAME = '$userid'";
         }else{
-            $query = "SELECT * FROM MOVIEREVIEW_LIKES WHERE USERNAME = '$userid' AND REVIEW_ID = '$id'";
+            $query = "SELECT REVIEW_ID FROM MOVIEREVIEW_LIKES WHERE USERNAME = '$userid'";
         }
         $res = mysqli_query($conn, $query) or die(mysqli_error($conn));
         if(mysqli_num_rows($res) > 0) {
-            echo json_encode(array('ok' => true));
+            $row = mysqli_fetch_assoc($res);
+            echo json_encode($row);
         }else{
             echo json_encode(array('ok' => false));
         }
@@ -27,5 +28,5 @@
         exit;
     }
 
-    getLike();
+    getReviewLikes();
 ?>

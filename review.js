@@ -139,7 +139,9 @@ function onJsonRandomReviews(json) {
       moviediv.appendChild(revtxt);
       const likeHeart = document.createElement("img");
       likeHeart.src = emptyheart;
+      likeHeart.classList.add("review-heart");
       likeHeart.addEventListener("click", toggleReviewHeart);
+      moviediv.appendChild(likeHeart);
       revDiv.appendChild(moviediv);
     }
   } else {
@@ -218,11 +220,57 @@ function ToggleHeart() {
   }
 }
 
-function toggleReviewHeart(){
+function onJsonMyReviewLikes(json) {
+  if (!json.ok) {
+    const indexs = [];
+    for (item of json) {
+      indexs.push(item.REVIEW_ID);
+    }
+    const reviews = document.querySelectorAll(".review");
+    for (item of reviews) {
+      if (indexs.includes(item.dataset.reviewid)) {
+        const heart = item.querySelector(".review-heart");
+        heart.src = fullheart;
+      }
+    }
+  }
 }
 
 function getMyReviewLikes() {
+  const formData = new FormData();
+  formData.append("id", id);
+  fetch("fetchMyReviewLikes.php", { method: "post", body: formData })
+    .then(onResponse)
+    .then(onJsonMyReviewLikes);
+}
 
+function onJsonRHeart(json) {
+  const allHearts = document.querySelectorAll(".review-heart");
+  for (item of allHearts) {
+    if (json.id == item.dataset.reviewid) {
+      if (json.ok === "insert") {
+        item.src = fullheart;
+      } else {
+        item.src = emptyheart;
+      }
+    }
+  }
+}
+
+function toggleReviewHeart(event) {
+  const formData = new FormData();
+  formData.append("id", event.parentNode.dataset.reviewid);
+  if (event.src === emptyheart) {
+    fetch("addReviewLike.php", { method: "post", body: formData })
+      .then(onResponse)
+      .then(onJsonRHeart)
+      .then(getInfo);
+  } else {
+    fetch("deleteReviewLike.php", { method: "post", body: formData })
+      .then(onResponse)
+      .then(onJsonRHeart)
+      .then(getInfo);
+  }
 }
 
 let checkSubmit = false;
