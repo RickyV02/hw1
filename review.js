@@ -153,10 +153,14 @@ function onJsonReviewLikes(json) {
   const reviews = document.querySelectorAll(".review");
   for (item of reviews) {
     if (item.querySelector("div h2").textContent == json.USERNAME) {
-      const likes = document.createElement("p");
-      likes.textContent = json.NUMLIKE + " likes";
-      likes.classList.add("likes");
-      item.appendChild(likes);
+      if (!item.querySelector(".likes")) {
+        const likes = document.createElement("p");
+        likes.textContent = json.NUMLIKE + " likes";
+        likes.classList.add("likes");
+        item.appendChild(likes);
+      } else {
+        item.querySelector(".likes").textContent = json.NUMLIKE + " likes";
+      }
       return;
     }
   }
@@ -178,7 +182,8 @@ function getRandomReviews() {
   fetch("getRandomReviews.php?q=" + encodeURIComponent(id))
     .then(onResponse)
     .then(onJsonRandomReviews)
-    .then(getReviewLike).then(getMyReviewLikes);
+    .then(getReviewLike)
+    .then(getMyReviewLikes);
 }
 
 function onJsonShowLike(json) {
@@ -264,11 +269,13 @@ function toggleReviewHeart(event) {
   if (event.currentTarget.src === "http://localhost/hw1/" + emptyheart) {
     fetch("addReviewLike.php", { method: "post", body: formData })
       .then(onResponse)
-      .then(onJsonRHeart);
+      .then(onJsonRHeart)
+      .then(getReviewLike);
   } else {
     fetch("deleteReviewLike.php", { method: "post", body: formData })
       .then(onResponse)
-      .then(onJsonRHeart);
+      .then(onJsonRHeart)
+      .then(getReviewLike);
   }
 }
 
