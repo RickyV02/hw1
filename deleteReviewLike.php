@@ -13,14 +13,27 @@
         $userid = mysqli_real_escape_string($conn, $userid);
         $id = mysqli_real_escape_string($conn, $_POST["id"]);
         if(is_numeric($id)){
-            $query = "DELETE FROM GAMEREVIEW_LIKES WHERE USERNAME = '$userid' AND GAME_ID = '$id'";
+            $query = "DELETE FROM GAMEREVIEW_LIKES  WHERE REVIEW_ID = '$id' AND USERNAME = '$userid'";
+            if(mysqli_query($conn, $query) or die(mysqli_error($conn))){
+                $query = "UPDATE GAME_REVIEWS SET NUMLIKE = NUMLIKE - 1 WHERE USERNAME = '$userid' AND GAME_ID = '$id'";
+                if(mysqli_query($conn, $query) or die(mysqli_error($conn))){
+                    echo json_encode(array('ok' => true));
+                    exit;
+                }
+            }
         }else{
-            $query = "DELETE FROM MOVIEVIEW_LIKES FROM MOVIE_REVIEWS WHERE USERNAME = '$userid' AND FILM_ID = '$id'";
+            $query = "DELETE FROM MOVIEREVIEW_LIKES  WHERE REVIEW_ID = '$id' AND USERNAME = '$userid'";
+            if(mysqli_query($conn, $query) or die(mysqli_error($conn))){
+                $query = "UPDATE MOVIE_REVIEWS SET NUMLIKE = NUMLIKE - 1 WHERE USERNAME = '$userid' AND FILM_ID = '$id'";
+                if(mysqli_query($conn, $query) or die(mysqli_error($conn))){
+                    echo json_encode(array('ok' => true));
+                    exit;
+                }
+            }
         }
-        $res = mysqli_query($conn, $query) or die(mysqli_error($conn));
-        $row = mysqli_fetch_assoc($res);
-        echo json_encode($row);
+        
         mysqli_close($conn);
+        echo json_encode(array('ok' => false));
         exit;
     }
     
