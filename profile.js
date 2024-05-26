@@ -116,7 +116,6 @@ function onJsonMyReviews(json) {
 }
 
 function onJsonMyLikedReviews(json) {
-  console.log(json);
   const sectionTitle = document.getElementById("favourite-header");
   if (!json.norev) {
     sectionTitle.textContent = "YOUR LIKED REVIEWS";
@@ -204,6 +203,24 @@ function getReviewLikes() {
   }
 }
 
+function onJsonShowMyLike(json) {
+  const p = document.getElementById("favourites");
+  if (json.nolikes) {
+    p.textContent = "0 likes";
+  } else {
+    p.textContent = json.likes + " likes";
+  }
+}
+
+function onJsonShowMyReviews(json) {
+  const p = document.getElementById("written");
+  if (json.norev) {
+    p.textContent = "0 reviews";
+  } else {
+    p.textContent = json.rev + " reviews";
+  }
+}
+
 function fetchUserInfo() {
   fetch("fetchUserMovies.php?q=" + encodeURIComponent(username))
     .then(onResponse)
@@ -217,7 +234,17 @@ function fetchUserInfo() {
   fetch("fetchMyLikedReviews.php?q=" + encodeURIComponent(username))
     .then(onResponse)
     .then(onJsonMyLikedReviews);
+  fetch("fetchMyLikes.php?q=" + encodeURIComponent(username))
+    .then(onResponse)
+    .then(onJsonShowMyLike);
+  fetch("fetchReviewCount.php?q=" + encodeURIComponent(username))
+    .then(onResponse)
+    .then(onJsonShowMyReviews);
 }
+
+function showSettings() {}
 
 fetchAvatar();
 fetchUserInfo();
+const settings = document.getElementById("settings");
+settings.addEventListener("click", showSettings);

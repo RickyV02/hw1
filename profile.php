@@ -14,10 +14,10 @@
 
 <?php
     include "checkSession.php";
-    if(!checkSession()){
+    if(!$userid=checkSession()){
         header("Location: login.php");
         exit;
-    }   
+    }  
 ?>
 <script>
 const username = "<?php echo $_GET["q"]?>";
@@ -28,6 +28,18 @@ const username = "<?php echo $_GET["q"]?>";
         <div class="profile-header">
             <img id="main-avatar">
             <h1 id="main-username"></h1>
+        </div>
+        <div class="user-info">
+            <?php
+            if($userid==$_GET["q"])
+            {
+                echo "<p id='settings'>";
+                echo "Settings";
+                echo "</p>";
+            }
+        ?>
+            <p id="favourites"></p>
+            <p id="written"></p>
         </div>
     </div>
     <div id="profile-content">
