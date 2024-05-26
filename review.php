@@ -14,7 +14,7 @@
 
 <?php
     include "checkSession.php";
-    if(!checkSession()){
+    if(!$user=checkSession()){
         header("Location: index.php");
         exit;
     }
@@ -33,6 +33,7 @@
 ?>
 
 <script>
+const username = "<?php echo $user; ?>";
 const id = <?php echo $id; ?>;
 const namer = "<?php echo $name; ?>";
 const img = "<?php echo $image; ?>";

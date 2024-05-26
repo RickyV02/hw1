@@ -41,7 +41,7 @@ function onJsonReview(json) {
     formTitle.textContent = "Already Reviewed !";
     form.classList.add("nascosto");
     const profileLink = document.createElement("a");
-    profileLink.href = "profile.php";
+    profileLink.href = "profile.php?q="+encodeURIComponent(username);
     profileLink.textContent = "See Your Review At Your Profile";
     const formDiv = document.querySelector(".review-form");
     formDiv.appendChild(profileLink);
