@@ -13,9 +13,9 @@
         $userid = mysqli_real_escape_string($conn, $userid);
         $id = mysqli_real_escape_string($conn, $_GET["q"]);
         if(is_numeric($id)){
-            $query = "SELECT GAME_REVIEWS.*,ACCOUNTS.USERNAME,AVATAR FROM GAME_REVIEWS  JOIN ACCOUNTS ON GAME_REVIEWS.USERNAME=ACCOUNTS.USERNAME WHERE GAME_ID = '$id'";
+            $query = "SELECT GAME_REVIEWS.*,ACCOUNTS.USERNAME,AVATAR FROM GAME_REVIEWS  JOIN ACCOUNTS ON GAME_REVIEWS.USERNAME=ACCOUNTS.USERNAME WHERE GAME_ID = '$id' ORDER BY RAND()";
         }else{
-            $query = "SELECT MOVIE_REVIEWS.*,ACCOUNTS.USERNAME,AVATAR FROM MOVIE_REVIEWS JOIN ACCOUNTS ON MOVIE_REVIEWS.USERNAME=ACCOUNTS.USERNAME WHERE FILM_ID = '$id'";
+            $query = "SELECT MOVIE_REVIEWS.*,ACCOUNTS.USERNAME,AVATAR FROM MOVIE_REVIEWS JOIN ACCOUNTS ON MOVIE_REVIEWS.USERNAME=ACCOUNTS.USERNAME WHERE FILM_ID = '$id' ORDER BY RAND()";
         }
         $res = mysqli_query($conn, $query) or die(mysqli_error($conn));
         $response=array();

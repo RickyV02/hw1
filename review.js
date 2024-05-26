@@ -57,7 +57,8 @@ function saveReview() {
   formData.append("rating", form.rating.value);
   fetch("saveReview.php", { method: "post", body: formData })
     .then(onResponse)
-    .then(onJsonReview);
+    .then(onJsonReview)
+    .then(getInfo);
 }
 
 function check_credentials(event) {
@@ -107,42 +108,76 @@ function onJsonRandomReviews(json) {
     sectionTitle.textContent = "Some of Our Users Reviews";
     const revDiv = document.getElementById("reviews-box");
     const displayedReviews = [];
-    for (let i = 0; i < 5; i++) {
-      let index;
-      do {
-        index = Rng();
-      } while (displayedReviews.includes(index));
-      displayedReviews.push(index);
-      const item = json[index];
-      const moviediv = document.createElement("div");
-      moviediv.classList.add("review");
-      moviediv.dataset.reviewid = item.ID;
-      const review = document.createElement("div");
-      const profileLink = document.createElement("a");
-      profileLink.href = "profile.php?q=" + encodeURIComponent(item.USERNAME);
-      const avatar = document.createElement("img");
-      avatar.src = item.AVATAR;
-      avatar.classList.add("avatar");
-      profileLink.appendChild(avatar);
-      review.appendChild(profileLink);
-      const user = document.createElement("h2");
-      user.textContent = item.USERNAME;
-      review.appendChild(user);
-      const revrat = document.createElement("p");
-      revrat.textContent = "Rating: " + item.VOTO;
-      revrat.classList.add("rating");
-      review.appendChild(revrat);
-      moviediv.appendChild(review);
-      const revtxt = document.createElement("p");
-      revtxt.textContent = item.RECENSIONE;
-      revtxt.classList.add("text");
-      moviediv.appendChild(revtxt);
-      const likeHeart = document.createElement("img");
-      likeHeart.src = emptyheart;
-      likeHeart.classList.add("review-heart");
-      likeHeart.addEventListener("click", toggleReviewHeart);
-      moviediv.appendChild(likeHeart);
-      revDiv.appendChild(moviediv);
+    if (json.length > 10) {
+      for (let i = 0; i < 5; i++) {
+        let index;
+        do {
+          index = Rng();
+        } while (displayedReviews.includes(index));
+        displayedReviews.push(index);
+        const item = json[index];
+        const moviediv = document.createElement("div");
+        moviediv.classList.add("review");
+        moviediv.dataset.reviewid = item.ID;
+        const review = document.createElement("div");
+        const profileLink = document.createElement("a");
+        profileLink.href = "profile.php?q=" + encodeURIComponent(item.USERNAME);
+        const avatar = document.createElement("img");
+        avatar.src = item.AVATAR;
+        avatar.classList.add("avatar");
+        profileLink.appendChild(avatar);
+        review.appendChild(profileLink);
+        const user = document.createElement("h2");
+        user.textContent = item.USERNAME;
+        review.appendChild(user);
+        const revrat = document.createElement("p");
+        revrat.textContent = "Rating: " + item.VOTO;
+        revrat.classList.add("rating");
+        review.appendChild(revrat);
+        moviediv.appendChild(review);
+        const revtxt = document.createElement("p");
+        revtxt.textContent = item.RECENSIONE;
+        revtxt.classList.add("text");
+        moviediv.appendChild(revtxt);
+        const likeHeart = document.createElement("img");
+        likeHeart.src = emptyheart;
+        likeHeart.classList.add("review-heart");
+        likeHeart.addEventListener("click", toggleReviewHeart);
+        moviediv.appendChild(likeHeart);
+        revDiv.appendChild(moviediv);
+      }
+    } else {
+      for (item of json) {
+        const moviediv = document.createElement("div");
+        moviediv.classList.add("review");
+        moviediv.dataset.reviewid = item.ID;
+        const review = document.createElement("div");
+        const profileLink = document.createElement("a");
+        profileLink.href = "profile.php?q=" + encodeURIComponent(item.USERNAME);
+        const avatar = document.createElement("img");
+        avatar.src = item.AVATAR;
+        avatar.classList.add("avatar");
+        profileLink.appendChild(avatar);
+        review.appendChild(profileLink);
+        const user = document.createElement("h2");
+        user.textContent = item.USERNAME;
+        review.appendChild(user);
+        const revrat = document.createElement("p");
+        revrat.textContent = "Rating: " + item.VOTO;
+        revrat.classList.add("rating");
+        review.appendChild(revrat);
+        moviediv.appendChild(review);
+        const revtxt = document.createElement("p");
+        revtxt.textContent = item.RECENSIONE;
+        revtxt.classList.add("text");
+        moviediv.appendChild(revtxt);
+        const likeHeart = document.createElement("img");
+        likeHeart.src = emptyheart;
+        likeHeart.classList.add("review-heart");
+        likeHeart.addEventListener("click", toggleReviewHeart);
+        moviediv.appendChild(likeHeart);
+        revDiv.appendChild(moviediv);
+      }
     }
   } else {
     sectionTitle.textContent = "This title has not been reviewed yet!";
@@ -266,6 +301,7 @@ function toggleReviewHeart(event) {
   const formData = new FormData();
   const div = event.currentTarget.parentNode;
   formData.append("id", div.dataset.reviewid);
+  formData.append("reference_id", id);
   if (event.currentTarget.src === "http://localhost/hw1/" + emptyheart) {
     fetch("addReviewLike.php", { method: "post", body: formData })
       .then(onResponse)
