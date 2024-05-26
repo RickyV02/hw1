@@ -10,8 +10,7 @@ body {
 .profile-container {
   display: flex;
   align-items: center;
-  margin: 0 auto;
-  padding: 20px;
+  margin: 1em 5em;
 }
 
 .profile-header {
@@ -30,7 +29,6 @@ body {
 #main-username {
   font-size: 24px;
   color: antiquewhite;
-  margin: auto;
 }
 
 .bio {
@@ -40,7 +38,7 @@ body {
 
 #profile-content {
   display: grid;
-  padding: 20px;
+  margin: 0 5em;
 }
 
 #favourite-movies,
