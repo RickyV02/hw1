@@ -116,6 +116,7 @@ function onJsonMyReviews(json) {
 }
 
 function onJsonMyLikedReviews(json) {
+  console.log(json);
   const sectionTitle = document.getElementById("favourite-header");
   if (!json.norev) {
     sectionTitle.textContent = "YOUR LIKED REVIEWS";
@@ -186,7 +187,6 @@ function onJsonReviewLikes(json) {
       } else {
         item.querySelector(".likes").textContent = json.NUMLIKE + " likes";
       }
-      return;
     }
   }
 }
