@@ -25,7 +25,7 @@ function onJsonUserGames(json) {
   if (json.nouser) {
     h1.textContent = "YOU HAVE NO FAVOURITE GAMES YET";
   } else {
-    h1.textContent = "SOME OF YOUR FAVOURITE GAMES";
+    h1.textContent = "YOUR FAVOURITE GAMES";
     const section = document.getElementById("favourite-games");
     for (item of json) {
       const gameLink = document.createElement("a");
@@ -44,9 +44,9 @@ function onJsonUserGames(json) {
 function onJsonUserMovies(json) {
   const h1 = document.getElementById("movie-header");
   if (json.nouser) {
-    h1.textContent = "YOU HAVE NO FAVOURITE MOVIES YET";
+    h1.textContent = "YOU HAVE NO FAVOURITE MOVIES OR SHOWS YET";
   } else {
-    h1.textContent = "SOME OF YOUR FAVOURITE MOVIES";
+    h1.textContent = "YOUR FAVOURITE MOVIES & SHOWS";
     const section = document.getElementById("favourite-movies");
     for (item of json) {
       const gameLink = document.createElement("a");
@@ -59,6 +59,151 @@ function onJsonUserMovies(json) {
   }
 }
 
+function onJsonMyReviews(json) {
+  const sectionTitle = document.getElementById("my-header");
+  if (!json.norev) {
+    sectionTitle.textContent = "YOUR REVIEWS";
+    const revDiv = document.getElementById("your-reviews");
+    for (item of json) {
+      const reviewBox = document.createElement("div");
+      reviewBox.classList.add("review-container");
+      const redirectLink = document.createElement("a");
+      const moviediv = document.createElement("div");
+      moviediv.classList.add("review");
+      if (item.hasOwnProperty("GAME_ID")) {
+        moviediv.dataset.id = item.GAME_ID;
+        redirectLink.href =
+          "result.php?name=" +
+          encodeURIComponent(item.GAME_NAME) +
+          "&qid=videoGame";
+      } else {
+        moviediv.dataset.id = item.FILM_ID;
+        redirectLink.href = "result.php?id=" + encodeURIComponent(item.FILM_ID);
+      }
+      const cover = document.createElement("img");
+      cover.src = item.COVER;
+      cover.classList.add("poster");
+      redirectLink.appendChild(cover);
+      reviewBox.appendChild(redirectLink);
+      moviediv.dataset.reviewid = item.ID;
+      const review = document.createElement("div");
+      const profileLink = document.createElement("a");
+      profileLink.href = "profile.php?q=" + encodeURIComponent(item.USERNAME);
+      const avatar = document.createElement("img");
+      avatar.src = item.AVATAR;
+      avatar.classList.add("avatar");
+      profileLink.appendChild(avatar);
+      review.appendChild(profileLink);
+      const user = document.createElement("h2");
+      user.textContent = item.USERNAME;
+      review.appendChild(user);
+      const revrat = document.createElement("p");
+      revrat.textContent = "Rating: " + item.VOTO;
+      revrat.classList.add("rating");
+      review.appendChild(revrat);
+      moviediv.appendChild(review);
+      const revtxt = document.createElement("p");
+      revtxt.textContent = item.RECENSIONE;
+      revtxt.classList.add("text");
+      moviediv.appendChild(revtxt);
+      reviewBox.appendChild(moviediv);
+      revDiv.appendChild(reviewBox);
+    }
+    getReviewLikes();
+  } else {
+    sectionTitle.textContent = "YOU HAVEN'T WRITTEN ANY REVIEW YET";
+  }
+}
+
+function onJsonMyLikedReviews(json) {
+  const sectionTitle = document.getElementById("favourite-header");
+  if (!json.norev) {
+    sectionTitle.textContent = "YOUR LIKED REVIEWS";
+    const revDiv = document.getElementById("favourite-reviews");
+    for (item of json) {
+      const reviewBox = document.createElement("div");
+      reviewBox.classList.add("review-container");
+      const moviediv = document.createElement("div");
+      moviediv.classList.add("review");
+      const redirectLink = document.createElement("a");
+      if (item.hasOwnProperty("GAME_ID")) {
+        moviediv.dataset.id = item.GAME_ID;
+        redirectLink.href =
+          "result.php?name=" +
+          encodeURIComponent(item.GAME_NAME) +
+          "&qid=videoGame";
+      } else {
+        moviediv.dataset.id = item.FILM_ID;
+        redirectLink.href = "result.php?id=" + encodeURIComponent(item.FILM_ID);
+      }
+      const cover = document.createElement("img");
+      cover.src = item.COVER;
+      cover.classList.add("poster");
+      redirectLink.appendChild(cover);
+      reviewBox.appendChild(redirectLink);
+      moviediv.dataset.reviewid = item.ID;
+      const review = document.createElement("div");
+      const profileLink = document.createElement("a");
+      profileLink.href = "profile.php?q=" + encodeURIComponent(item.USERNAME);
+      const avatar = document.createElement("img");
+      avatar.src = item.AVATAR;
+      avatar.classList.add("avatar");
+      profileLink.appendChild(avatar);
+      review.appendChild(profileLink);
+      const user = document.createElement("h2");
+      user.textContent = item.USERNAME;
+      review.appendChild(user);
+      const revrat = document.createElement("p");
+      revrat.textContent = "Rating: " + item.VOTO;
+      revrat.classList.add("rating");
+      review.appendChild(revrat);
+      moviediv.appendChild(review);
+      const revtxt = document.createElement("p");
+      revtxt.textContent = item.RECENSIONE;
+      revtxt.classList.add("text");
+      moviediv.appendChild(revtxt);
+      reviewBox.appendChild(moviediv);
+      revDiv.appendChild(reviewBox);
+    }
+    getReviewLikes();
+  } else {
+    sectionTitle.textContent = "YOU HAVEN'T LIKED ANY REVIEW YET";
+  }
+}
+
+function onJsonReviewLikes(json) {
+  const reviews = document.querySelectorAll(".review");
+  for (item of reviews) {
+    if (
+      item.querySelector("div h2").textContent == json.USERNAME &&
+      item.dataset.reviewid == json.ID
+    ) {
+      if (!item.querySelector(".likes")) {
+        const likes = document.createElement("p");
+        likes.textContent = json.NUMLIKE + " likes";
+        likes.classList.add("likes");
+        item.appendChild(likes);
+      } else {
+        item.querySelector(".likes").textContent = json.NUMLIKE + " likes";
+      }
+      return;
+    }
+  }
+}
+
+function getReviewLikes() {
+  const reviews = document.querySelectorAll(".review");
+  const formData = new FormData();
+  for (item of reviews) {
+    const checkId = item.dataset.id;
+    formData.append("id", checkId);
+    formData.append("username", item.querySelector("div h2").textContent);
+    fetch("getReviewLikes.php", { method: "post", body: formData })
+      .then(onResponse)
+      .then(onJsonReviewLikes);
+  }
+}
+
 function fetchUserInfo() {
   fetch("fetchUserMovies.php?q=" + encodeURIComponent(username))
     .then(onResponse)
@@ -66,6 +211,12 @@ function fetchUserInfo() {
   fetch("fetchUserGames.php?q=" + encodeURIComponent(username))
     .then(onResponse)
     .then(onJsonUserGames);
+  fetch("fetchMyReviews.php?q=" + encodeURIComponent(username))
+    .then(onResponse)
+    .then(onJsonMyReviews);
+  fetch("fetchMyLikedReviews.php?q=" + encodeURIComponent(username))
+    .then(onResponse)
+    .then(onJsonMyLikedReviews);
 }
 
 fetchAvatar();

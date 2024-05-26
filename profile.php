@@ -35,10 +35,10 @@ const username = "<?php echo $_GET["q"]?>";
         <section id="favourite-movies"></section>
         <h1 id="game-header" class="section-header"></h1>
         <section id="favourite-games"></section>
-        <h1 id="favourite-header" class="section-header"></h1>
-        <section id="favourite-reviews"></section>
         <h1 id="my-header" class="section-header"></h1>
         <section id="your-reviews"></section>
+        <h1 id="favourite-header" class="section-header"></h1>
+        <section id="favourite-reviews"></section>
     </div>
     <footer>
         <div class="footer-content">
