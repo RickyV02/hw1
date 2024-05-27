@@ -25,15 +25,16 @@ header h1 {
   margin: 0.5em 0;
 }
 
-.review-form h1{
-    color:#fff;
-    font-size: 16px;
+.review-form h1 {
+  color: #fff;
+  font-size: 16px;
 }
 
 .main {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  height: max-content;
   margin: 2em;
   padding: 20px;
 }
@@ -45,11 +46,21 @@ header h1 {
   border: 2px solid black;
 }
 
+@media screen and (max-width: 550px) {
+  .main {
+    flex-direction: column;
+  }
+  #cover {
+    width: 70%;
+    height: auto;
+  }
+}
+
 .review-form {
   display: flex;
   flex-direction: column;
   flex: 1;
-  max-width: 50%;
+  max-width: 500px;
   padding-left: 20px;
 }
 
