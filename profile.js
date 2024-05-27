@@ -23,9 +23,9 @@ function fetchAvatar() {
 function onJsonUserGames(json) {
   const h1 = document.getElementById("game-header");
   if (json.nouser) {
-    h1.textContent = "YOU HAVE NO FAVOURITE GAMES YET";
+    h1.textContent = "NO FAVOURITE GAMES YET";
   } else {
-    h1.textContent = "YOUR FAVOURITE GAMES";
+    h1.textContent = "FAVOURITE GAMES";
     const section = document.getElementById("favourite-games");
     for (item of json) {
       const gameLink = document.createElement("a");
@@ -44,9 +44,9 @@ function onJsonUserGames(json) {
 function onJsonUserMovies(json) {
   const h1 = document.getElementById("movie-header");
   if (json.nouser) {
-    h1.textContent = "YOU HAVE NO FAVOURITE MOVIES OR SHOWS YET";
+    h1.textContent = "NO FAVOURITE MOVIES OR SHOWS YET";
   } else {
-    h1.textContent = "YOUR FAVOURITE MOVIES & SHOWS";
+    h1.textContent = "FAVOURITE MOVIES & SHOWS";
     const section = document.getElementById("favourite-movies");
     for (item of json) {
       const gameLink = document.createElement("a");
@@ -62,7 +62,7 @@ function onJsonUserMovies(json) {
 function onJsonMyReviews(json) {
   const sectionTitle = document.getElementById("my-header");
   if (!json.norev) {
-    sectionTitle.textContent = "YOUR REVIEWS";
+    sectionTitle.textContent = "REVIEWS";
     const revDiv = document.getElementById("your-reviews");
     for (item of json) {
       const reviewBox = document.createElement("div");
@@ -118,7 +118,7 @@ function onJsonMyReviews(json) {
 function onJsonMyLikedReviews(json) {
   const sectionTitle = document.getElementById("favourite-header");
   if (!json.norev) {
-    sectionTitle.textContent = "YOUR LIKED REVIEWS";
+    sectionTitle.textContent = "LIKED REVIEWS";
     const revDiv = document.getElementById("favourite-reviews");
     for (item of json) {
       const reviewBox = document.createElement("div");
@@ -163,6 +163,13 @@ function onJsonMyLikedReviews(json) {
       revtxt.classList.add("text");
       moviediv.appendChild(revtxt);
       reviewBox.appendChild(moviediv);
+      if (verifyUserSession) {
+        const likeHeart = document.createElement("img");
+        likeHeart.src = "public/full.svg";
+        likeHeart.classList.add("heart");
+        likeHeart.addEventListener("click", RemoveReview);
+        reviewBox.appendChild(likeHeart);
+      }
       revDiv.appendChild(reviewBox);
     }
     getReviewLikes();
@@ -221,6 +228,36 @@ function onJsonShowMyReviews(json) {
   }
 }
 
+function onJsonRemoveReview(json) {
+  if (json.ok == "delete") {
+    const reviews = document.querySelectorAll(
+      "#favourite-reviews .review-container .review"
+    );
+    for (item of reviews) {
+      if (
+        item.dataset.id == json.referenceid &&
+        item.dataset.reviewid == json.id
+      ) {
+        item.parentNode.classList.add("nascosto");
+        return;
+      }
+    }
+  }
+}
+
+function RemoveReview(event) {
+  const img = event.currentTarget;
+  const imgDiv = img.parentNode;
+  const id = imgDiv.querySelector(".review").dataset.reviewid;
+  const referenceid = imgDiv.querySelector(".review").dataset.id;
+  const formData = new FormData();
+  formData.append("id", id);
+  formData.append("reference_id", referenceid);
+  fetch("deleteReviewLike.php", { method: "post", body: formData })
+    .then(onResponse)
+    .then(onJsonRemoveReview);
+}
+
 function fetchUserInfo() {
   fetch("fetchUserMovies.php?q=" + encodeURIComponent(username))
     .then(onResponse)
@@ -242,9 +279,13 @@ function fetchUserInfo() {
     .then(onJsonShowMyReviews);
 }
 
-function showSettings() {}
+function toggleSettings() {}
 
+if (verifyUserSession) {
+  const settings = document.getElementById("settings");
+  settings.addEventListener("click", toggleSettings);
+}
+
+let settingsStatus = false;
 fetchAvatar();
 fetchUserInfo();
-const settings = document.getElementById("settings");
-settings.addEventListener("click", showSettings);

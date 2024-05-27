@@ -25,9 +25,9 @@ p {
   color: green;
 }
 
-#settings:hover{
+#settings:hover {
   text-decoration: underline;
-  color:purple;
+  color: purple;
 }
 
 .profile-header {
@@ -36,7 +36,7 @@ p {
   gap: 1em;
   border: 2px solid black;
   border-radius: 5px;
-  box-shadow: 3px 3px 3px 3px black;
+  box-shadow: 10px 10px 10px 10px #202830;
   background-color: black;
   padding: 15px;
 }
@@ -47,8 +47,8 @@ p {
   gap: 10px;
   border: 2px solid black;
   border-radius: 5px;
-  box-shadow: 3px 3px 3px 3px black;
-  background-color: black
+  box-shadow: 10px 10px 10px 10px #202830;
+  background-color: black;
 }
 
 #main-avatar {
@@ -150,6 +150,17 @@ p {
   background-color: #2c3440;
   height: fit-content;
   position: relative;
+}
+
+.heart {
+  position: absolute;
+  border: none;
+  right: 5px;
+  top: auto;
+  width: 50px;
+  height: auto;
+  cursor: pointer;
+  z-index: 2;
 }
 
 .poster {
@@ -296,4 +307,8 @@ footer a {
     margin-right: 0;
     margin-bottom: 20px;
   }
+}
+
+.nascosto{
+  display: none;
 }
