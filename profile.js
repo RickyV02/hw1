@@ -113,15 +113,26 @@ function onJsonMyReviews(json) {
       const redirectLink = document.createElement("a");
       const moviediv = document.createElement("div");
       moviediv.classList.add("review");
+      const redirectReviewLink = document.createElement("a");
       if (item.hasOwnProperty("GAME_ID")) {
         moviediv.dataset.id = item.GAME_ID;
         redirectLink.href =
           "result.php?name=" +
           encodeURIComponent(item.GAME_NAME) +
           "&qid=videoGame";
+        redirectReviewLink.href =
+          "editReview.php?id=" +
+          encodeURIComponent(item.GAME_ID) +
+          "&user=" +
+          encodeURIComponent(item.USERNAME);
       } else {
         moviediv.dataset.id = item.FILM_ID;
         redirectLink.href = "result.php?id=" + encodeURIComponent(item.FILM_ID);
+        redirectReviewLink.href =
+          "editReview.php?id=" +
+          encodeURIComponent(item.FILM_ID) +
+          "&user=" +
+          encodeURIComponent(item.USERNAME);
       }
       const cover = document.createElement("img");
       cover.src = item.COVER;
@@ -161,7 +172,8 @@ function onJsonMyReviews(json) {
         const editButton = document.createElement("button");
         editButton.textContent = "EDIT";
         editButton.classList.add("edit-button");
-        optionsBlock.appendChild(editButton);
+        redirectReviewLink.appendChild(editButton);
+        optionsBlock.appendChild(redirectReviewLink);
         reviewBox.appendChild(optionsBlock);
       }
       revDiv.appendChild(reviewBox);

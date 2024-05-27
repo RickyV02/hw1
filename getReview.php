@@ -19,7 +19,8 @@
         }
         $res = mysqli_query($conn, $query) or die(mysqli_error($conn));
         if(mysqli_num_rows($res) > 0) {
-            echo json_encode(array('ok' => true));
+            $row = mysqli_fetch_assoc($res);
+            echo json_encode(array('ok' => true,'content'=> $row));
         }else{
             echo json_encode(array('ok' => false));
         }

@@ -4,7 +4,7 @@
         header("Location: index.php");
         exit;
     }
-    function getReview() {
+    function getReviewLikes() {
 
         $conn = mysqli_connect("localhost", "root", "", "HW1") or die("Errore: ". mysqli_connect_error());
         
@@ -22,5 +22,5 @@
         exit;
     }
     
-    getReview();
+    getReviewLikes();
 ?>
