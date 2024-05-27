@@ -18,7 +18,7 @@
         header("Location: login.php");
         exit;
     }
-    if(isset($_GET["id"]) && isset($_GET["user"])){
+    if(isset($_GET["id"]) && isset($_GET["user"]) && $userid == $_GET["user"]){
         if(is_numeric($_GET["id"])){
             $id = $_GET["id"];
         }else{
