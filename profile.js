@@ -59,6 +59,49 @@ function onJsonUserMovies(json) {
   }
 }
 
+function onJsonDeleteReview(json) {
+  if (json.ok == "delete") {
+    const reviews = document.querySelectorAll(
+      "#your-reviews .review-container .review"
+    );
+    for (item of reviews) {
+      if (
+        item.dataset.id == json.referenceid &&
+        item.dataset.reviewid == json.id
+      ) {
+        item.parentNode.classList.add("nascosto");
+        fetchUserInfo();
+        break;
+      }
+    }
+    const OtherReviews = document.querySelectorAll(
+      "#favourite-reviews .review-container .review"
+    );
+    for (item of OtherReviews) {
+      if (
+        item.dataset.id == json.referenceid &&
+        item.dataset.reviewid == json.id
+      ) {
+        item.parentNode.classList.add("nascosto");
+        return;
+      }
+    }
+  }
+}
+
+function deleteReview(event) {
+  const button = event.currentTarget;
+  const buttonDiv = button.parentNode.parentNode;
+  const id = buttonDiv.querySelector(".review").dataset.reviewid;
+  const referenceid = buttonDiv.querySelector(".review").dataset.id;
+  const formData = new FormData();
+  formData.append("id", id);
+  formData.append("reference_id", referenceid);
+  fetch("deleteReview.php", { method: "post", body: formData })
+    .then(onResponse)
+    .then(onJsonDeleteReview);
+}
+
 function onJsonMyReviews(json) {
   const sectionTitle = document.getElementById("my-header");
   if (!json.norev) {
@@ -107,6 +150,20 @@ function onJsonMyReviews(json) {
       revtxt.classList.add("text");
       moviediv.appendChild(revtxt);
       reviewBox.appendChild(moviediv);
+      if (verifyUserSession) {
+        const optionsBlock = document.createElement("div");
+        optionsBlock.classList.add("options-block");
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "DELETE";
+        deleteButton.classList.add("delete-button");
+        deleteButton.addEventListener("click", deleteReview);
+        optionsBlock.appendChild(deleteButton);
+        const editButton = document.createElement("button");
+        editButton.textContent = "EDIT";
+        editButton.classList.add("edit-button");
+        optionsBlock.appendChild(editButton);
+        reviewBox.appendChild(optionsBlock);
+      }
       revDiv.appendChild(reviewBox);
     }
     getReviewLikes();
@@ -258,7 +315,7 @@ function RemoveReview(event) {
     .then(onJsonRemoveReview);
 }
 
-function fetchUserInfo() {
+function fetchUserFavourites() {
   fetch("fetchUserMovies.php?q=" + encodeURIComponent(username))
     .then(onResponse)
     .then(onJsonUserMovies);
@@ -271,6 +328,9 @@ function fetchUserInfo() {
   fetch("fetchMyLikedReviews.php?q=" + encodeURIComponent(username))
     .then(onResponse)
     .then(onJsonMyLikedReviews);
+}
+
+function fetchUserInfo() {
   fetch("fetchMyLikes.php?q=" + encodeURIComponent(username))
     .then(onResponse)
     .then(onJsonShowMyLike);
@@ -289,3 +349,4 @@ if (verifyUserSession) {
 let settingsStatus = false;
 fetchAvatar();
 fetchUserInfo();
+fetchUserFavourites();

@@ -14,6 +14,7 @@ body {
   margin: 1em 5em;
 }
 
+
 p {
   font-size: 16px;
   color: white;
@@ -36,7 +37,7 @@ p {
   gap: 1em;
   border: 2px solid #202830;
   border-radius: 5px;
-  box-shadow: 10px 10px 10px 10px #202830;
+  box-shadow: 5px 5px 5px 5px #202830;
   background-color: black;
   padding: 15px;
 }
@@ -47,7 +48,7 @@ p {
   gap: 10px;
   border: 2px solid #202830;
   border-radius: 5px;
-  box-shadow: 10px 10px 10px 10px #202830;
+  box-shadow: 5px 5px 5px 5px #202830;
   background-color: black;
 }
 
@@ -148,8 +149,60 @@ p {
   box-shadow: 5px 5px 5px 5px black;
   transition: border-color 1s ease;
   background-color: #2c3440;
-  height: fit-content;
+  height: max-content;
   position: relative;
+}
+
+.options-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+  position: absolute;
+  right: 5px;
+  top: auto;
+}
+
+@media screen and (max-width: 680px) {
+  .review-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .options-block{
+    position: relative;
+    justify-content: space-between;
+    height: fit-content;
+    gap: 1em;
+    margin-bottom: 20px;
+  }
+}
+
+.delete-button,
+.edit-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 2px solid black;
+  box-shadow: 3px 3px 3px 3px black;
+  border-radius: 5px;
+  margin-right: 10px;
+  font-weight: bold;
+  color: white;
+}
+
+.delete-button {
+  background-color: #db0b0b;
+}
+
+.edit-button {
+  background-color: rgb(122, 55, 122);
+}
+
+.delete-button:hover,
+.edit-button:hover {
+  color: black;
 }
 
 .heart {
@@ -197,14 +250,6 @@ p {
   margin: 0.3em;
 }
 
-@media screen and (max-width: 650px) {
-  .review div {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-
 .review div h2 {
   font-size: 16px;
   font-weight: bold;
@@ -240,6 +285,16 @@ p {
 
 .avatar:hover {
   border-color: rgb(122, 55, 122);
+}
+
+
+@media screen and (max-width: 600px) {
+  .profile-container{
+    margin: 1em;
+  }
+  #profile-content{
+    margin: 1em;
+  }
 }
 
 footer {
@@ -309,6 +364,6 @@ footer a {
   }
 }
 
-.nascosto{
+.nascosto {
   display: none;
 }
