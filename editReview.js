@@ -37,13 +37,15 @@ function checkReview() {
 }
 
 function onJsonShowRedirect(json) {
+  const formTitle = document.querySelector(".review-form h1");
   if (json.ok) {
-    const form = document.querySelector("form");
+    formTitle.textContent = "Edit Saved!";
     form.classList.add("nascosto");
     const profileLink = document.createElement("a");
     profileLink.href = "profile.php?q=" + encodeURIComponent(username);
-    profileLink.textContent = "See Your New Review At Your Profile";
-    document.querySelector("main").appendChild(profileLink);
+    profileLink.textContent = "See Your Review At Your Profile";
+    const formDiv = document.querySelector(".review-form");
+    formDiv.appendChild(profileLink);
   }
 }
 
@@ -66,10 +68,10 @@ function onJsonShowOldReview(json) {
     } else {
       h1.textContent += item.FILM_NAME;
     }
+    document.getElementById("cover").src = item.COVER;
+    reviewContent.textContent = item.RECENSIONE;
+    form.rating.value = item.VOTO;
   }
-  document.getElementById("cover").src = item.COVER;
-  reviewContent.textContent = item.RECENSIONE;
-  form.rating.value = item.VOTO;
 }
 
 function check_credentials(event) {
@@ -88,7 +90,7 @@ function getOldReviewInfo() {
     .then(onJsonShowOldReview);
 }
 
-let checkSubmit = false;
+let checkSubmit = true;
 const form = document.querySelector("form");
 form.rating.addEventListener("blur", checkRating);
 const reviewContent = document.getElementById("review");

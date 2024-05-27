@@ -42,6 +42,7 @@ const id = <?php echo $id; ?>;
     <div class="main">
         <img id="cover">
         <div class="review-form">
+            <h1></h1>
             <form method="post">
                 <label for="review">Your Review:</label>
                 <textarea id="review" name="review" rows="4" cols="50"></textarea>

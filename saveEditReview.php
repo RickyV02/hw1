@@ -15,9 +15,9 @@
         $rating= mysqli_real_escape_string($conn, $_POST["rating"]);
         $review= mysqli_real_escape_string($conn, $_POST["review"]);
         if(is_numeric($id)){
-            $query = "UPDATE GAME_REVIEWS SET RECENSIONE = '$review' AND VOTO = '$rating' WHERE USERNAME = '$userid' AND GAME_ID = '$id'";
+            $query = "UPDATE GAME_REVIEWS SET RECENSIONE = '$review', VOTO = '$rating' WHERE USERNAME = '$userid' AND GAME_ID = '$id'";
         }else{
-            $query = "UPDATE MOVIE_REVIEWS SET RECENSIONE = '$review' AND VOTO = '$rating' WHERE USERNAME = '$userid' AND FILM_ID = '$id'";
+            $query = "UPDATE MOVIE_REVIEWS SET RECENSIONE = '$review', VOTO = '$rating' WHERE USERNAME = '$userid' AND FILM_ID = '$id'";
         }
         
         if(mysqli_query($conn, $query) or die(mysqli_error($conn))) {
