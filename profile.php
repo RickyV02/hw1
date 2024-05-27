@@ -21,7 +21,7 @@
 ?>
 <script>
 const username = "<?php echo $_GET["q"]?>";
-const verifyUserSession = <?php if($userid==$_GET["q"]) echo true; else echo false;?>
+const verifyUserSession = <?php if($userid==$_GET["q"]) echo "true"; else echo "false";?>
 </script>
 
 <body>
