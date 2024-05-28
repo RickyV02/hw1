@@ -4,8 +4,8 @@
         header("Location: index.php");
         exit;
     }
-    
-    $conn = mysqli_connect("localhost", "root", "", "HW1") or die("Errore: ". mysqli_connect_error());
+        
+    $conn = mysqli_connect($dbconfig['host'], $dbconfig['user'], $dbconfig['password'], $dbconfig['name']);
 
     $username = mysqli_real_escape_string($conn, $_GET["Username"]);
 

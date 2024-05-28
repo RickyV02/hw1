@@ -6,7 +6,9 @@
     }
     function fetchMyLikedReviews() {
 
-        $conn = mysqli_connect("localhost", "root", "", "HW1") or die("Errore: ". mysqli_connect_error());
+        global $dbconfig;
+        
+        $conn = mysqli_connect($dbconfig['host'], $dbconfig['user'], $dbconfig['password'], $dbconfig['name']);
         
         $userid = mysqli_real_escape_string($conn, $_GET["q"]);
         $response = array();

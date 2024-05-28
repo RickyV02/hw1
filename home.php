@@ -16,7 +16,8 @@
     include "checkSession.php";
     
     if (!checkSession() && isset($_COOKIE["remember_me"])) {
-        $conn = mysqli_connect("localhost", "root", "", "hw1") or die("Errore: ". mysqli_connect_error());
+        
+        $conn = mysqli_connect($dbconfig['host'], $dbconfig['user'], $dbconfig['password'], $dbconfig['name']);
         $token = mysqli_real_escape_string($conn, $_COOKIE['remember_me']);
     
         $query = "SELECT * FROM USER_TOKENS JOIN ACCOUNTS ON USER_TOKENS.USERID=ACCOUNTS.ID WHERE TOKEN = '$token' AND EXPIRES_AT > NOW()";

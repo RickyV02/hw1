@@ -21,7 +21,8 @@ if (checkSession() || isset($_COOKIE["remember_me"])) {
 }
 
 if (isset($_POST["Username"], $_POST["password"])) {
-    $conn = mysqli_connect("localhost", "root", "", "hw1") or die("Errore: " . mysqli_connect_error());
+        
+    $conn = mysqli_connect($dbconfig['host'], $dbconfig['user'], $dbconfig['password'], $dbconfig['name']);
 
     $username = mysqli_real_escape_string($conn, $_POST["Username"]);
     $query = "SELECT * FROM ACCOUNTS WHERE USERNAME = '$username'";

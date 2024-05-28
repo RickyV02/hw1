@@ -23,7 +23,9 @@ if(checkSession() || isset($_COOKIE["remember_me"])){
 if(isset($_POST['email'])&&isset($_POST['Username']) && isset($_POST['password']) && isset($_POST['rpassword']) && isset($_POST['terms']))
 {
     $errors=array();
-    $conn = mysqli_connect("localhost", "root", "", "HW1") or die("Errore: ". mysqli_connect_error());
+    global $dbconfig;
+        
+    $conn = mysqli_connect($dbconfig['host'], $dbconfig['user'], $dbconfig['password'], $dbconfig['name']);
     $email = mysqli_real_escape_string($conn,$_POST['email']);
     $password = mysqli_real_escape_string($conn,$_POST['password']);
 

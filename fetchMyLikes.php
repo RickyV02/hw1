@@ -6,7 +6,9 @@
     }
     function fetchNL() {
 
-        $conn = mysqli_connect("localhost", "root", "", "HW1") or die("Errore: ". mysqli_connect_error());
+        global $dbconfig;
+        
+        $conn = mysqli_connect($dbconfig['host'], $dbconfig['user'], $dbconfig['password'], $dbconfig['name']);
         
         $username = mysqli_real_escape_string($conn, $_GET["q"]);
         $query = "SELECT COUNT(*) AS LIKES FROM MOVIE_LIKES WHERE USERNAME = '$username'";

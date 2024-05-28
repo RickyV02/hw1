@@ -4,9 +4,9 @@
         header("Location: index.php");
         exit;
     }
+        
+    $conn = mysqli_connect($dbconfig['host'], $dbconfig['user'], $dbconfig['password'], $dbconfig['name']);
     
-    $conn = mysqli_connect("localhost", "root", "", "HW1") or die("Errore: ". mysqli_connect_error());
-
     $email = mysqli_real_escape_string($conn, $_GET["email"]);
 
     $query = "SELECT EMAIL FROM ACCOUNTS WHERE EMAIL = '$email'";
