@@ -21,7 +21,7 @@ if (checkSession() || isset($_COOKIE["remember_me"])) {
 }
 
 if (isset($_POST["Username"], $_POST["password"])) {
-        
+    global $dbconfig;
     $conn = mysqli_connect($dbconfig['host'], $dbconfig['user'], $dbconfig['password'], $dbconfig['name']);
 
     $username = mysqli_real_escape_string($conn, $_POST["Username"]);
@@ -43,20 +43,20 @@ if (isset($_POST["Username"], $_POST["password"])) {
                     if ($res) {
                         setcookie("remember_me", $token, $expires_at);
                     } else {
-                        $error = "Errore durante la creazione del token di ricordo!";
+                        $error = "Token creation error!";
                     }
                 }
                 header("Location: home.php");
                 exit;
             } else {
-                $error = "Password errata!";
+                $error = "Wrong passowrd!";
             }
         } else {
-            $error = "Credenziali errate!";
+            $error = "Wrong credentials!";
         }
         mysqli_free_result($res);
     } else {
-        $error = "Errore durante l'esecuzione della query!";
+        $error = "Query execution error!";
     }
     mysqli_close($conn);
 } elseif (isset($_POST["Username"]) || isset($_POST["password"])) {
@@ -79,19 +79,20 @@ if (isset($_POST["Username"], $_POST["password"])) {
         ?>
         <input type="text" placeholder="Username" name="Username" autocomplete="off" required
             <?php if(isset($_POST["Username"])){echo "value=".$_POST["Username"];} ?>>
-        <p id="nouser" class="nascosto">Inserire username!</p>
+        <p id="nouser" class="nascosto">Insert username!</p>
         <div class="password-container">
             <input type="password" placeholder="Password" name="password" autocomplete="off" class="pwd"
                 <?php if(isset($_POST["password"])){echo "value=".$_POST["password"];} ?>>
             <img class="show-password" src="public/eye_visible_hide_hidden_show_icon_145988.svg">
         </div>
-        <p id="nopwd" class="nascosto">Inserire password!</p>
+        <p id="nopwd" class="nascosto">Insert password!</p>
         <div class="check">
             <input type="checkbox" name="rememberme" id="rememberme"
                 <?php if(isset($_POST["rememberme"])){echo $_POST["rememberme"] ? "checked" : "";} ?>>
             <label for="rememberme">Remember me</label>
         </div>
         <input type="submit" value="SIGN IN" class="button">
+        <p>Did you forget the password?<a href="forgotten_password.php"> Change it now!</a></p>
         <p>Not Registred yet? <a href="create_account.php">Sign up now!</a></p>
         <a href="index.php">Home Page</a>
     </form>

@@ -1,8 +1,10 @@
 <?php
+    include("checkSession.php");
     session_start();
     session_unset();
     session_destroy();
         if (isset($_COOKIE["remember_me"])) { 
+            global $dbconfig;
             $conn = mysqli_connect($dbconfig['host'], $dbconfig['user'], $dbconfig['password'], $dbconfig['name']);
             $tokenData=$_COOKIE["remember_me"];
             $token = mysqli_real_escape_string($conn, $tokenData);

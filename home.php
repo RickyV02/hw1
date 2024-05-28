@@ -16,7 +16,7 @@
     include "checkSession.php";
     
     if (!checkSession() && isset($_COOKIE["remember_me"])) {
-        
+        global $dbconfig;
         $conn = mysqli_connect($dbconfig['host'], $dbconfig['user'], $dbconfig['password'], $dbconfig['name']);
         $token = mysqli_real_escape_string($conn, $_COOKIE['remember_me']);
     

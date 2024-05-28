@@ -1,10 +1,10 @@
 <?php 
-
+    include("checkSession.php");
     if (!isset($_GET["Username"])) {
         header("Location: index.php");
         exit;
     }
-        
+    global $dbconfig;    
     $conn = mysqli_connect($dbconfig['host'], $dbconfig['user'], $dbconfig['password'], $dbconfig['name']);
 
     $username = mysqli_real_escape_string($conn, $_GET["Username"]);
