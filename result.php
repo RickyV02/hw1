@@ -21,7 +21,6 @@
     if(isset($_GET["name"]) && isset($_GET["qid"])){
         $search = $_GET["name"];
         $searchqid = $_GET["qid"];
-        
     }else if(isset($_GET["id"])){
         $search = $_GET["id"];
         $searchqid = null;
