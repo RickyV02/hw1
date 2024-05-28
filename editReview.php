@@ -30,18 +30,13 @@
     }  
 ?>
 
-<script>
-const username = "<?php echo $userid;?>";
-const id = <?php echo $id; ?>;
-</script>
-
 <body>
     <header>
         <h1>Edit Your Review for: </h1>
     </header>
     <div class="main">
         <img id="cover">
-        <div class="review-form">
+        <div data-id=<?php echo $id;?> data-username="<?php echo $userid;?>" class="review-form">
             <h1></h1>
             <form method="post">
                 <label for="review">Your Review:</label>

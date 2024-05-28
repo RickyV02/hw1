@@ -53,7 +53,10 @@ function showSearch() {
     .then(onJson);
 }
 
-showSearch();
+
 const modal_search = document.getElementById("modal_search");
+const searchname = modal_search.dataset.searchname;
 const placeholder_img =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png";
+
+showSearch();

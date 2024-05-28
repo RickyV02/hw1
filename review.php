@@ -14,7 +14,7 @@
 
 <?php
     include "checkSession.php";
-    if(!$user=checkSession()){
+    if(!$userid=checkSession()){
         header("Location: index.php");
         exit;
     }
@@ -32,26 +32,19 @@
     }
 ?>
 
-<script>
-const username = "<?php echo $user; ?>";
-const id = <?php echo $id; ?>;
-const namer = "<?php echo $name; ?>";
-const img = "<?php echo $image; ?>";
-</script>
-
 <body>
     <header>
         <h1>Leave a Review for: "<?php echo $name?>"</h1>
     </header>
 
     <div class="film-review">
-        <div class="film-info">
+        <div id="name" data-name="<?php echo $name; ?>" class="film-info">
             <h1><?php echo $name?></h1>
-            <img src="<?php echo $image?>">
+            <img id="cover" data-image="<?php echo $image;?>" src="<?php echo $image?>">
             <img id="heart" src="public/empty.svg">
         </div>
 
-        <div class="review-form">
+        <div data-username="<?php echo $userid;?>" data-id=<?php echo $id;?> class="review-form">
             <h1></h1>
             <form method="post">
 

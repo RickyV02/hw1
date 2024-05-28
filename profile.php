@@ -17,18 +17,14 @@
     if(!$userid=checkSession()){
         header("Location: login.php");
         exit;
-    }  
+    }
 ?>
-<script>
-const username = "<?php echo $_GET["q"]?>";
-const verifyUserSession = <?php if($userid==$_GET["q"]) echo "true"; else echo "false";?>
-</script>
 
 <body>
     <div class="profile-container">
         <div class="profile-header">
             <img id="main-avatar">
-            <h1 id="main-username"></h1>
+            <h1 data-username="<?php echo $_GET["q"]?>" id="main-username"></h1>
         </div>
         <div class="user-info">
             <?php

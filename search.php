@@ -22,10 +22,6 @@
     }
 ?>
 
-<script>
-const searchname = "<?php echo $searchname; ?>";
-</script>
-
 <body>
     <header>
         <h1>You searched for "<?php echo $searchname;?>"</h1>
@@ -34,7 +30,7 @@ const searchname = "<?php echo $searchname; ?>";
             <input type="submit" class="submit" value="">
         </form>
     </header>
-    <section id="modal_search">
+    <section data-searchname="<?php echo $searchname;?>" id="modal_search">
     </section>
     <footer>
         <div class="footer-content">

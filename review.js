@@ -41,7 +41,7 @@ function onJsonReview(json) {
     formTitle.textContent = "Already Reviewed !";
     form.classList.add("nascosto");
     const profileLink = document.createElement("a");
-    profileLink.href = "profile.php?q="+encodeURIComponent(username);
+    profileLink.href = "profile.php?q=" + encodeURIComponent(username);
     profileLink.textContent = "See Your Review At Your Profile";
     const formDiv = document.querySelector(".review-form");
     formDiv.appendChild(profileLink);
@@ -327,6 +327,10 @@ form.addEventListener("submit", check_credentials);
 form.addEventListener("submit", getInfo);
 const heart = document.getElementById("heart");
 heart.addEventListener("click", ToggleHeart);
+const namer = document.getElementById("name").dataset.name;
+const img = document.getElementById("cover").dataset.image;
+const username = document.querySelector(".review-form").dataset.username;
+const id = document.querySelector(".review-form").dataset.id;
 
 getLike();
 getReview();

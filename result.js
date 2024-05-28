@@ -415,7 +415,10 @@ function showResults() {
   }
 }
 
-showResults();
 const modal_search = document.getElementById("modal_search");
+const search = modal_search.dataset.search;
+const search_qid = modal_search.dataset.search_qid;
 const placeholder_img =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png";
+  
+showResults();

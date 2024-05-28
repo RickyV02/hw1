@@ -28,16 +28,11 @@
     }
 ?>
 
-<script>
-const search = "<?php echo $search; ?>";
-const search_qid = "<?php echo $searchqid; ?>";
-</script>
-
 <body>
     <header>
         <h1>Here's what we found</h1>
     </header>
-    <section id="modal_search">
+    <section data-search="<?php echo $search; ?>" data-search_qid="<?php echo $searchqid; ?>" id="modal_search">
     </section>
     <footer>
         <div class="footer-content">

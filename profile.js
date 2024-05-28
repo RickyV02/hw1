@@ -351,14 +351,18 @@ function fetchUserInfo() {
     .then(onJsonShowMyReviews);
 }
 
-function toggleSettings() {}
+function toggleSettings() {
+  //DA FARE
+}
 
-if (verifyUserSession) {
+let verifyUserSession = false;
+if (document.getElementById("settings") !== null) {
+  verifyUserSession = true;
   const settings = document.getElementById("settings");
   settings.addEventListener("click", toggleSettings);
 }
-
 let settingsStatus = false;
+const username = document.getElementById("main-username").dataset.username;
 fetchAvatar();
 fetchUserInfo();
 fetchUserFavourites();

@@ -96,4 +96,7 @@ form.rating.addEventListener("blur", checkRating);
 const reviewContent = document.getElementById("review");
 reviewContent.addEventListener("blur", checkReview);
 form.addEventListener("submit", check_credentials);
+const id = document.querySelector(".review-form").dataset.id;
+const username= document.querySelector(".review-form").dataset.username;
+
 getOldReviewInfo();
