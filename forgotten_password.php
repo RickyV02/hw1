@@ -27,22 +27,22 @@ if(isset($_POST["email"])) {
     global $dbconfig;
     global $userid;
     $conn = mysqli_connect($dbconfig['host'], $dbconfig['user'], $dbconfig['password'], $dbconfig['name']);
-    $to = mysqli_real_escape_string($conn,$_POST['email']);
+    $email = mysqli_real_escape_string($conn,$_POST['email']);
     
-    if (!filter_var($to, FILTER_VALIDATE_EMAIL)) {
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Email format not valid!";
     } else {
-        $email = mysqli_real_escape_string($conn, strtolower($to));
+        $email = mysqli_real_escape_string($conn, strtolower($email));
         $res = mysqli_query($conn, "SELECT * FROM ACCOUNTS WHERE EMAIL = '$email'")or die(mysqli_error($conn));
         if (mysqli_num_rows($res) > 0) {
         $new_password = generateRandomString(8);
         $password = password_hash($new_password, PASSWORD_BCRYPT);
-        $query = "UPDATE ACCOUNTS SET PWD = '$new_password' WHERE USERNAME = '$userid'";
+        $query = "UPDATE ACCOUNTS SET PWD = '$password' WHERE EMAIL = '$email'";
         if (mysqli_query($conn, $query) or die(mysqli_error($conn))){
             $subject = "Reset Password";
             $message = "Your new passowrd is: " . $new_password . "\n Go to your profile to change it as soon as possible!";
             $headers = "From: FlixNexusMail@gmail.com";
-            mail($to, $subject, $message, $headers);
+            mail($email, $subject, $message, $headers);
             $errors[] = "Email with new password sent successfully!";
         }else{
             $errors[] = "Database connection error!";
