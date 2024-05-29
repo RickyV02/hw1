@@ -40,10 +40,11 @@ if(isset($_POST["email"])) {
         $query = "UPDATE ACCOUNTS SET PWD = '$password' WHERE EMAIL = '$email'";
         if (mysqli_query($conn, $query) or die(mysqli_error($conn))){
             $subject = "Reset Password";
-            $message = "Your new passowrd is: " . $new_password . "\n Go to your profile to change it as soon as possible!";
+            $message = "Your new password is: " . $new_password . "\nGo to your profile to change it as soon as possible!";
             $headers = "From: FlixNexusMail@gmail.com";
-            mail($email, $subject, $message, $headers);
-            $errors[] = "Email with new password sent successfully!";
+            if(mail($email, $subject, $message, $headers)){
+                $errors[] = "Email with new password sent successfully!";
+            }
         }else{
             $errors[] = "Database connection error!";
         }
