@@ -57,7 +57,7 @@ if(isset($_POST["email"])) {
 
 <body>
     <form name="login" method="post" class="login-box">
-        <h2>Forgotten Password Form</h2>
+        <h2>Forgotten Password</h2>
         <?php 
         if(isset($errors)) 
         {

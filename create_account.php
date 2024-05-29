@@ -50,6 +50,10 @@ if(isset($_POST['email'])&&isset($_POST['Username']) && isset($_POST['password']
         $errors[] = "Passwords doesnt match!";
     }
 
+    if (!preg_match('/[!@#$%^&*()\-_=+{};:,<.>]/', $password) && !preg_match('/[A-Z]/', $password)) {
+        $errors[] = "Password must contain at least one Upper Case letter and a special character!";
+    } 
+
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Email format not valid!";
     } else {
@@ -149,7 +153,7 @@ if(isset($_POST['email'])&&isset($_POST['Username']) && isset($_POST['password']
         </div>
         <p id="pwdmatch" class="nascosto">Passwords doesnt match!</p>
         <label id="avatar" for="avatar">Upload a Profile Picture</label>
-        <input type="file" id="file" name="avatar" accept=' .jpg, .jpeg, image/gif, image/png'>
+        <input type="file" id="file" name="avatar" accept='.jpg, .jpeg, image/gif, image/png'>
         <p id="nosize" class="nascosto">The image must not exceed 5MB !</p>
         <p id="noext" class="nascosto">Allowed formats are . png, . jpeg, . jpg and . gif !</p>
         <div class=" check">

@@ -75,7 +75,7 @@ function check_email() {
   } else {
     error_msg.classList.remove("errormsg");
     error_msg.classList.add("nascosto");
-    fetch("checkEmail.php?email=" + encodeURIComponent(String(emailInput.value).toLowerCase()))
+    fetch("checkEmail.php?email=" + encodeURIComponent(String(form.email.value).toLowerCase()))
       .then(onResponse)
       .then(onJsonEmail);
   }

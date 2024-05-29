@@ -52,10 +52,9 @@ p {
 }
 
 #main-avatar {
-  max-width: 150px;
+  max-width: 100px;
   height: auto;
   border-radius: 50%;
-  margin-bottom: 20px;
   border: 3px solid white;
 }
 
@@ -64,12 +63,24 @@ p {
   color: antiquewhite;
 }
 
-.bio {
-  font-size: 16px;
-  margin: 10px 0;
+#settings-div {
+  display: flex;
+  margin: 1em;
+  padding: 20px;
 }
 
-#profile-content {
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.settings-form h1 {
+  border-bottom: 1px solid #456;
+}
+
+.profile-content {
   display: grid;
   margin: 0 5em;
 }
@@ -290,9 +301,84 @@ p {
   .profile-container {
     margin: 1em;
   }
-  #profile-content {
+  .profile-content {
     margin: 1em;
   }
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 1em 0;
+  padding: 8px 40px 8px 8px;
+  color: #333;
+  width: fit-content;
+  box-sizing: border-box;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+label[for="avatar"] {
+  background-color: #2b2b2b;
+  width: fit-content;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+label[for="avatar"]:hover {
+  background-color: green;
+}
+
+.errormsg {
+  color: #ff0033;
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.mainerror{
+  color: #ff0033;
+  font-size: 20px;
+  margin: 1em 2em;
+}
+
+.updatemsg {
+  color: green;
+  font-size: 20px;
+  margin: 1em 2em;
+}
+
+.password-container {
+  position: relative;
+  width: fit-content;
+}
+
+.show-password {
+  position: absolute;
+  top: 25%;
+  right: 1%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.submit {
+  max-width: 100px;
+  padding: 10px;
+  border: none;
+  border-radius: 25px;
+  background-color: #6a0dad;
+  color: #f2f2f2;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 1em 0;
 }
 
 footer {

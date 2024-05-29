@@ -5,6 +5,202 @@ function onResponse(response) {
   } else return response.json();
 }
 
+function toggleVisibility() {
+  const it = document.getElementById("pwd_input");
+  const show_pwd = document.querySelector(".show-password");
+  if (it.type === "password") {
+    it.type = "text";
+    show_pwd.src = hide;
+  } else {
+    it.type = "password";
+    show_pwd.src = show;
+  }
+}
+
+function validatePassword(password) {
+  const maiuscRegex = /[A-Z]/;
+  if (!maiuscRegex.test(password)) {
+    return false;
+  }
+
+  const spCharsRegex = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
+  if (!spCharsRegex.test(password)) {
+    return false;
+  }
+
+  return true;
+}
+
+function validateEmail(email) {
+  const emailRegex = /^[A-z0-9\.\+_-]+@[A-z0-9\._-]+\.[A-z]{2,6}$/;
+  if (emailRegex.test(email)) return true;
+  else return false;
+}
+
+function onJsonEmail(json) {
+  const error_msg = document.getElementById("em2");
+  if (json.exists) {
+    error_msg.classList.remove("nascosto");
+    error_msg.classList.add("errormsg");
+    checkSubmit = false;
+  } else {
+    error_msg.classList.remove("errormsg");
+    error_msg.classList.add("nascosto");
+    checkSubmit = true;
+  }
+}
+
+function check_email() {
+  if (form.email.value !== "") {
+    const error_msg = document.getElementById("em");
+    if (!validateEmail(form.email.value)) {
+      error_msg.classList.remove("nascosto");
+      error_msg.classList.add("errormsg");
+      checkSubmit = false;
+    } else {
+      error_msg.classList.remove("errormsg");
+      error_msg.classList.add("nascosto");
+      fetch(
+        "checkEmail.php?email=" +
+          encodeURIComponent(String(form.email.value).toLowerCase())
+      )
+        .then(onResponse)
+        .then(onJsonEmail);
+    }
+  }else{
+    hideErrors();
+  }
+}
+
+function check_password() {
+  if (form.password.value !== "") {
+    const error_msg = document.getElementById("pwd");
+    if (!validatePassword(form.password.value)) {
+      error_msg.classList.remove("nascosto");
+      error_msg.classList.add("errormsg");
+      checkSubmit = false;
+    } else {
+      error_msg.classList.remove("errormsg");
+      error_msg.classList.add("nascosto");
+      checkSubmit = true;
+    }
+  } else {
+    hideErrors();
+  }
+}
+
+function check_minlength() {
+  
+  if (form.password.value !== "") {
+    const error_msg = document.getElementById("minlength");
+    if (form.password.value.length < 8) {
+      error_msg.classList.remove("nascosto");
+      error_msg.classList.add("errormsg");
+      checkSubmit = false;
+    } else {
+      error_msg.classList.remove("errormsg");
+      error_msg.classList.add("nascosto");
+      checkSubmit = true;
+    }
+  }else{
+    hideErrors();
+  }
+}
+
+function hideErrors() {
+  const errors = document.querySelectorAll(".errormsg");
+  for (item of errors) {
+    item.classList.remove("errormsg");
+    item.classList.add("nascosto");
+  }
+}
+
+function onJsonChangeSettings(json) {
+  const status = document.getElementById("updateResponse");
+  if (json.updateStatus) {
+    hideErrors();
+    status.classList.add("updatemsg");
+    status.classList.remove("mainerror");
+    status.textContent = "Update Successfully Saved !";
+    if (json.log.avatar) {
+      fetchAvatar();
+    }
+    toggleSettings();
+    form.email.value = "";
+    form.password.value = "";
+  } else {
+    status.classList.add("mainerror");
+    status.classList.remove("updatemsg");
+    status.textContent = "Update Failed !";
+  }
+}
+
+function check_credentials(event) {
+  event.preventDefault();
+  if (checkSubmit) {
+    checkSubmit = false;
+    const formData = new FormData();
+    if (form.email.value) {
+      formData.append("email", form.email.value);
+    }
+    if (form.password.value) {
+      formData.append("password", form.password.value);
+    }
+    if (fileInput.files[0]) {
+      const fileUpload = fileInput.files[0];
+      formData.append("file", fileUpload);
+    }
+    fetch("changeSettings.php", { method: "post", body: formData })
+      .then(onResponse)
+      .then(onJsonChangeSettings);
+  }
+}
+
+function activateClick() {
+  fileInput.click();
+}
+
+function hideFileErrors() {
+  const error_msg1 = document.getElementById("nosize");
+  error_msg1.classList.remove("errormsg");
+  error_msg1.classList.add("nascosto");
+  const error_msg2 = document.getElementById("noext");
+  error_msg2.classList.remove("errormsg");
+  error_msg2.classList.add("nascosto");
+}
+
+function checkFile() {
+  const fileUpload = fileInput.files[0];
+  if (fileUpload) {
+    const maxSize = 5 * 1024 * 1024;
+    if (fileUpload.size >= maxSize) {
+      const error_msg = document.getElementById("nosize");
+      error_msg.classList.remove("nascosto");
+      error_msg.classList.add("errormsg");
+      checkSubmit = false;
+      return;
+    }
+    const allowedExtensions = [".jpg", ".jpeg", ".png", ".gif"];
+    const fileName = fileUpload.name.toLowerCase();
+    let validExtension = false;
+    for (item of allowedExtensions) {
+      if (fileName.endsWith(item)) {
+        validExtension = true;
+        break;
+      }
+    }
+    if (!validExtension) {
+      const error_msg = document.getElementById("noext");
+      error_msg.classList.remove("nascosto");
+      error_msg.classList.add("errormsg");
+      checkSubmit = false;
+      return;
+    }
+    hideFileErrors();
+    checkSubmit = true;
+  }
+}
+
 function onJsonAvatar(json) {
   if (!json.nouser) {
     const avatar = document.getElementById("main-avatar");
@@ -352,15 +548,47 @@ function fetchUserInfo() {
 }
 
 function toggleSettings() {
-  //DA FARE
+  const settingsDiv = document.getElementById("settings-div");
+  const profileContent = document.getElementById("profile-content");
+  if (settingsStatus) {
+    settingsStatus = false;
+    form.classList.remove("settings-form");
+    form.classList.add("nascosto");
+    settingsDiv.classList.add("nascosto");
+    profileContent.classList.remove("nascosto");
+  } else {
+    settingsStatus = true;
+    settingsDiv.classList.remove("nascosto");
+    form.classList.add("settings-form");
+    form.classList.remove("nascosto");
+    profileContent.classList.add("nascosto");
+  }
 }
 
 let verifyUserSession = false;
+let form;
+let checkSubmit = false;
+let fileLabel;
+let fileInput;
 if (document.getElementById("settings") !== null) {
   verifyUserSession = true;
   const settings = document.getElementById("settings");
   settings.addEventListener("click", toggleSettings);
+  form = document.querySelector("form");
+  form.password.addEventListener("blur", check_password);
+  form.password.addEventListener("blur", check_minlength);
+  form.email.addEventListener("blur", check_email);
+  form.addEventListener("submit", check_credentials);
+  fileLabel = document.getElementById("avatar");
+  fileLabel.addEventListener("click", activateClick);
+  fileInput = document.getElementById("file");
+  fileInput.addEventListener("change", checkFile);
+  const show_pwd = document.querySelector(".show-password");
+  show_pwd.addEventListener("click", toggleVisibility);
 }
+
+const hide = "public/eye_slash_visible_hide_hidden_show_icon_145987.svg";
+const show = "public/eye_visible_hide_hidden_show_icon_145988.svg";
 let settingsStatus = false;
 const username = document.getElementById("main-username").dataset.username;
 fetchAvatar();

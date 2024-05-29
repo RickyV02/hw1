@@ -83,7 +83,7 @@ input[type="checkbox"] {
   position: absolute;
   top: 25%;
   right: 11%;
-  width: 30x;
+  width: 30px;
   height: 30px;
   cursor: pointer;
 }
@@ -121,6 +121,7 @@ input[type="file"] {
 
 label[for="avatar"] {
   background-color: #2b2b2b;
+  width: fit-content;
   color: #fff;
   padding: 10px 15px;
   border-radius: 5px;

@@ -34,12 +34,20 @@
                 echo "Settings";
                 echo "</p>";
             }
-        ?>
-            <p id="favourites"></p>
+            ?>
+            <p id="favourites">
+            </p>
             <p id="written"></p>
         </div>
     </div>
-    <div id="profile-content">
+    <?php
+            if($userid==$_GET["q"])
+            {
+                echo "<p id='updateResponse'>";
+                echo "</p>";
+            }
+            ?>
+    <div id="profile-content" class="profile-content">
         <h1 id="movie-header" class="section-header"></h1>
         <section id="favourite-movies"></section>
         <h1 id="game-header" class="section-header"></h1>
@@ -49,6 +57,29 @@
         <h1 id="favourite-header" class="section-header"></h1>
         <section id="favourite-reviews"></section>
     </div>
+    <?php
+    if ($userid == $_GET["q"]) {
+    echo "<div id='settings-div' class='nascosto'>";
+    echo "<form method='post' class='nascosto' enctype='multipart/form-data'>";
+    echo "<h1 class='section-header'>PROFILE SETTINGS</h1>";
+    echo "<input type='email' placeholder='New Email' autocomplete='off' name='email'>";
+    echo '<p id="em" class="nascosto">Email format not valid!</p>';
+    echo '<p id="em2" class="nascosto">Email already taken!</p>';
+    echo "<div class='password-container'>";
+    echo "<input type='password' id='pwd_input' placeholder='New Password' autocomplete='off' name='password'>";
+    echo '<img class="show-password" src="public/eye_visible_hide_hidden_show_icon_145988.svg">';
+    echo "</div>";
+    echo '<p id="minlength" class="nascosto">Enter a password with at least 8 characters!</p>';
+    echo '<p id="pwd" class="nascosto">Password must contain at least one Upper Case letter and a special character!</p>';
+    echo '<label id="avatar" for="avatar">Upload New Profile Picture</label>';
+    echo "<input id='file' type='file' accept='.jpg, .jpeg, image/gif, image/png' name='avatar'>";
+    echo '<p id="nosize" class="nascosto">The image must not exceed 5MB!</p>';
+    echo '<p id="noext" class="nascosto">Allowed formats are .png, .jpeg, .jpg, and .gif!</p>';
+    echo '<input type="submit" value="SUBMIT" class="submit">';
+    echo "</form>";
+    echo "</div>";
+    }
+    ?>
     <footer>
         <div class="footer-content">
             <div class="footer-section">
