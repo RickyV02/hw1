@@ -42,9 +42,9 @@ function onJsonRandomMovies(json) {
     const movielink = document.createElement("a");
     movielink.href = "login.php";
     let movieThumb;
-    if (item.image) {
+    if (item.hasOwnProperty("image")) {
       movieThumb = item.image;
-    } else if (item.thumbnail) {
+    } else if (item.hasOwnProperty("thumbnail")) {
       movieThumb = item.thumbnail;
     } else {
       movieThumb = placeholder_img;
