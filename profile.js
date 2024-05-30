@@ -67,8 +67,8 @@ function check_email() {
         .then(onResponse)
         .then(onJsonEmail);
     }
-  }else{
-    hideErrors();
+  } else {
+    hideAll();
   }
 }
 
@@ -85,12 +85,11 @@ function check_password() {
       checkSubmit = true;
     }
   } else {
-    hideErrors();
+    hideAll();
   }
 }
 
 function check_minlength() {
-  
   if (form.password.value !== "") {
     const error_msg = document.getElementById("minlength");
     if (form.password.value.length < 8) {
@@ -102,37 +101,67 @@ function check_minlength() {
       error_msg.classList.add("nascosto");
       checkSubmit = true;
     }
-  }else{
-    hideErrors();
+  } else {
+    hideAll();
   }
 }
 
-function hideErrors() {
-  const errors = document.querySelectorAll(".errormsg");
-  for (item of errors) {
+function hideAll() {
+  const errors1 = document.querySelectorAll(".errormsg");
+  for (item of errors1) {
     item.classList.remove("errormsg");
+    item.classList.add("nascosto");
+  }
+  const errors2 = document.querySelectorAll(".mainerror");
+  for (item of errors2) {
+    item.classList.remove("mainerror");
+    item.classList.add("nascosto");
+  }
+  const errors3 = document.querySelectorAll(".updatemsg");
+  for (item of errors3) {
+    item.classList.remove("updatemsg");
     item.classList.add("nascosto");
   }
 }
 
 function onJsonChangeSettings(json) {
-  const status = document.getElementById("updateResponse");
-  if (json.updateStatus) {
-    hideErrors();
-    status.classList.add("updatemsg");
-    status.classList.remove("mainerror");
-    status.textContent = "Update Successfully Saved !";
-    if (json.log.avatar) {
+  console.log(json);
+  const statusDiv = document.getElementById("updateResponse");
+  hideAll();
+  form.email.value = "";
+  form.password.value = "";
+  fileInput.value = "";
+  if (json.UpdateLog) {
+    if (json.UpdateLog.email) {
+      const p = document.createElement("p");
+      p.classList.add("updatemsg");
+      p.textContent = json.UpdateLog.email;
+      statusDiv.appendChild(p);
+    }
+    if (json.UpdateLog.password) {
+      const p = document.createElement("p");
+      p.classList.add("updatemsg");
+      p.textContent = json.UpdateLog.password;
+      statusDiv.appendChild(p);
+    }
+    if (json.UpdateLog.avatar) {
+      const p = document.createElement("p");
+      p.classList.add("updatemsg");
+      p.textContent = json.UpdateLog.avatar;
+      statusDiv.appendChild(p);
       fetchAvatar();
     }
-    toggleSettings();
-    form.email.value = "";
-    form.password.value = "";
-  } else {
-    status.classList.add("mainerror");
-    status.classList.remove("updatemsg");
-    status.textContent = "Update Failed !";
   }
+  if (json.UpdateError) {
+    const array = json.UpdateError;
+    for (let i = 0; i < array.length; i++) {
+      const p = document.createElement("p");
+      p.classList.add("mainerror");
+      p.textContent = array[i];
+      statusDiv.appendChild(p);
+    }
+  }
+  toggleSettings();
 }
 
 function check_credentials(event) {

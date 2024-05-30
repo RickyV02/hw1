@@ -342,16 +342,21 @@ label[for="avatar"]:hover {
   margin: 10px 0;
 }
 
-.mainerror{
+#updateResponse {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin: 1em;
+}
+
+.mainerror {
   color: #ff0033;
   font-size: 20px;
-  margin: 1em 2em;
 }
 
 .updatemsg {
   color: green;
   font-size: 20px;
-  margin: 1em 2em;
 }
 
 .password-container {

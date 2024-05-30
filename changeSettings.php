@@ -22,7 +22,7 @@
             }else{
                 $query = "UPDATE ACCOUNTS SET EMAIL = '$email' WHERE USERNAME = '$userid'";
                 if (mysqli_query($conn, $query)) {
-                    $updates["email"]="Email changed succesfully!";
+                    $updates["email"]="Email changed successfully!";
                 } else {
                     $errors[] = "Error connecting to the Database";
                 }
@@ -39,7 +39,7 @@
             $password = password_hash($password, PASSWORD_BCRYPT);
             $query = "UPDATE ACCOUNTS SET PWD = '$password' WHERE USERNAME = '$userid'";
                 if (mysqli_query($conn, $query)) {
-                    $updates["password"]="Password changed succesfully!";
+                    $updates["password"]="Password changed successfully!";
                 } else {
                     $errors[] = "Error connecting to the Database";
                 }
@@ -60,7 +60,7 @@
                         move_uploaded_file($file['tmp_name'], $avatar);
                         $query = "UPDATE ACCOUNTS SET AVATAR = '$avatar' WHERE USERNAME = '$userid'";
                         if (mysqli_query($conn, $query)) {
-                            $updates["avatar"]="Avatar changed succesfully!";
+                            $updates["avatar"]="Avatar changed successfully!";
                         } else {
                             $errors[] = "Error connecting to the Database";
                         }
@@ -75,9 +75,9 @@
     }
     mysqli_close($conn);
     if(count($errors)==0){
-        echo json_encode(array("updateStatus" => true, "log" => $updates));
+        echo json_encode(array("UpdateLog" => $updates,"UpdateError" => $errors));
     }else{
-        echo json_encode(array("updateStatus" => false, "log" => $errors));
+        echo json_encode(array("UpdateLog" => $updates,"UpdateError" => $errors));
     }
     exit;
 ?>
