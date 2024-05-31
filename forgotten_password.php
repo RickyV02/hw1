@@ -14,62 +14,16 @@
 
 <?php
 include "checkSession.php";
-include "RandomPassword.php";
-
 if ($userid = checkSession() || isset($_COOKIE["remember_me"])) {
     header("Location: home.php");
     exit;
-}
-
-if(isset($_POST["email"])) {
-
-    $errors=array();
-    global $dbconfig;
-    global $userid;
-    $conn = mysqli_connect($dbconfig['host'], $dbconfig['user'], $dbconfig['password'], $dbconfig['name']);
-    $email = mysqli_real_escape_string($conn,$_POST['email']);
-    
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "Email format not valid!";
-    } else {
-        $email = mysqli_real_escape_string($conn, strtolower($email));
-        $res = mysqli_query($conn, "SELECT * FROM ACCOUNTS WHERE EMAIL = '$email'")or die(mysqli_error($conn));
-        if (mysqli_num_rows($res) > 0) {
-        $new_password = generateRandomString(8);
-        $password = password_hash($new_password, PASSWORD_BCRYPT);
-        $query = "UPDATE ACCOUNTS SET PWD = '$password' WHERE EMAIL = '$email'";
-        if (mysqli_query($conn, $query) or die(mysqli_error($conn))){
-            $subject = "Reset Password";
-            $message = "Your new password is: " . $new_password . "\nGo to your profile to change it as soon as possible!";
-            $headers = "From: FlixNexusMail@gmail.com";
-            if(mail($email, $subject, $message, $headers)){
-                $errors[] = "Email with new password sent successfully!";
-            }
-        }else{
-            $errors[] = "Database connection error!";
-        }
-        }else{
-            $errors[] = "Email not registered!";
-        }
-    }
 }
 ?>
 
 <body>
     <form name="login" method="post" class="login-box">
         <h2>Forgotten Password</h2>
-        <?php 
-        if(isset($errors)) 
-        {
-            foreach($errors as $err) {
-                {
-                    echo "<p class='errormsg'>";
-                    echo $err;
-                    echo "</p>";
-                }
-            }
-        } 
-        ?>
+        <p id="status"></p>
         <input type="email" placeholder="Email" name="email" autocomplete="off" required
             <?php if(isset($_POST["email"])){echo "value=".$_POST["email"];} ?>>
         <p id="em" class="nascosto">Email format not valid!</p>

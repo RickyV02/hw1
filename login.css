@@ -111,6 +111,12 @@ input[type="checkbox"] {
   margin-top: 5px;
 }
 
+#status {
+  color: green;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
 .nascosto {
   display: none;
 }

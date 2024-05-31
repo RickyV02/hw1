@@ -39,8 +39,31 @@ function onJsonEmail(json) {
   }
 }
 
+function onJsonEmailSent(json) {
+  document.getElementById("status").textContent = json.status;
+}
+
+function hideErrors() {
+  const errors = document.querySelectorAll(".errormsg");
+  for (item of errors) {
+    item.classList.remove("errormsg");
+    item.classList.add("nascosto");
+  }
+}
+
+function sendMail() {
+  hideErrors();
+  checkSubmit = false;
+  const formData = new FormData();
+  formData.append("email", form.email.value);
+  fetch("sendMail.php", { method: "post", body: formData })
+    .then(onResponse)
+    .then(onJsonEmailSent);
+}
+
 function checkSub(event) {
-  if (!checkSubmit) event.preventDefault();
+  event.preventDefault();
+  if (checkSubmit) sendMail();
 }
 
 let checkSubmit = false;

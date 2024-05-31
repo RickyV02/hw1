@@ -125,7 +125,6 @@ function hideAll() {
 }
 
 function onJsonChangeSettings(json) {
-  console.log(json);
   const statusDiv = document.getElementById("updateResponse");
   hideAll();
   form.email.value = "";
