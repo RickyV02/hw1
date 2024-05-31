@@ -35,8 +35,8 @@ p {
   align-items: center;
   gap: 1em;
   border: 2px solid #202830;
-  border-radius: 5px;
-  box-shadow: 5px 5px 5px 5px #202830;
+  border-radius: 20px;
+  box-shadow: 2px 2px 2px 2px #202830;
   background-color: black;
   padding: 15px;
 }
@@ -46,8 +46,8 @@ p {
   flex-direction: column;
   gap: 10px;
   border: 2px solid #202830;
-  border-radius: 5px;
-  box-shadow: 5px 5px 5px 5px #202830;
+  border-radius: 20px;
+  box-shadow: 2px 2px 2px 2px #202830;
   background-color: black;
 }
 
@@ -191,23 +191,24 @@ p {
 
 .delete-button,
 .edit-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  border: 2px solid black;
-  box-shadow: 3px 3px 3px 3px black;
-  border-radius: 5px;
-  margin-right: 10px;
-  font-weight: bold;
+  border: none;
+  padding: 12px;
   color: white;
+  font-weight: bold;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition-duration: 0.3s;
 }
 
 .delete-button {
   background-color: #db0b0b;
+  box-shadow: 5px 5px 0px red;
 }
 
 .edit-button {
-  background-color: rgb(122, 55, 122);
+  background-color: rgb(168, 38, 255);
+  box-shadow: 5px 5px 0px rgb(140, 32, 212);
 }
 
 .delete-button:hover,

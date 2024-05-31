@@ -38,10 +38,6 @@ input[type="text"] {
   margin-top: 0.3em;
 }
 
-form {
-  position: relative;
-}
-
 .submit {
   background-image: url(public/lente.png);
   border-radius: 3px;
@@ -78,7 +74,7 @@ form {
   margin: 0.5em;
   padding: 1em;
   border-radius: 12px;
-  background: #202830;
+  background: #14181c;
   border: 3px solid #1c1c1c;
   transition: border-color 0.8s ease;
   box-shadow: 5px 5px 5px black;
@@ -90,12 +86,30 @@ form {
 }
 
 form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   height: fit-content;
+  position: relative;
 }
 
-form h2 {
+form h3 {
   cursor: pointer;
   width: max-content;
+  color: antiquewhite;
+  font-size: 1.3em;
+  box-shadow: 2px 2px 2px 2px black;
+  background-color: green;
+  border: solid 2px black;
+  border-radius: 12px;
+  font-style: italic;
+  margin: 0.5em 0;
+  padding: 10px;
+  transition: background-color 0.8s ease;
+}
+
+form h3:hover {
+  background-color: purple;
 }
 
 .heart {
@@ -143,12 +157,12 @@ form h2 {
   margin: 0.5em;
   box-shadow: 2px 2px 2px 2px black;
   border: solid 2px black;
-  padding: 5px 5px;
+  padding: 5px;
 }
 
 .cover {
   border-radius: 5px;
-  border: solid 2px black;
+  border: solid 3px black;
   max-height: 200px;
   max-width: 250px;
 }

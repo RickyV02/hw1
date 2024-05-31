@@ -40,8 +40,8 @@ function onJsonGame(json) {
         review_form.appendChild(input);
       }
     }
-    const reviewh2 = document.createElement("h2");
-    reviewh2.textContent = "Leave a Review!";
+    const reviewh2 = document.createElement("h3");
+    reviewh2.textContent = "Leave a Review !";
     review_form.appendChild(game_cover);
     review_form.appendChild(reviewh2);
     reviewh2.addEventListener("click", submitform);
@@ -153,8 +153,8 @@ function onJsonMovie(json) {
       review_form.appendChild(input);
     }
   }
-  const reviewh2 = document.createElement("h2");
-  reviewh2.textContent = "Leave a Review!";
+  const reviewh2 = document.createElement("h3");
+  reviewh2.textContent = "Leave a Review !";
   review_form.appendChild(poster);
   review_form.appendChild(reviewh2);
   reviewh2.addEventListener("click", submitform);
