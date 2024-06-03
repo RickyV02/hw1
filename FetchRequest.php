@@ -3,11 +3,11 @@
 include("credentials.php");
 function getRequest() {
 
-global $apikey;
+global $apikey_search;
 
 $url = "https://imdb8.p.rapidapi.com/auto-complete?q=" .urlencode($_GET["q"]);
 $headers = array(
-'x-rapidapi-key: ' . $apikey,
+'x-rapidapi-key: ' . $apikey_search,
 'x-rapidapi-host: imdb8.p.rapidapi.com',
 'Content-Type: application/json'
 );

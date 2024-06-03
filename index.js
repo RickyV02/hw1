@@ -15,7 +15,7 @@ function onJsonWeekly(json) {
     const movieThumb = item.primaryImage.imageUrl;
     const thumbImg = document.createElement("img");
     thumbImg.src = movieThumb;
-    thumbImg.dataset.id = item.imdbid;
+    thumbImg.dataset.id = item.id;
     thumbImg.onerror = function () {
       thumbImg.src = placeholder_img;
     };
