@@ -60,7 +60,7 @@ if (isset($_POST["Username"], $_POST["password"])) {
     }
     mysqli_close($conn);
 } elseif (isset($_POST["Username"]) || isset($_POST["password"])) {
-    $error = "Inserisci username e password!";
+    $error = "Insert username and password!";
 }
 ?>
 
